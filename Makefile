@@ -1,43 +1,50 @@
 NAME    := cub3d
 CC      := cc
 CFLAGS  := -Wall -Wextra -Werror 
+
 # Folder
-SRC_DIR := src
+SRC_DIR := Src
 OBJ_DIR := .obj
-INC_DIR := includes
-LIB_DIR := libft
+INC_DIR := Includes
+LIB_DIR := Lib
+LIBFT_DIR := $(LIB_DIR)/libft
 
 # ============================================================
 #  Src Files
 # ============================================================
 
-SRCS    := main.c
-
+SRCS := main.c
+LIBFT := $(LIBFT_DIR)/libft.a
 # ============================================================
 #  Generate complete Path
 # ============================================================
 
 OBJS    := $(addprefix $(OBJ_DIR)/, $(SRCS:.c=.o))
-IFLAGS  := -I$(INC_DIR) -I$(LIB_DIR)/include
+IFLAGS  := -I$(INC_DIR) -I$(LIB_DIR) -I$(LIBFT_DIR)
 
 # ============================================================
 #  Rules
 # ============================================================
+all: libs $(NAME)
 
-.PHONY: all clean fclean re
-
-all: $(NAME)
+libs:
+	$(MAKE) -C $(LIBFT_DIR)
 
 $(NAME): $(OBJS)
-	$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
+	$(CC) $(CFLAGS) $(OBJS) $(LIBFT) -o $(NAME)
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 	@mkdir -p $(OBJ_DIR)
 	$(CC) $(CFLAGS) $(IFLAGS) -c $< -o $@
+
 clean:
 	rm -rf $(OBJ_DIR)
+	$(MAKE) clean -C $(LIBFT_DIR)
 
 fclean: clean
 	rm -f $(NAME)
+	$(MAKE) fclean -C $(LIBFT_DIR)
 
 re: fclean all
+
+.PHONY: all clean fclean re libs
