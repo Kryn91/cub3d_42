@@ -1,7 +1,6 @@
 NAME    := cub3d
 CC      := cc
 CFLAGS  := -Wall -Wextra -Werror -MMD
-CFLAGS  := -Wall -Wextra -Werror
 
 # Folder
 SRC_DIR := Src
@@ -49,6 +48,5 @@ fclean: clean
 -include $(OBJS:.o=.d)
 
 re: fclean all
-
 
 .PHONY: all clean fclean re libs
