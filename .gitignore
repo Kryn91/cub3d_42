@@ -1,0 +1,11 @@
+*.d
+*.o
+*.a
+cub3d
+.DS_Store
+*.swp
+*.swo
+*~
+.vscode/
+.dSYM/
+.github/
