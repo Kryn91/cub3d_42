@@ -11,10 +11,12 @@ typedef struct s_texture
 
 typedef struct s_player
 {
-	int			pos_x;
-	int			pos_y;
-	int			dir_x;
-	int			dir_y;
+	double		pos_x;
+	double		pos_y;
+	double		dir_x;
+	double		dir_y;
+	double		cam_x;
+	double		cam_y;
 }	t_player;
 
 typedef struct s_map
@@ -31,6 +33,8 @@ typedef struct s_game
 	void		*win;
 	t_player	player;
 	t_map		map;
+	double		time;
+	double		old_time;
 }	t_game;
 
 #endif

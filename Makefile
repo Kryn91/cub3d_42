@@ -9,6 +9,7 @@ INC_DIR := Includes
 LIB_DIR := Lib
 LIBFT_DIR := $(LIB_DIR)/libft
 MLX_DIR := $(LIB_DIR)/Mlx
+MLX_FLAG := -lmlx -lXext -lX11 -lm
 
 # MLX
 MLX_URL := https://github.com/42paris/minilibx-linux.git
@@ -38,7 +39,7 @@ libs:
 	$(MAKE) -C $(LIBFT_DIR)
 
 $(NAME): $(OBJS)
-	$(CC) $(CFLAGS) $(MLX_FLAG) $(OBJS) $(LIBFT) -L$(MLX_DIR) -o $(NAME)
+	$(CC) $(CFLAGS) $(OBJS) $(LIBFT) -L$(MLX_DIR) $(MLX_FLAG) -o $(NAME)
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 	@mkdir -p $(OBJ_DIR)
@@ -52,7 +53,7 @@ clean:
 fclean: clean
 	rm -f $(NAME)
 	$(MAKE) fclean -C $(LIBFT_DIR)
-	
+
 
 -include $(OBJS:.o=.d)
 
