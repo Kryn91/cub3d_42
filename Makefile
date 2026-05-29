@@ -1,6 +1,7 @@
 NAME    := cub3d
 CC      := cc
 CFLAGS  := -Wall -Wextra -Werror -MMD
+MLX_FLAG := -lmlx -lXext -lX11 -lm
 
 # Folder
 SRC_DIR := Src
@@ -9,7 +10,7 @@ INC_DIR := Includes
 LIB_DIR := Lib
 LIBFT_DIR := $(LIB_DIR)/libft
 MLX_DIR := $(LIB_DIR)/Mlx
-MLX_FLAG := -lmlx -lXext -lX11 -lm
+
 
 # MLX
 MLX_URL := https://github.com/42paris/minilibx-linux.git
@@ -17,7 +18,9 @@ MLX_URL := https://github.com/42paris/minilibx-linux.git
 #  Src Files
 # ============================================================
 
-SRCS := main.c
+SRCS := main.c \
+		Parsing/parsing.c
+
 LIBFT := $(LIBFT_DIR)/libft.a
 # ============================================================
 #  Generate complete Path
@@ -42,7 +45,7 @@ $(NAME): $(OBJS)
 	$(CC) $(CFLAGS) $(OBJS) $(LIBFT) -L$(MLX_DIR) $(MLX_FLAG) -o $(NAME)
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
-	@mkdir -p $(OBJ_DIR)
+	@mkdir -p $(dir $@)
 	$(CC) $(CFLAGS) $(IFLAGS) -c $< -o $@
 
 clean:
@@ -53,7 +56,6 @@ clean:
 fclean: clean
 	rm -f $(NAME)
 	$(MAKE) fclean -C $(LIBFT_DIR)
-
 
 -include $(OBJS:.o=.d)
 

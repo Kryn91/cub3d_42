@@ -1,6 +1,8 @@
 #ifndef CUB3D_H
 # define CUB3D_H
 
+#include "bool.h"
+
 typedef struct s_texture
 {
 	void		*img;
@@ -37,4 +39,5 @@ typedef struct s_game
 	double		old_time;
 }	t_game;
 
+bool    parsing(int ac, char **av);
 #endif
