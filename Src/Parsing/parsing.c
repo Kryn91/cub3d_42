@@ -7,7 +7,7 @@ bool    check_xpm(char *av)
 {
     size_t  i;
 
-    i = ft_strlen(av);
+    i = ft_strlen(av) - 1;
     if (av[i] != 'r')
         return (ft_putstr_fd("Error : ber required", 2), false);
     i--;
