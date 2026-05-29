@@ -39,5 +39,5 @@ typedef struct s_game
 	double		old_time;
 }	t_game;
 
-bool    parsing(int ac, char **av);
+void    parsing(int ac, char **av);
 #endif

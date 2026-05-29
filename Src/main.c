@@ -7,8 +7,7 @@ int main(int ac, char **av)
 {
 	t_game	game;
 
-	if (parsing(ac, av) == false)
-		return (1);
+	parsing(ac, av);
 	game.mlx = mlx_init();
 	game.win = mlx_new_window(game.mlx, 1200, 600, "cub3d");
 	mlx_loop(game.mlx);
