@@ -1,6 +1,6 @@
 NAME    := cub3d
 CC      := cc
-CFLAGS  := -Wall -Wextra -Werror -MMD
+CFLAGS  := -Wall -Wextra -Werror -MMD -g3
 MLX_FLAG := -lmlx -lXext -lX11 -lm
 
 # Folder
@@ -18,9 +18,10 @@ MLX_URL := https://github.com/42paris/minilibx-linux.git
 #  Src Files
 # ============================================================
 
-SRCS := main.c \
-		Parsing/parsing.c
-
+SRCS :=	main.c				\
+		Parsing/parsing.c	\
+		Rendering/test.c
+		Rendering/render.c
 LIBFT := $(LIBFT_DIR)/libft.a
 # ============================================================
 #  Generate complete Path
