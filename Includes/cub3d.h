@@ -49,7 +49,6 @@ typedef struct s_ray
 	int		step_x;
 	int		step_y;
 	int		side;
-	int		hit;
 }	t_ray;
 
 typedef struct s_game

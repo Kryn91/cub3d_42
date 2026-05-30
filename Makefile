@@ -20,7 +20,7 @@ MLX_URL := https://github.com/42paris/minilibx-linux.git
 
 SRCS :=	main.c				\
 		Parsing/parsing.c	\
-		Rendering/test.c
+		Rendering/test.c	\
 		Rendering/render.c
 LIBFT := $(LIBFT_DIR)/libft.a
 # ============================================================
