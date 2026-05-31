@@ -15,7 +15,7 @@ int		main(int ac, char **av)
 	game.mlx = mlx_init();
 	init_test(&game);
 	game.win = mlx_new_window(game.mlx, game.screen_x, game.screen_y, "cub3d");
-	mlx_loop_hook(game.mlx, ray, &game);
+	mlx_loop_hook(game.mlx, (void *)ray, &game);
 	mlx_loop(game.mlx);
 	return (0);
 }

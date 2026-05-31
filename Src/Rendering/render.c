@@ -42,27 +42,31 @@ void	side_dists_calc(t_game *game, t_ray *ray)
 	if (ray->dir_x < 0)
 	{
 		ray->step_x = -1;
-		ray->side_dist_x = (game->player.pos_x - ray->map_x) * ray->delta_dist_x;
+		ray->side_dist_x = (game->player.pos_x - ray->map_x)
+			* ray->delta_dist_x;
 	}
 	else
 	{
 		ray->step_x = 1;
-		ray->side_dist_x = (ray->map_x + 1 - game->player.pos_x) * ray->delta_dist_x;
+		ray->side_dist_x = (ray->map_x + 1 - game->player.pos_x)
+			* ray->delta_dist_x;
 	}
 	if (ray->dir_y < 0)
 	{
 		ray->step_y = -1;
-		ray->side_dist_y = (game->player.pos_y - ray->map_y) * ray->delta_dist_y;
+		ray->side_dist_y = (game->player.pos_y - ray->map_y)
+			* ray->delta_dist_y;
 	}
 	else
 	{
 		ray->step_y = 1;
-		ray->side_dist_y = (ray->map_y + 1 - game->player.pos_y) * ray->delta_dist_y;
+		ray->side_dist_y = (ray->map_y + 1 - game->player.pos_y)
+			* ray->delta_dist_y;
 	}
 }
+
 void	line_calc(t_game *game, t_ray *ray)
 {
-	// printf("%f, %f, %f\n", ray->wall_dist, ray->side_dist_x, ray->delta_dist_y);
 	if (ray->side == 0)
 		ray->wall_dist = fabs(ray->side_dist_x - ray->delta_dist_x);
 	else
@@ -76,31 +80,24 @@ void	line_calc(t_game *game, t_ray *ray)
 		ray->wall_end = game->screen_y - 1;
 }
 
-void	ray_dir_calc(t_game *game, t_ray *ray)
+int	ray(t_game *game)
 {
-	int	x;
+	int		x;
+	t_ray	ray;
 
 	x = -1;
 	while (++x <= game->screen_x - 1)
 	{
-		ray_init(game, ray, x);
-		side_dists_calc(game, ray);
-		ray_collision(game, ray);
-		line_calc(game, ray);
-		while (ray->wall_start != ray->wall_end)
+		ray_init(game, &ray, x);
+		side_dists_calc(game, &ray);
+		ray_collision(game, &ray);
+		line_calc(game, &ray);
+		while (ray.wall_start != ray.wall_end)
 		{
-			mlx_pixel_put(game->mlx, game->win, x, ray->wall_start, 0xFFFFFF);
-			printf("start :%d, end :%d\n", ray->wall_start, ray->wall_end);
-			ray->wall_start++;
+			mlx_pixel_put(game->mlx, game->win, x, ray.wall_start, 0xFFFFFF);
+			printf("start :%d, end :%d\n", ray.wall_start, ray.wall_end);
+			ray.wall_start++;
 		}
 	}
-	// mlx_loop_end(game->mlx);
-}
-
-int	ray(t_game *game)
-{
-	t_ray	ray;
-
-	ray_dir_calc(game, &ray);
 	return (0);
 }

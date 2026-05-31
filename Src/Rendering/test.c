@@ -30,8 +30,8 @@ void	init_test(t_game *game)
 {
 	int idx = 1;
 
-	game->screen_x = 1200;
-	game->screen_y = 800;
+	game->screen_x = 1920;
+	game->screen_y = 1080;
 	game->map.arr = map;
 	game->map.floor_color = 0x808080;
 	game->map.ceiling_color = 0x333333;

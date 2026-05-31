@@ -10,10 +10,12 @@ INC_DIR := Includes
 LIB_DIR := Lib
 LIBFT_DIR := $(LIB_DIR)/libft
 MLX_DIR := $(LIB_DIR)/Mlx
+MLX_BRANCH := fedora
 
 
 # MLX
 MLX_URL := https://github.com/42paris/minilibx-linux.git
+
 # ============================================================
 #  Src Files
 # ============================================================
@@ -36,8 +38,10 @@ IFLAGS  := -I$(INC_DIR) -I$(LIB_DIR) -I$(LIBFT_DIR) -I$(MLX_DIR)
 all: libs mlx $(NAME)
 
 mlx :
-	git clone $(MLX_URL) $(MLX_DIR)
-	$(MAKE) -C $(MLX_DIR)
+	@if [ ! -d "$(MLX_DIR)/.git" ]; then \
+		git clone --branch $(MLX_BRANCH) $(MLX_URL) $(MLX_DIR); \
+		$(MAKE) -C $(MLX_DIR); \
+	fi
 
 libs:
 	$(MAKE) -C $(LIBFT_DIR)
