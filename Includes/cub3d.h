@@ -1,7 +1,7 @@
 #ifndef CUB3D_H
 # define CUB3D_H
 
-#include "bool.h"
+# include "bool.h"
 
 typedef struct s_texture
 {
@@ -63,5 +63,6 @@ typedef struct s_game
 	int			screen_y;
 }	t_game;
 
-void    parsing(int ac, char **av);
+void	parsing(int ac, char **av);
+
 #endif

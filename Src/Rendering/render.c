@@ -1,7 +1,7 @@
-#include "cub3d.h"
 #include <math.h>
 #include <stdio.h>
 #include "mlx.h"
+#include "render.h"
 
 void	ray_init(t_game *game, t_ray *ray, int x)
 {
@@ -84,8 +84,10 @@ int	ray(t_game *game)
 {
 	int		x;
 	t_ray	ray;
+	t_img	image;
 
 	x = -1;
+	init_img(game, &image);
 	while (++x <= game->screen_x - 1)
 	{
 		ray_init(game, &ray, x);
@@ -94,10 +96,11 @@ int	ray(t_game *game)
 		line_calc(game, &ray);
 		while (ray.wall_start != ray.wall_end)
 		{
-			mlx_pixel_put(game->mlx, game->win, x, ray.wall_start, 0xFFFFFF);
-			printf("start :%d, end :%d\n", ray.wall_start, ray.wall_end);
+			mlx_pixel_put_img(&image, x, ray.wall_start, 0xFFFFFF);
 			ray.wall_start++;
 		}
 	}
+	mlx_put_image_to_window(game->mlx, game->win, image.img, 0, 0);
+	mlx_destroy_image(game->mlx, image.img);
 	return (0);
 }

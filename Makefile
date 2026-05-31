@@ -10,21 +10,24 @@ INC_DIR := Includes
 LIB_DIR := Lib
 LIBFT_DIR := $(LIB_DIR)/libft
 MLX_DIR := $(LIB_DIR)/Mlx
-MLX_BRANCH := fedora
 
 
 # MLX
 MLX_URL := https://github.com/42paris/minilibx-linux.git
+MLX_BRANCH := fedora
 
 # ============================================================
 #  Src Files
 # ============================================================
 
-SRCS :=	main.c				\
-		Parsing/parsing.c	\
-		Rendering/test.c	\
-		Rendering/render.c
+SRCS :=	main.c					\
+		Parsing/parsing.c		\
+		Rendering/test.c		\
+		Rendering/render.c		\
+		Rendering/mlx_render.c
+
 LIBFT := $(LIBFT_DIR)/libft.a
+
 # ============================================================
 #  Generate complete Path
 # ============================================================
@@ -35,6 +38,7 @@ IFLAGS  := -I$(INC_DIR) -I$(LIB_DIR) -I$(LIBFT_DIR) -I$(MLX_DIR)
 # ============================================================
 #  Rules
 # ============================================================
+
 all: libs mlx $(NAME)
 
 mlx :
