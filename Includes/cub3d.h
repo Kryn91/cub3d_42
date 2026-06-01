@@ -63,6 +63,6 @@ typedef struct s_game
 	int			screen_y;
 }	t_game;
 
-void	parsing(int ac, char **av);
+void	parsing(int ac, char **av, t_map *map);
 
 #endif

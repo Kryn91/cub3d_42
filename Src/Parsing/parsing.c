@@ -2,6 +2,7 @@
 #include "cub3d.h"
 #include <stdio.h>
 #include "libft.h"
+#include "create_map.h"
 
 bool    check_xpm(char *av)
 {
@@ -31,8 +32,11 @@ bool    check_valid_arg(int ac, char **av)
     return (true);
 }
 
-void    parsing(int ac, char **av)
+void    parsing(int ac, char **av, t_map *map)
 {
     if (check_valid_arg(ac, av) == false)
+        exit(1);
+    map->arr = create_map(av[1]);
+    if (!map->arr)
         exit(1);
 }

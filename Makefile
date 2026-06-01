@@ -10,7 +10,8 @@ INC_DIR := Includes
 LIB_DIR := Lib
 LIBFT_DIR := $(LIB_DIR)/libft
 MLX_DIR := $(LIB_DIR)/Mlx
-
+GNL_DIR := $(LIB_DIR)/Gnl
+INC_PARSING := $(INC_DIR)/Parsing
 
 # MLX
 MLX_URL := https://github.com/42paris/minilibx-linux.git
@@ -22,18 +23,24 @@ MLX_BRANCH := fedora
 
 SRCS :=	main.c					\
 		Parsing/parsing.c		\
+		Parsing/read_map_file.c	\
+		Parsing/create_map.c 	\
 		Rendering/test.c		\
 		Rendering/render.c		\
-		Rendering/mlx_render.c
+		Rendering/mlx_render.c	\
+		Utils/free_memory.c 
 
 LIBFT := $(LIBFT_DIR)/libft.a
 
+GNL :=	$(GNL_DIR)/get_next_line.c		\
+		$(GNL_DIR)/get_next_line_utils.c
+		
 # ============================================================
 #  Generate complete Path
 # ============================================================
 
 OBJS    := $(addprefix $(OBJ_DIR)/, $(SRCS:.c=.o))
-IFLAGS  := -I$(INC_DIR) -I$(LIB_DIR) -I$(LIBFT_DIR) -I$(MLX_DIR)
+IFLAGS  := -I$(INC_DIR) -I$(LIB_DIR) -I$(LIBFT_DIR) -I$(INC_PARSING) -I$(GNL_DIR) -I$(MLX_DIR)
 
 # ============================================================
 #  Rules
@@ -48,10 +55,10 @@ mlx :
 	fi
 
 libs:
-	$(MAKE) -C $(LIBFT_DIR)
+	$(MAKE) -C $(LIBFT_DIR) -j
 
 $(NAME): $(OBJS)
-	$(CC) $(CFLAGS) $(OBJS) $(LIBFT) -L$(MLX_DIR) $(MLX_FLAG) -o $(NAME)
+	$(CC) $(CFLAGS) $(OBJS) $(LIBFT) $(GNL) -L$(MLX_DIR) $(MLX_FLAG) -o $(NAME)
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 	@mkdir -p $(dir $@)
@@ -59,7 +66,7 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 
 clean:
 	rm -rf $(OBJ_DIR)
-	$(MAKE) clean -C $(LIBFT_DIR)
+	$(MAKE) clean -C $(LIBFT_DIR) -j
 	rm -rf $(MLX_DIR)
 
 fclean: clean
