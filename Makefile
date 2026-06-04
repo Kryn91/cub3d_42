@@ -12,6 +12,7 @@ LIBFT_DIR := $(LIB_DIR)/libft
 MLX_DIR := $(LIB_DIR)/Mlx
 GNL_DIR := $(LIB_DIR)/Gnl
 INC_PARSING := $(INC_DIR)/Parsing
+INC_MOVEMENT := $(INC_DIR)/Movement
 
 # MLX
 MLX_URL := https://github.com/42paris/minilibx-linux.git
@@ -28,7 +29,8 @@ SRCS :=	main.c					\
 		Rendering/test.c		\
 		Rendering/render.c		\
 		Rendering/mlx_render.c	\
-		Utils/free_memory.c 
+		Utils/free_memory.c		\
+		Movement/handle_input.c 
 
 LIBFT := $(LIBFT_DIR)/libft.a
 
@@ -40,7 +42,7 @@ GNL :=	$(GNL_DIR)/get_next_line.c		\
 # ============================================================
 
 OBJS    := $(addprefix $(OBJ_DIR)/, $(SRCS:.c=.o))
-IFLAGS  := -I$(INC_DIR) -I$(LIB_DIR) -I$(LIBFT_DIR) -I$(INC_PARSING) -I$(GNL_DIR) -I$(MLX_DIR)
+IFLAGS  := -I$(INC_DIR) -I$(LIB_DIR) -I$(LIBFT_DIR) -I$(INC_PARSING) -I$(INC_MOVEMENT) -I$(GNL_DIR) -I$(MLX_DIR)
 
 # ============================================================
 #  Rules
