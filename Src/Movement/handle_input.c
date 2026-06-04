@@ -12,7 +12,7 @@ void	close_win(t_game *game)
 void    handle_input(int keycode, t_game *game)
 {
     double  movespeed;
-    
+
     movespeed = 0.10;
     if (keycode == KEY_W)
         game->player.pos_y += movespeed;

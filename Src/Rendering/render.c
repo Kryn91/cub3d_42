@@ -105,8 +105,9 @@ int	side_calc(t_ray *ray)
 void	render_wall(t_game *game, t_ray *ray, int x, t_img *image)
 {
 	double	wall_x;
+	double	tex_pos;
 	int		tex_x;
-	double	tex_y;
+	int		tex_y;
 	int		color;
 	t_img	tex_img;
 	double	step;
@@ -124,15 +125,16 @@ void	render_wall(t_game *game, t_ray *ray, int x, t_img *image)
 		tex_x = game->map.walls[side].width - tex_x - 1;
 	if (side == 1 && ray->dir_y < 0)
 		tex_x = game->map.walls[side].width - tex_x - 1;
-	tex_y = 0;
 	step = game->map.walls[side].height / ray->line_length;
+	tex_pos = (ray->wall_start + ray->line_length / 2 - game->screen_y / 2) * step;
 	tex_img.addr = mlx_get_data_addr(game->map.walls[side].img, &tex_img.bpp, &tex_img.size_line, &tex_img.endian);
 	while (ray->wall_start != ray->wall_end)
 	{
-		color = *(unsigned int *) (tex_img.addr + tex_x * (tex_img.bpp / 8) + (int) floor(tex_y) * tex_img.size_line);
+		tex_y = (int) tex_pos;
+		color = *(unsigned int *) (tex_img.addr + tex_x * (tex_img.bpp / 8) + tex_y * tex_img.size_line);
 		mlx_pixel_put_img(image, x, ray->wall_start, color);
 		ray->wall_start++;
-		tex_y += step;
+		tex_pos += step;
 	}
 }
 
