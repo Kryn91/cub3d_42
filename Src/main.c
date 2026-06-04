@@ -3,18 +3,21 @@
 #include "mlx.h"
 
 int		ray(t_game *game);
-void	init_test(t_game *game);
+void	init_test(t_game *game, int idx);
 
 int		main(int ac, char **av)
 {
 	t_game	game;
 	t_map	map;
 
-	(void) ac;
-	(void) av;
+	int	idx;
+
+	idx = 3;
+	if (ac > 1)
+		idx = ft_atoi(av[1]);
 	parsing(ac, av, &map);
 	game.mlx = mlx_init();
-	init_test(&game);
+	init_test(&game, idx);
 	game.win = mlx_new_window(game.mlx, game.screen_x, game.screen_y, "cub3d");
 	mlx_loop_hook(game.mlx, (void *)ray, &game);
 	mlx_loop(game.mlx);
