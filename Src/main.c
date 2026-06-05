@@ -17,6 +17,7 @@ int	run_game(t_game *game)
 	mlx_loop_hook(game->mlx, (void *)ray, game);
 	mlx_hook(game->win,  17, 0, (void *)close_win, game);
 	mlx_hook(game->win, 2, 1L << 0, (void *)handle_input, game);
+	mlx_hook(game->win, 6 , 1L << 6, (void *)handle_mouse_input, game);
 	mlx_loop(game->mlx);
 	return (0);
 }
