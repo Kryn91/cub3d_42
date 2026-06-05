@@ -17,13 +17,25 @@ void    handle_input(int keycode, t_game *game)
 
     movespeed = 0.10;
     if (keycode == KEY_W)
-        game->player.pos_x -= movespeed;
+    {
+        game->player.pos_x += game->player.dir_x * movespeed;
+        game->player.pos_y += game->player.dir_y * movespeed;
+    }
     else if (keycode == KEY_S)
-        game->player.pos_x += movespeed;
+    {
+        game->player.pos_x -= game->player.dir_x * movespeed;
+        game->player.pos_y -= game->player.dir_y * movespeed;
+    }
     else if (keycode == KEY_D)
-        game->player.pos_y -= movespeed;
+    {
+        game->player.pos_x += game->player.plane_x * movespeed;
+        game->player.pos_y += game->player.plane_y * movespeed;
+    }
     else if (keycode == KEY_A)
-        game->player.pos_y += movespeed;
+    {
+        game->player.pos_y -= game->player.plane_y * movespeed;
+        game->player.pos_x -= game->player.plane_x * movespeed;
+    }
     else if (keycode == KEY_ESC)
         close_win(game);
 }
@@ -55,5 +67,4 @@ void    handle_mouse_input(int x, int y, t_game *game)
     delta = x - game->player.mouse_x;
     game->player.mouse_x = x;
     rotate_player(game, delta * MOUSE_SENSIBILITY);
-    //printf("x %d y %d\n", x, y);
 }
