@@ -19,8 +19,8 @@ typedef struct s_player
 	double		dir_y;
 	double		plane_x;
 	double		plane_y;
-	int			mouse_x;
-	int			mouse_y;
+	double		mouse_x;
+	double		mouse_y;
 }	t_player;
 
 typedef struct s_map
@@ -45,7 +45,7 @@ typedef struct s_ray
 	double	delta_dist_x;
 	double	delta_dist_y;
 	double	wall_dist;
-	double	line_length;
+	int		line_length;
 	int		wall_start;
 	int		wall_end;
 	int		step_x;

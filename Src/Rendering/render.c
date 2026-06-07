@@ -80,8 +80,8 @@ void	line_calc(t_game *game, t_ray *ray)
 	// else
 	// 	ray->wall_dist = ray->side_dist_y;
 	ray->line_length = game->screen_y / ray->wall_dist;
-	ray->wall_start = (game->screen_y / 2) - (ray->line_length / 2);
-	ray->wall_end = (game->screen_y / 2) + (ray->line_length / 2);
+	ray->wall_start = (game->screen_y / 2.0) - (ray->line_length / 2.0);
+	ray->wall_end = (game->screen_y / 2.0) + (ray->line_length / 2.0);
 	if (ray->wall_start < 0)
 		ray->wall_start = 0;
 	if (ray->wall_end > game->screen_y)
@@ -113,7 +113,6 @@ void	render_wall(t_game *game, t_ray *ray, int x, t_img *image)
 	double	step;
 	int		side;
 
-	step = game->map.walls[0].height / ray->line_length;
 	if (ray->side == 0)
 		wall_x = game->player.pos_y + ray->dir_y * ray->wall_dist;
 	else
@@ -121,16 +120,12 @@ void	render_wall(t_game *game, t_ray *ray, int x, t_img *image)
 	wall_x -= floor(wall_x);
 	side = side_calc(ray);
 	tex_x = wall_x * game->map.walls[side].width;
-	if (side == 0 && ray->dir_x > 0)
-		tex_x = game->map.walls[side].width - tex_x - 1;
-	if (side == 1 && ray->dir_y < 0)
-		tex_x = game->map.walls[side].width - tex_x - 1;
-	step = game->map.walls[side].height / ray->line_length;
-	tex_pos = (ray->wall_start + ray->line_length / 2 - game->screen_y / 2) * step;
+	step = (double) game->map.walls[side].height / (double) ray->line_length;
+	tex_pos = (ray->wall_start + ray->line_length / 2.0 - game->screen_y / 2.0) * step;
 	tex_img.addr = mlx_get_data_addr(game->map.walls[side].img, &tex_img.bpp, &tex_img.size_line, &tex_img.endian);
-	while (ray->wall_start != ray->wall_end)
+	while (ray->wall_start <= ray->wall_end)
 	{
-		tex_y = (int) tex_pos;
+		tex_y = tex_pos;
 		color = *(unsigned int *) (tex_img.addr + tex_x * (tex_img.bpp / 8) + tex_y * tex_img.size_line);
 		mlx_pixel_put_img(image, x, ray->wall_start, color);
 		ray->wall_start++;
