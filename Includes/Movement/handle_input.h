@@ -10,7 +10,7 @@
 # define KEY_D		100
 # define KEY_ESC	65307
 
-# define MOUSE_SENSIBILITY 0.05
+# define MOUSE_SENSIBILITY 0.005
 
 void    handle_input(int keycode, t_game *game);
 void	close_win(t_game *game);
