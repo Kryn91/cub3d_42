@@ -31,7 +31,6 @@ SRCS :=	main.c					\
 		Rendering/minimap.c		\
 		Rendering/mlx_render.c	\
 		Utils/free_memory.c		\
-		Movement/handle_input.c
 		Movement/handle_input.c	\
 		Movement/movement.c
 
