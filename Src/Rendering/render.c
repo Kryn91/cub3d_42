@@ -148,8 +148,9 @@ int	ray(t_game *game)
 		ray_collision(game, &ray);
 		line_calc(game, &ray);
 		render_wall(game, &ray, x, &image);
-		render_minimap(game);
+
 	}
+	render_minimap(game, &image);
 	mlx_put_image_to_window(game->mlx, game->win, image.img, 0, 0);
 	mlx_destroy_image(game->mlx, image.img);
 	return (0);
