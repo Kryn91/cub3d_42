@@ -30,13 +30,14 @@ SRCS :=	main.c					\
 		Rendering/render.c		\
 		Rendering/mlx_render.c	\
 		Utils/free_memory.c		\
-		Movement/handle_input.c 
+		Movement/handle_input.c	\
+		Movement/movement.c
 
 LIBFT := $(LIBFT_DIR)/libft.a
 
 GNL :=	$(GNL_DIR)/get_next_line.c		\
 		$(GNL_DIR)/get_next_line_utils.c
-		
+
 # ============================================================
 #  Generate complete Path
 # ============================================================
