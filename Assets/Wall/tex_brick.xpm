@@ -1,0 +1,23 @@
+/* XPM */
+static char *tex_brick_xpm[] = {
+"16 16 3 1",
+". c #C8B8A8",
+"A c #B03030",
+"B c #7A1E1E",
+"AAA.BBB.AAA.BBBB",
+"AAA.BBB.AAA.BBBB",
+"AAA.BBB.AAA.BBBB",
+"................",
+"BB.AAA.BBB.AAAA.",
+"BB.AAA.BBB.AAAA.",
+"BB.AAA.BBB.AAAA.",
+"................",
+"AAA.BBB.AAA.BBBB",
+"AAA.BBB.AAA.BBBB",
+"AAA.BBB.AAA.BBBB",
+"................",
+"BB.AAA.BBB.AAAA.",
+"BB.AAA.BBB.AAAA.",
+"BB.AAA.BBB.AAAA.",
+"................"
+};

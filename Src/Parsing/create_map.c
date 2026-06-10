@@ -81,15 +81,14 @@ char	**vector_map(char *map)
 	return (map_tab);
 }
 
-char	**create_map(char *file)
+char	**create_map(char *file, t_game *game)
 {
 	char	*map;
 	char	**map_tab;
 
-	map = open_map(file);
+	map = open_map(file, game);
 	if (!map)
 		exit(1);
-    //checker la map
 	map_tab = vector_map(map);
 	if (!map_tab)
 	{

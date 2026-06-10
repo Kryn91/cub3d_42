@@ -29,7 +29,9 @@ typedef struct s_map
 	char		**arr;
 	t_texture	walls[4];
 	int			floor_color;
+	char		*floor_parse;
 	int			ceiling_color;
+	char		*ceiling_parse;
 	int			width;
 	int			height;
 }	t_map;
@@ -66,6 +68,6 @@ typedef struct s_game
 	int			screen_y;
 }	t_game;
 
-void	parsing(int ac, char **av, t_map *map);
+void	parsing(int ac, char **av, t_game *game);
 
 #endif

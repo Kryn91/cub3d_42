@@ -22,16 +22,17 @@ MLX_BRANCH := fedora
 #  Src Files
 # ============================================================
 
-SRCS :=	main.c					\
-		Parsing/parsing.c		\
-		Parsing/read_map_file.c	\
-		Parsing/create_map.c 	\
-		Rendering/test.c		\
-		Rendering/render.c		\
-		Rendering/minimap.c		\
-		Rendering/mlx_render.c	\
-		Utils/free_memory.c		\
-		Movement/handle_input.c	\
+SRCS :=	main.c						\
+		Parsing/parsing.c			\
+		Parsing/read_map_file.c		\
+		Parsing/create_map.c 		\
+		Parsing/texture_parsing.c	\
+		Rendering/test.c			\
+		Rendering/render.c			\
+		Rendering/minimap.c			\
+		Rendering/mlx_render.c		\
+		Utils/free_memory.c			\
+		Movement/handle_input.c		\
 		Movement/movement.c
 
 LIBFT := $(LIBFT_DIR)/libft.a

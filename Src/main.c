@@ -23,11 +23,15 @@ int	run_game(t_game *game)
 }
 int		main(int ac, char **av)
 {
-	t_game	game;
-	t_map	map;
+	t_game	*game;
 
-	parsing(ac, av, &map);
-	if (run_game(&game) != 0)
+	game = malloc(sizeof(t_game));
+	if (!game)
 		return (1);
+	ft_memset(game, 0, sizeof(t_game));
+	parsing(ac, av, game);
+	if (run_game(game) != 0)
+		return (1);
+	free(game);
 	return (0);
 }
