@@ -30,7 +30,10 @@ void	render_minimap(t_game *game, t_img *image)
 			map_y = game->player.pos_y - offset_y / MINIMAP_TILE_SIZE;
 			if (map_x >= 0 && map_x < game->map.width && map_y >= 0 && map_y < game->map.height)
 			{
-				if (game->map.arr[(int)map_y][(int)map_x] == '0')
+				if (map_x >= game->player.pos_x - 0.1 && map_x <= game->player.pos_x + 0.1
+					&& map_y >= game->player.pos_y - 0.1 && map_y <= game->player.pos_y + 0.1)
+					mlx_pixel_put_img(image, MINIMAP_POS_X + x, MINIMAP_POS_Y + y, 0x0000FF);
+				else if (game->map.arr[(int)map_y][(int)map_x] == '0')
 					mlx_pixel_put_img(image, MINIMAP_POS_X + x, MINIMAP_POS_Y + y, 0xFFFFFF);
 				else
 					mlx_pixel_put_img(image, MINIMAP_POS_X + x, MINIMAP_POS_Y + y, 0x000000);
