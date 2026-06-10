@@ -21,6 +21,7 @@ typedef struct s_player
 	double		plane_y;
 	double		mouse_x;
 	double		mouse_y;
+	double		rotation_angle;
 }	t_player;
 
 typedef struct s_map

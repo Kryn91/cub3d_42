@@ -52,4 +52,5 @@ void	handle_mouse_input(int x, int y, t_game *game)
 	delta = x - game->player.mouse_x;
 	game->player.mouse_x = x;
 	rotate_player(game, delta * MOUSE_SENSIBILITY);
+	game->player.rotation_angle += delta * MOUSE_SENSIBILITY;
 }

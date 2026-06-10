@@ -88,6 +88,7 @@ static void	set_player(t_game *game, const t_test_scene *scene)
 	game->player.dir_y = scene->dir_y;
 	game->player.plane_x = -scene->dir_y * FOV_PLANE;
 	game->player.plane_y = scene->dir_x * FOV_PLANE;
+	game->player.rotation_angle = 0;
 }
 
 void	init_test(t_game *game, int idx)
