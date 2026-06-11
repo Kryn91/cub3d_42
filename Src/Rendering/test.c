@@ -77,18 +77,19 @@ void	init_tex(t_game *game, t_texture *tex, char *path)
 	tex->path = path;
 	tex->height = 64;
 	tex->width = 64;
-	tex->img = mlx_xpm_file_to_image(game->mlx, path, &tex->width, &tex->height);
+	tex->img = mlx_xpm_file_to_image
+		(game->mlx, path, &tex->width, &tex->height);
 }
 
 static void	set_player(t_game *game, const t_test_scene *scene)
 {
-	game->player.pos_x = scene->pos_x;
-	game->player.pos_y = scene->pos_y;
+	game->player.pos_x = 1.5;
+	game->player.pos_y = 1.5;
 	game->player.dir_x = scene->dir_x;
 	game->player.dir_y = scene->dir_y;
 	game->player.plane_x = -scene->dir_y * FOV_PLANE;
 	game->player.plane_y = scene->dir_x * FOV_PLANE;
-	game->player.rotation_angle = ;
+	game->player.rotation_angle = 1.5708;
 }
 
 void	init_test(t_game *game, int idx)
@@ -100,14 +101,10 @@ void	init_test(t_game *game, int idx)
 	if (idx < 0 || idx >= count)
 		idx = 0;
 	scene = &g_scenes[idx];
-
 	game->screen_x = 1920;
 	game->screen_y = 1080;
-	game->map.arr = scene->map;
-	game->map.floor_color = 0x808080;
-	game->map.ceiling_color = 0x333333;
-	game->map.width = scene->width;
-	game->map.height = scene->height;
+	game->map.width = 33;
+	game->map.height = 14;
 	set_player(game, scene);
 	game->time = 0;
 	game->old_time = 0;
