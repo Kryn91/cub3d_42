@@ -27,9 +27,8 @@ typedef struct s_ray
 	int		step_x;
 	int		step_y;
 	int		side;
-	double	tex_pos;
 	int		tex_x;
-	int		tex_y;
+	double	tex_y;
 	int		color;
 	double	tex_step;
 	t_img	tex_img;
