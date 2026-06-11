@@ -2,8 +2,8 @@
 #include "cub3d.h"
 #include <stdio.h>
 #include "libft.h"
-#include "create_map.h"
-#include "texture_parsing.h"
+#include "read_map_file.h"
+#include "color_parser.h"
 
 bool    check_cub(char *av)
 {
@@ -32,15 +32,51 @@ bool    check_valid_arg(int ac, char **av)
         exit(1);
     return (true);
 }
+void debug_map(t_map *map)
+{
+    int i;
+
+    printf("===== MAP DEBUG =====\n");
+
+    // Dimensions
+    printf("width  = %d\n", map->width);
+    printf("height = %d\n", map->height);
+
+    // Floor / Ceiling raw
+    printf("\n--- COLORS RAW ---\n");
+    printf("floor_parse   = %s\n", map->floor_parse);
+    printf("ceiling_parse = %s\n", map->ceiling_parse);
+
+    // Floor / Ceiling hex
+    printf("\n--- COLORS HEX ---\n");
+    printf("floor   = 0x%06X (%d)\n", map->floor_color, map->floor_color);
+    printf("ceiling = 0x%06X (%d)\n", map->ceiling_color, map->ceiling_color);
+
+    // Textures
+    printf("\n--- TEXTURES ---\n");
+    printf("NO = %s\n", map->walls[0].path);
+    printf("SO = %s\n", map->walls[1].path);
+    printf("WE = %s\n", map->walls[2].path);
+    printf("EA = %s\n", map->walls[3].path);
+
+    // Map array
+    printf("\n--- MAP ARRAY ---\n");
+    if (map->arr)
+    {
+        for (i = 0; map->arr[i]; i++)
+            printf("%s\n", map->arr[i]);
+    }
+
+    printf("=====================\n");
+}
 
 void    parsing(int ac, char **av, t_game *game)
 {
     if (check_valid_arg(ac, av) == false)
         exit(1);
-    game->map.arr = create_map(av[1], game);
-    init_and_check_texture(game);
-    //checker les texture et init la couleur
-    //puis checker la map
+    parse_map(av[1], game);
+    color_parser(game);
+    debug_map(&game->map);
     if (!game->map.arr)
         exit(1);
 }

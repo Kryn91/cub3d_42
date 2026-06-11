@@ -25,8 +25,9 @@ MLX_BRANCH := fedora
 SRCS :=	main.c						\
 		Parsing/parsing.c			\
 		Parsing/read_map_file.c		\
-		Parsing/create_map.c 		\
+		Parsing/texture_parser.c	\
 		Parsing/texture_parsing.c	\
+		Parsing/color_parser.c		\
 		Rendering/test.c			\
 		Rendering/render.c			\
 		Rendering/minimap.c			\

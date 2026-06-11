@@ -2,6 +2,9 @@
 #include "get_next_line.h"
 #include "cub3d.h"
 #include <stdio.h>
+#include "read_map_file.h"
+#include "texture_parser.h"
+#include "free_memory.h"
 
 int	open_file(char *map)
 {
@@ -16,63 +19,50 @@ int	open_file(char *map)
 	return (fd);
 }
 
-void	read_texture(int fd, t_game *game)
-{
-	char	*line;
 
-    line = get_next_line(fd);
-    game->map.walls[0].path = ft_strtrim(line, "\n");
-    free(line);
-    line = get_next_line(fd);
-    game->map.walls[1].path = ft_strtrim(line, "\n");
-    free(line);
-    line = get_next_line(fd);
-    game->map.walls[2].path = ft_strtrim(line, "\n");
-    free(line);
-    line = get_next_line(fd);
-    game->map.walls[3].path = ft_strtrim(line, "\n");
-    free(line);
-    line = get_next_line(fd);
-    game->map.floor_parse = ft_strtrim(line, "\n");
-    free(line);
-    line = get_next_line(fd);
-    game->map.ceiling_parse = ft_strtrim(line, "\n");
-    free(line);
-	game->map.floor_parse = get_next_line(fd);
-	game->map.ceiling_parse = get_next_line(fd);
-	/*
-    printf("NO = %sSO = %sWE = %sEA = %s\nF  = %sC  = %s\n",
-    game->map.walls[0].path,
-    game->map.walls[1].path,
-    game->map.walls[2].path,
-    game->map.walls[3].path,
-    game->map.floor_parse,
-    game->map.ceiling_parse);
-	*/
+char	**add_map_line(char **map, char *line)
+{
+	char	**new_map;
+	size_t	i;
+	size_t	len;
+
+	len = 0;
+	while (map && map[len])
+		len++;
+	new_map = malloc(sizeof(char *) * (len + 2));
+	if (!new_map)
+		return (perror("malloc"), NULL);
+	i = 0;
+	while (map && map[i])
+	{
+		new_map[i] = map[i];
+		i++;
+	}
+	new_map[i] = ft_strtrim(line, "\n");
+	if (!new_map)
+		return (perror("strdup"), free_array(new_map), NULL);
+	new_map[i + 1] = NULL;
+	free(map);
+	return (new_map);
 }
 
-char	*open_map(char *map, t_game *game)
+void	parse_map(char *map, t_game *game)
 {
 	int		fd;
-	char	*map_read;
 	char	*line_read;
-	char	*temp;
 
 	fd = open_file(map);
-	read_texture(fd, game);
-	map_read = ft_strdup("");
-	temp = NULL;
+	if (fd == -1)
+		return ;
 	line_read = get_next_line(fd);
 	while (line_read != NULL)
 	{
-		temp = ft_strjoin(map_read, line_read);
+		if (is_texture(line_read))
+    		handle_texture(line_read, game);
+		else
+    		game->map.arr = add_map_line(game->map.arr, line_read);
 		free(line_read);
-		free(map_read);
-		if (!temp)
-			return (close(fd), NULL);
-		map_read = temp;
 		line_read = get_next_line(fd);
 	}
 	close(fd);
-	return (map_read);
 }

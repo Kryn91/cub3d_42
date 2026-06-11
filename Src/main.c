@@ -1,6 +1,7 @@
 #include "libft.h"
 #include "cub3d.h"
 #include "handle_input.h"
+#include "free_memory.h"
 #include "mlx.h"
 
 int		ray(t_game *game);
@@ -30,8 +31,10 @@ int		main(int ac, char **av)
 		return (1);
 	ft_memset(game, 0, sizeof(t_game));
 	parsing(ac, av, game);
+	//checkeur, test les erreurs et ramene dans le main
 	if (run_game(game) != 0)
 		return (1);
+	free_map(game);
 	free(game);
 	return (0);
 }

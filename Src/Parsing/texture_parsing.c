@@ -25,7 +25,7 @@ bool    check_xpm(char *av)
 
 void    init_and_check_texture(t_game *game)
 {
-    printf("NO = %sSO = %sWE = %sEA = %s\nF  = %sC  = %s\n",
+    printf("NO = %s\nSO = %s\nWE = %s\nEA = %s\nF  = %s\nC  = %s\n",
     game->map.walls[0].path,
     game->map.walls[1].path,
     game->map.walls[2].path,
