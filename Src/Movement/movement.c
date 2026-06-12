@@ -42,9 +42,9 @@ void	move_strafe(int keycode, double movespeed, t_game *game)
 		game->player.pos_x += game->player.plane_x * movespeed;
 		game->player.pos_y += game->player.plane_y * movespeed;
 	}
-	else if (keycode == KEY_A && !isColiding(game->player.pos_y
-			- game->player.plane_y * movespeed, game->player.pos_x
-			- game->player.plane_x * movespeed, game))
+	else if (keycode == KEY_A && !isColiding(game->player.pos_x
+			- game->player.plane_x * movespeed, game->player.pos_y
+			- game->player.plane_y * movespeed, game))
 	{
 		game->player.pos_y -= game->player.plane_y * movespeed;
 		game->player.pos_x -= game->player.plane_x * movespeed;

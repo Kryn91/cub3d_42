@@ -28,6 +28,7 @@ SRCS :=	main.c						\
 		Parsing/texture_parser.c	\
 		Parsing/texture_parsing.c	\
 		Parsing/color_parser.c		\
+		Parsing/init_player.c		\
 		Rendering/test.c			\
 		Rendering/render.c			\
 		Rendering/minimap.c			\

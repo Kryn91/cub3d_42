@@ -32,6 +32,7 @@ bool    check_valid_arg(int ac, char **av)
         exit(1);
     return (true);
 }
+
 void debug_map(t_map *map)
 {
     int i;
@@ -69,6 +70,7 @@ void debug_map(t_map *map)
 
     printf("=====================\n");
 }
+
 
 void    parsing(int ac, char **av, t_game *game)
 {

@@ -3,6 +3,7 @@
 #include "handle_input.h"
 #include "free_memory.h"
 #include "mlx.h"
+#include "init_player.h"
 
 int		ray(t_game *game);
 void	init_test(t_game *game, int idx);
@@ -31,6 +32,7 @@ int		main(int ac, char **av)
 		return (1);
 	ft_memset(game, 0, sizeof(t_game));
 	parsing(ac, av, game);
+	init_player(game);
 	//checkeur, test les erreurs et ramene dans le main
 	if (run_game(game) != 0)
 		return (1);
