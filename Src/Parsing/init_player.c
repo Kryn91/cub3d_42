@@ -1,15 +1,16 @@
 #include "init_player.h"
+#include "math.h"
 
 void    set_orientation(char c, t_game *game)
 {
     if (c == 'E')
-        game->player.rotation_angle = 0;
+        game->player.rotation_angle = 0.0;
     if (c == 'S')
-        game->player.rotation_angle = 90;
+        game->player.rotation_angle = (M_PI / 2);
     if (c == 'W')
-        game->player.rotation_angle = 180;
+        game->player.rotation_angle = (M_PI);
     if (c == 'N')
-        game->player.rotation_angle = 270;
+        game->player.rotation_angle = (3.0 * M_PI / 2);
 }
 
 void    set_player_pos(t_game  *game)
@@ -29,8 +30,8 @@ void    set_player_pos(t_game  *game)
                 || map->arr[y][x] == 'E' || map->arr[y][x] == 'W')
             {
                 set_orientation(map->arr[y][x], game);
-                game->player.pos_x = x;
-                game->player.pos_y = y;
+                game->player.pos_x = x + 0.5;
+                game->player.pos_y = y + 0.5;
             }
             x++;
         }
