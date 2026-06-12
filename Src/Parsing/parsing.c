@@ -71,12 +71,31 @@ void debug_map(t_map *map)
     printf("=====================\n");
 }
 
+void    init_map_size(t_map *map)
+{
+    int i;
+    int len;
+    int max_len;
+    
+
+    i = 0;
+    while (map->arr[i])
+    {
+        len = ft_strlen(map->arr[i]);
+        if (len > max_len)
+            max_len = len;
+        i++;
+    }
+    map->width = max_len;
+    map->height = i;
+}
 
 void    parsing(int ac, char **av, t_game *game)
 {
     if (check_valid_arg(ac, av) == false)
         exit(1);
     parse_map(av[1], game);
+    init_map_size(&game->map);
     color_parser(game);
     debug_map(&game->map);
     if (!game->map.arr)

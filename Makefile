@@ -13,6 +13,7 @@ MLX_DIR := $(LIB_DIR)/Mlx
 GNL_DIR := $(LIB_DIR)/Gnl
 INC_PARSING := $(INC_DIR)/Parsing
 INC_MOVEMENT := $(INC_DIR)/Movement
+INC_CHECKER := $(INC_DIR)/Checker
 
 # MLX
 MLX_URL := https://github.com/42paris/minilibx-linux.git
@@ -29,6 +30,9 @@ SRCS :=	main.c						\
 		Parsing/texture_parsing.c	\
 		Parsing/color_parser.c		\
 		Parsing/init_player.c		\
+		Checker/checker.c 			\
+		Checker/map_checker.c		\
+		Checker/map_solver.c		\
 		Rendering/test.c			\
 		Rendering/render.c			\
 		Rendering/minimap.c			\
@@ -48,7 +52,7 @@ GNL :=	$(GNL_DIR)/get_next_line.c		\
 # ============================================================
 
 OBJS    := $(addprefix $(OBJ_DIR)/, $(SRCS:.c=.o))
-IFLAGS  := -I$(INC_DIR) -I$(LIB_DIR) -I$(LIBFT_DIR) -I$(INC_PARSING) -I$(INC_MOVEMENT) -I$(GNL_DIR) -I$(MLX_DIR)
+IFLAGS  := -I$(INC_DIR) -I$(LIB_DIR) -I$(LIBFT_DIR) -I$(INC_PARSING) -I$(INC_CHECKER) -I$(INC_MOVEMENT) -I$(GNL_DIR) -I$(MLX_DIR)
 
 # ============================================================
 #  Rules
