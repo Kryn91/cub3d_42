@@ -32,12 +32,12 @@ void	minimap_pixel_render(t_game *game, t_img *image, t_minimap_pixel *px)
 			&& px->map_y <= game->player.pos_y + 0.1)
 			mlx_pixel_put_img
 				(image, MINIMAP_POS_X + px->x, MINIMAP_POS_Y + px->y, 0x0000FF);
-		else if (game->map.arr[(int)px->map_y][(int)px->map_x] == '0')
-			mlx_pixel_put_img
-				(image, MINIMAP_POS_X + px->x, MINIMAP_POS_Y + px->y, 0xFFFFFF);
-		else
+		else if (game->map.arr[(int)px->map_y][(int)px->map_x] == '1')
 			mlx_pixel_put_img
 				(image, MINIMAP_POS_X + px->x, MINIMAP_POS_Y + px->y, 0x000000);
+		else
+			mlx_pixel_put_img
+				(image, MINIMAP_POS_X + px->x, MINIMAP_POS_Y + px->y, 0xFFFFFF);
 	}
 	else
 		mlx_pixel_put_img

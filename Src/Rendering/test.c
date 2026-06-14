@@ -28,12 +28,12 @@ void	init_hand_tex(t_game *game, char *path, int i)
 
 void	init(t_game *game)
 {
-	game->screen_x = 1920;
-	game->screen_y = 1080;
+	game->screen_x = 1600;
+	game->screen_y = 960;
 	init_tex(game, game->map.walls, "Assets/Wall/tex_brick.xpm");
 	init_tex(game, game->map.walls + 1, "Assets/Wall/tex_checker.xpm");
 	init_tex(game, game->map.walls + 2, "Assets/Wall/tex_noise.xpm");
 	init_tex(game, game->map.walls + 3, "Assets/Wall/tex_stripes.xpm");
-	// init_hand_tex(game, "Assets/Hand/weapon_idle.xpm", 0);
-	// init_hand_tex(game, "Assets/Hand/weapon_weapon.xpm", 1);
+	init_hand_tex(game, "Assets/Hand/weapon_idle.xpm", 0);
+	init_hand_tex(game, "Assets/Hand/weapon_attack.xpm", 1);
 }

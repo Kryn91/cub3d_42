@@ -28,6 +28,18 @@ void	render_wall(t_game *game, t_ray *ray, int x, t_img *image)
 	}
 }
 
+void	render_hand(t_game *game, t_img *img)
+{
+	int		pos_x;
+	int		pos_y;
+
+	pos_x = game->screen_x / 2.0 - game->hand[0].width * PIXEL_SIZE / 2.0;
+	pos_y = game->screen_y - game->hand[0].height * PIXEL_SIZE;
+	// printf("Debug: ScreenH=%d | SpriteH=%d | Scale=%d | TotalHeight=%d | pos_y=%d\n",
+	// 	game->screen_y, game->hand[0].height, PIXEL_SIZE, game->hand[0].height * PIXEL_SIZE, pos_y);
+	sprite_to_img(&game->hand[0], img, pos_x, pos_y);
+}
+
 int	render(t_game *game)
 {
 	int		x;
@@ -48,7 +60,7 @@ int	render(t_game *game)
 		render_wall(game, &ray, x, &img);
 	}
 	render_minimap(game, &img);
-	// render_hand(game, &image);
+	render_hand(game, &img);
 	mlx_put_image_to_window(game->mlx, game->win, img.img_ptr, 0, 0);
 	mlx_destroy_image(game->mlx, img.img_ptr);
 	return (0);

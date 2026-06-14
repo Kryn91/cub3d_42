@@ -5,7 +5,7 @@ static char *weapon_attack[] = {
 ". c #CCCCCC",
 "x c #666666",
 "o c #FF3300",
-"+ c #FFFFFF", // Effet d'impact / Slash
+"+ c #FFFFFF",
 "* c #333333",
 "       +        ",
 "     +++++      ",

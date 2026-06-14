@@ -2,11 +2,11 @@
 static char *weapon_idle[] = {
 "16 16 6 1",
 "  c None",
-". c #CCCCCC", // Tranchant clair
-"x c #666666", // Dos de la lame
-"o c #FF3300", // Lueur Magipunk
-"+ c #FFFFFF", // Éclat
-"* c #333333", // Garde et poignée
+". c #CCCCCC",
+"x c #666666",
+"o c #FF3300",
+"+ c #FFFFFF",
+"* c #333333",
 "                ",
 "                ",
 "                ",

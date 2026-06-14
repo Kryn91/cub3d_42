@@ -15,12 +15,15 @@ void	init_img(t_game *game, t_img *img, int width, int height)
 	img->addr = mlx_get_data_addr
 		(img->img_ptr, &img->bpp, &img->size_line, &img->endian);
 }
+#include <stdio.h>
 
 void	sprite_to_img(t_texture *tex, t_img *img, int pos_x, int pos_y)
 {
-	int		x;
-	int		y;
-	int		color;
+	int				i;
+	int				j;
+	int				x;
+	int				y;
+	unsigned int	color;
 
 	y = -1;
 	while (++y < tex->height)
@@ -28,9 +31,20 @@ void	sprite_to_img(t_texture *tex, t_img *img, int pos_x, int pos_y)
 		x = -1;
 		while (++x < tex->width)
 		{
-			color = *(unsigned int *) tex->img.addr + y * tex->img.size_line
-				+ x * (tex->img.bpp / 8);
-			mlx_pixel_put_img(img, pos_x + x, pos_y + y, color);
+			color = *(unsigned int *)(tex->img.addr + y * tex->img.size_line
+					+ x * (tex->img.bpp / 8));
+			if (color == 0xFF000000)
+				continue ;
+			j = -1;
+			while (++j < PIXEL_SIZE)
+			{
+				i = -1;
+				while (++i < PIXEL_SIZE)
+				{
+					mlx_pixel_put_img(img, pos_x + x * PIXEL_SIZE + i,
+						pos_y + y * PIXEL_SIZE + j, color);
+				}
+			}
 		}
 	}
 }
