@@ -30,10 +30,10 @@ void	init(t_game *game)
 {
 	game->screen_x = 1600;
 	game->screen_y = 920;
-	init_tex(game, game->map.walls, "Assets/Wall/tex_brick.xpm");
-	init_tex(game, game->map.walls + 1, "Assets/Wall/tex_checker.xpm");
-	init_tex(game, game->map.walls + 2, "Assets/Wall/tex_noise.xpm");
-	init_tex(game, game->map.walls + 3, "Assets/Wall/tex_stripes.xpm");
+	init_tex(game, game->map.walls, game->map.walls[0].path);
+	init_tex(game, game->map.walls + 1, game->map.walls[1].path);
+	init_tex(game, game->map.walls + 2, game->map.walls[2].path);
+	init_tex(game, game->map.walls + 3, game->map.walls[3].path);
 	init_hand_tex(game, "Assets/Hand/weapon_idle.xpm", 0);
 	init_hand_tex(game, "Assets/Hand/weapon_attack.xpm", 1);
 }

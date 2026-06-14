@@ -11,7 +11,7 @@ void	render_wall(t_game *game, t_ray *ray, int x, t_img *image)
 
 	i = -1;
 	while (++i < ray->wall_start)
-		mlx_pixel_put_img(image, x, i, 0xFFF000);
+		mlx_pixel_put_img(image, x, i, game->map.ceiling_color);
 	while (i < ray->wall_end)
 	{
 		color = *(unsigned int *)(ray->tex_img.addr + ray->tex_x
@@ -23,7 +23,7 @@ void	render_wall(t_game *game, t_ray *ray, int x, t_img *image)
 	}
 	while (i < game->screen_y)
 	{
-		mlx_pixel_put_img(image, x, i, 0x000FFF);
+		mlx_pixel_put_img(image, x, i, game->map.floor_color);
 		i++;
 	}
 }
