@@ -98,4 +98,3 @@ int	side_calc(t_ray *ray)
 		return (3);
 	return (0);
 }
-

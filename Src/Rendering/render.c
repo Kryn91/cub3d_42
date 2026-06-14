@@ -14,7 +14,7 @@ void	render_wall(t_game *game, t_ray *ray, int x, t_img *image)
 		mlx_pixel_put_img(image, x, i, 0xFFF000);
 	while (i < ray->wall_end)
 	{
-		color = *(unsigned int *) (ray->tex_img.addr + ray->tex_x
+		color = *(unsigned int *)(ray->tex_img.addr + ray->tex_x
 				* ray->tex_img.bpp / 8
 				+ (int) ray->tex_y * ray->tex_img.size_line);
 		mlx_pixel_put_img(image, x, i, color);
@@ -35,8 +35,6 @@ void	render_hand(t_game *game, t_img *img)
 
 	pos_x = game->screen_x / 2.0 - game->hand[0].width * PIXEL_SIZE / 2.0;
 	pos_y = game->screen_y - game->hand[0].height * PIXEL_SIZE;
-	// printf("Debug: ScreenH=%d | SpriteH=%d | Scale=%d | TotalHeight=%d | pos_y=%d\n",
-	// 	game->screen_y, game->hand[0].height, PIXEL_SIZE, game->hand[0].height * PIXEL_SIZE, pos_y);
 	sprite_to_img(&game->hand[0], img, pos_x, pos_y);
 }
 

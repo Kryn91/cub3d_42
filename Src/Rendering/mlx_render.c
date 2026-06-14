@@ -15,7 +15,6 @@ void	init_img(t_game *game, t_img *img, int width, int height)
 	img->addr = mlx_get_data_addr
 		(img->img_ptr, &img->bpp, &img->size_line, &img->endian);
 }
-#include <stdio.h>
 
 void	sprite_to_img(t_texture *tex, t_img *img, int pos_x, int pos_y)
 {

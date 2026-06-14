@@ -3,7 +3,6 @@
 #include "minimap.h"
 #include <math.h>
 
-
 void	minimap_pixel_pos(t_game *game, t_minimap_pixel *px)
 {
 	double	offset_x;

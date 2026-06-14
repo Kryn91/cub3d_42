@@ -38,6 +38,4 @@ void	side_dists_calc(t_game *game, t_ray *ray);
 void	line_calc(t_game *game, t_ray *ray);
 int		side_calc(t_ray *ray);
 
-
-
 #endif

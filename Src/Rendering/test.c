@@ -29,7 +29,7 @@ void	init_hand_tex(t_game *game, char *path, int i)
 void	init(t_game *game)
 {
 	game->screen_x = 1600;
-	game->screen_y = 960;
+	game->screen_y = 920;
 	init_tex(game, game->map.walls, "Assets/Wall/tex_brick.xpm");
 	init_tex(game, game->map.walls + 1, "Assets/Wall/tex_checker.xpm");
 	init_tex(game, game->map.walls + 2, "Assets/Wall/tex_noise.xpm");
