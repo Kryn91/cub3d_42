@@ -3,43 +3,59 @@
 #include "minimap.h"
 #include <math.h>
 
-void	render_minimap(t_game *game, t_img *image)
+
+void	minimap_pixel_pos(t_game *game, t_minimap_pixel *px)
 {
 	double	offset_x;
-	double	old_offset_x;
 	double	offset_y;
-	double	old_offset_y;
-	double	map_x;
-	double	map_y;
-	int	x;
-	int	y;
+	double	rot_offset_x;
+	double	rot_offset_y;
 
-	y = -1;
-	while (++y < MINIMAP_SIZE)
+	offset_x = px->x - MINIMAP_SIZE / 2.0;
+	offset_y = px->y - MINIMAP_SIZE / 2.0;
+	rot_offset_x = (offset_x * cos(game->player.rotation_angle))
+		- (offset_y * sin(game->player.rotation_angle));
+	rot_offset_y = (offset_x * sin(game->player.rotation_angle))
+		+ (offset_y * cos(game->player.rotation_angle));
+	px->map_x = game->player.pos_x - rot_offset_x / MINIMAP_TILE_SIZE;
+	px->map_y = game->player.pos_y - rot_offset_y / MINIMAP_TILE_SIZE;
+}
+
+void	minimap_pixel_render(t_game *game, t_img *image, t_minimap_pixel *px)
+{
+	if (px->map_x >= 0 && px->map_x < game->map.width
+		&& px->map_y >= 0 && px->map_y < game->map.height)
 	{
-		x = -1;
-		while (++x < MINIMAP_SIZE)
+		if (px->map_x >= game->player.pos_x - 0.1
+			&& px->map_x <= game->player.pos_x + 0.1
+			&& px->map_y >= game->player.pos_y - 0.1
+			&& px->map_y <= game->player.pos_y + 0.1)
+			mlx_pixel_put_img
+				(image, MINIMAP_POS_X + px->x, MINIMAP_POS_Y + px->y, 0x0000FF);
+		else if (game->map.arr[(int)px->map_y][(int)px->map_x] == '0')
+			mlx_pixel_put_img
+				(image, MINIMAP_POS_X + px->x, MINIMAP_POS_Y + px->y, 0xFFFFFF);
+		else
+			mlx_pixel_put_img
+				(image, MINIMAP_POS_X + px->x, MINIMAP_POS_Y + px->y, 0x000000);
+	}
+	else
+		mlx_pixel_put_img
+			(image, MINIMAP_POS_X + px->x, MINIMAP_POS_Y + px->y, 0x1A1A1A);
+}
+
+void	render_minimap(t_game *game, t_img *image)
+{
+	t_minimap_pixel	px;
+
+	px.y = -1;
+	while (++px.y < MINIMAP_SIZE)
+	{
+		px.x = -1;
+		while (++px.x < MINIMAP_SIZE)
 		{
-			old_offset_x = x - MINIMAP_SIZE / 2.0;
-			old_offset_y = y - MINIMAP_SIZE / 2.0;
-			offset_x = (old_offset_x * cos(game->player.rotation_angle))
-				- (old_offset_y * sin(game->player.rotation_angle));
-			offset_y = (old_offset_x * sin(game->player.rotation_angle))
-				+ (old_offset_y * cos(game->player.rotation_angle));
-			map_x = game->player.pos_x - offset_x / MINIMAP_TILE_SIZE;
-			map_y = game->player.pos_y - offset_y / MINIMAP_TILE_SIZE;
-			if (map_x >= 0 && map_x < game->map.width && map_y >= 0 && map_y < game->map.height)
-			{
-				if (map_x >= game->player.pos_x - 0.1 && map_x <= game->player.pos_x + 0.1
-					&& map_y >= game->player.pos_y - 0.1 && map_y <= game->player.pos_y + 0.1)
-					mlx_pixel_put_img(image, MINIMAP_POS_X + x, MINIMAP_POS_Y + y, 0x0000FF);
-				else if (game->map.arr[(int)map_y][(int)map_x] == '0')
-					mlx_pixel_put_img(image, MINIMAP_POS_X + x, MINIMAP_POS_Y + y, 0xFFFFFF);
-				else
-					mlx_pixel_put_img(image, MINIMAP_POS_X + x, MINIMAP_POS_Y + y, 0x000000);
-			}
-			else
-				mlx_pixel_put_img(image, MINIMAP_POS_X + x, MINIMAP_POS_Y + y, 0x1A1A1A);
+			minimap_pixel_pos(game, &px);
+			minimap_pixel_render(game, image, &px);
 		}
 	}
 }

@@ -6,4 +6,12 @@
 # define MINIMAP_POS_X		20
 # define MINIMAP_POS_Y		20
 
+typedef struct s_minimap_pixel
+{
+	int		x;
+	int		y;
+	double	map_x;
+	double	map_y;
+}	t_minimap_pixel;
+
 #endif

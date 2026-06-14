@@ -3,9 +3,18 @@
 
 # include "bool.h"
 
+typedef struct s_img
+{
+	void	*img_ptr;
+	void	*addr;
+	int		bpp;
+	int		size_line;
+	int		endian;
+}	t_img;
+
 typedef struct s_texture
 {
-	void		*img;
+	t_img		img;
 	char		*path;
 	int			width;
 	int			height;
@@ -46,6 +55,7 @@ typedef struct s_game
 	double		old_time;
 	int			screen_x;
 	int			screen_y;
+	t_texture	hand[2];
 }	t_game;
 
 void	parsing(int ac, char **av, t_game *game);

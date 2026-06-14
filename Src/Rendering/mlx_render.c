@@ -9,9 +9,28 @@ void	mlx_pixel_put_img(t_img *img, int x, int y, int color)
 	*(unsigned int *)pixel = color;
 }
 
-void	init_img(t_game *game, t_img *image)
+void	init_img(t_game *game, t_img *img, int width, int height)
 {
-	image->img = mlx_new_image(game->mlx, game->screen_x, game->screen_y);
-	image->addr = mlx_get_data_addr(image->img,
-			&image->bpp, &image->size_line, &image->endian);
+	img->img_ptr = mlx_new_image(game->mlx, width, height);
+	img->addr = mlx_get_data_addr
+		(img->img_ptr, &img->bpp, &img->size_line, &img->endian);
+}
+
+void	sprite_to_img(t_texture *tex, t_img *img, int pos_x, int pos_y)
+{
+	int		x;
+	int		y;
+	int		color;
+
+	y = -1;
+	while (++y < tex->height)
+	{
+		x = -1;
+		while (++x < tex->width)
+		{
+			color = *(unsigned int *) tex->img.addr + y * tex->img.size_line
+				+ x * (tex->img.bpp / 8);
+			mlx_pixel_put_img(img, pos_x + x, pos_y + y, color);
+		}
+	}
 }
