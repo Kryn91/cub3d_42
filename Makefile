@@ -35,7 +35,6 @@ SRCS :=	main.c						\
 		Checker/map_solver.c		\
 		Rendering/test.c			\
 		Rendering/render.c			\
-		Rendering/render2.c			\
 		Rendering/minimap.c			\
 		Rendering/mlx_render.c		\
 		Rendering/raycasting.c		\
