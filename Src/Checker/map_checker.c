@@ -59,14 +59,15 @@ bool    check_player_count(t_map *map)
     return false;
 }
 
-bool     check_map(t_map *map)
+bool     check_map(t_game *game)
 {
-    if (map->width > MAX_MAP_SIZE || map->height > MAX_MAP_SIZE)
+    if (game->map.width > MAX_MAP_SIZE || game->map.height > MAX_MAP_SIZE)
         return (ft_putstr_fd("Error\nMap too high\n", 2), false);
-    if (check_valid_char(map) == false)
+    if (check_valid_char(&game->map) == false)
         return (false);
-    if (check_player_count(map) == false)
+    if (check_player_count(&game->map) == false)
         return (false);
-    solver(map);
+    if (map_solver(game) == false)
+        return (false);
     return true;
 }

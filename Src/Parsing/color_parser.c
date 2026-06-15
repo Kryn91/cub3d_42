@@ -41,7 +41,7 @@ int    transform_color(char *str)
     
     split = ft_split(str, ',');
     if (!split || !split[0] || !split[1] || !split[2])
-        return (-1);
+        return (free_array(split), -1);
     r = ft_atoi(split[0]);
     g = ft_atoi(split[1]);
     b = ft_atoi(split[2]);

@@ -33,6 +33,7 @@ SRCS :=	main.c						\
 		Checker/checker.c 			\
 		Checker/map_checker.c		\
 		Checker/map_solver.c		\
+		Checker/solver.c			\
 		Rendering/test.c			\
 		Rendering/render.c			\
 		Rendering/minimap.c			\

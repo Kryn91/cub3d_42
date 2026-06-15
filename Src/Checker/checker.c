@@ -5,7 +5,7 @@
 
 void    checker(t_game *game)
 {
-    if (check_map(&game->map) == false)
+    if (check_map(game) == false)
     {
         free_map(game);
         exit(1);

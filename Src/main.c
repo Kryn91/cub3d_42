@@ -31,8 +31,8 @@ int		main(int ac, char **av)
 		return (1);
 	ft_memset(game, 0, sizeof(t_game));
 	parsing(ac, av, game);
-	checker(game);
 	init_player(game);
+	checker(game);
 	//checkeur, test les erreurs et ramene dans le main
 	if (run_game(game) != 0)
 		return (1);
