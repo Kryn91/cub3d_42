@@ -2,6 +2,10 @@
 # define CUB3D_H
 
 # include "bool.h"
+# include "libft.h"
+
+# define SCREEN_WIDTH 1600
+# define SCREEN_HEIGHT 920
 
 typedef struct s_img
 {
@@ -45,17 +49,24 @@ typedef struct s_map
 	int			height;
 }	t_map;
 
+typedef struct s_enemy
+{
+	double		pos_x;
+	double		pos_y;
+	t_texture	tex;
+}	t_enemy;
+
 typedef struct s_game
 {
 	void		*mlx;
 	void		*win;
 	t_player	player;
 	t_map		map;
+	t_list		*enemy_lst;
 	double		time;
 	double		old_time;
-	int			screen_x;
-	int			screen_y;
 	t_texture	hand[2];
+	double		wall_dist_buf[SCREEN_WIDTH];
 }	t_game;
 
 void	parsing(int ac, char **av, t_game *game);

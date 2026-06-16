@@ -40,6 +40,7 @@ SRCS :=	main.c						\
 		Rendering/mlx_render.c		\
 		Rendering/raycasting.c		\
 		Rendering/raycasting2.c		\
+		Rendering/render_enemy.c	\
 		Utils/free_memory.c			\
 		Movement/handle_input.c		\
 		Movement/movement.c
@@ -70,7 +71,7 @@ mlx :
 	fi
 
 libs:
-	$(MAKE) -C $(LIBFT_DIR) -j
+	$(MAKE) bonus -C $(LIBFT_DIR) -j
 
 $(NAME): $(OBJS)
 	$(CC) $(CFLAGS) $(OBJS) $(LIBFT) $(GNL) -L$(MLX_DIR) $(MLX_FLAG) -o $(NAME)

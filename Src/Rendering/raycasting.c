@@ -2,7 +2,7 @@
 
 void	ray_init(t_game *game, t_ray *ray, int x)
 {
-	ray->cam_x = 2 * x / (double)game->screen_x - 1;
+	ray->cam_x = 2 * x / (double)SCREEN_WIDTH - 1;
 	ray->dir_x = game->player.dir_x + game->player.plane_x * ray->cam_x;
 	ray->dir_y = game->player.dir_y + game->player.plane_y * ray->cam_x;
 	if (ray->dir_x == 0)
@@ -69,21 +69,22 @@ void	side_dists_calc(t_game *game, t_ray *ray)
 	}
 }
 
-void	line_calc(t_game *game, t_ray *ray)
+void	line_calc(t_game *game, t_ray *ray, int x)
 {
 	if (ray->side == 0)
 		ray->wall_dist = fabs(ray->side_dist_x - ray->delta_dist_x);
 	else
 		ray->wall_dist = fabs(ray->side_dist_y - ray->delta_dist_y);
-	if (ray->wall_dist == 0)
+	game->wall_dist_buf[x] = ray->wall_dist;
+	if (ray->wall_dist <= 0)
 		return ;
-	ray->line_length = (double) game->screen_y / ray->wall_dist;
-	ray->wall_start = game->screen_y / 2 - ray->line_length / 2;
-	ray->wall_end = game->screen_y / 2 + ray->line_length / 2;
+	ray->line_length = (double) SCREEN_HEIGHT / ray->wall_dist;
+	ray->wall_start = SCREEN_HEIGHT / 2 - ray->line_length / 2;
+	ray->wall_end = SCREEN_HEIGHT / 2 + ray->line_length / 2;
 	if (ray->wall_start < 0)
 		ray->wall_start = 0;
-	if (ray->wall_end > game->screen_y)
-		ray->wall_end = game->screen_y - 1;
+	if (ray->wall_end > SCREEN_HEIGHT)
+		ray->wall_end = SCREEN_HEIGHT - 1;
 }
 
 int	side_calc(t_ray *ray)

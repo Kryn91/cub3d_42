@@ -21,7 +21,7 @@ void	render_wall(t_game *game, t_ray *ray, int x, t_img *image)
 		ray->tex_y += ray->tex_step;
 		i++;
 	}
-	while (i < game->screen_y)
+	while (i < SCREEN_HEIGHT)
 	{
 		mlx_pixel_put_img(image, x, i, game->map.floor_color);
 		i++;
@@ -33,9 +33,24 @@ void	render_hand(t_game *game, t_img *img)
 	int		pos_x;
 	int		pos_y;
 
-	pos_x = game->screen_x / 2.0 - game->hand[0].width * PIXEL_SIZE / 2.0;
-	pos_y = game->screen_y - game->hand[0].height * PIXEL_SIZE;
+	pos_x = SCREEN_WIDTH / 2.0 - game->hand[0].width * PIXEL_SIZE / 2.0;
+	pos_y = SCREEN_HEIGHT - game->hand[0].height * PIXEL_SIZE;
 	sprite_to_img(&game->hand[0], img, pos_x, pos_y);
+}
+
+void	render_scene(t_game *game, t_ray *ray, t_img *img, int x)
+{
+	while (++x <= SCREEN_WIDTH - 1)
+	{
+		ray_init(game, ray, x);
+		side_dists_calc(game, ray);
+		ray_collision(game, ray);
+		line_calc(game, ray, x);
+		if (ray->wall_dist <= 0)
+			continue ;
+		tex_calc(game, ray);
+		render_wall(game, ray, x, img);
+	}
 }
 
 int	render(t_game *game)
@@ -45,20 +60,11 @@ int	render(t_game *game)
 	t_img	img;
 
 	x = -1;
-	init_img(game, &img, game->screen_x, game->screen_y);
-	while (++x <= game->screen_x - 1)
-	{
-		ray_init(game, &ray, x);
-		side_dists_calc(game, &ray);
-		ray_collision(game, &ray);
-		line_calc(game, &ray);
-		if (ray.wall_dist == 0)
-			continue ;
-		tex_calc(game, &ray);
-		render_wall(game, &ray, x, &img);
-	}
+	init_img(game, &img, SCREEN_WIDTH, SCREEN_HEIGHT);
+	render_scene(game, &ray, &img, x);
 	render_minimap(game, &img);
 	render_hand(game, &img);
+	render_enemy(game, &img);
 	mlx_put_image_to_window(game->mlx, game->win, img.img_ptr, 0, 0);
 	mlx_destroy_image(game->mlx, img.img_ptr);
 	return (0);

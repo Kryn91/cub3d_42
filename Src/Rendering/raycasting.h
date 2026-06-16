@@ -35,7 +35,7 @@ void	tex_calc(t_game *game, t_ray *ray);
 void	ray_init(t_game *game, t_ray *ray, int x);
 void	ray_collision(t_game *game, t_ray *ray);
 void	side_dists_calc(t_game *game, t_ray *ray);
-void	line_calc(t_game *game, t_ray *ray);
+void	line_calc(t_game *game, t_ray *ray, int x);
 int		side_calc(t_ray *ray);
 
 #endif
