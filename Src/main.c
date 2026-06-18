@@ -35,7 +35,6 @@ int		main(int ac, char **av)
 	parsing(ac, av, game);
 	init_player(game);
 	checker(game);
-	//checkeur, test les erreurs et ramene dans le main
 	if (run_game(game) != 0)
 		return (1);
 	free_map(game);

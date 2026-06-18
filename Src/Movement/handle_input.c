@@ -12,19 +12,6 @@ void	close_win(t_game *game)
 	exit(0);
 }
 
-void	handle_input(int keycode, t_game *game)
-{
-	double	movespeed;
-
-	movespeed = 0.10;
-	if (keycode == KEY_W || keycode == KEY_S)
-		move_walk(keycode, movespeed, game);
-	else if (keycode == KEY_A || keycode == KEY_D )
-		move_strafe(keycode, movespeed, game);
-	else if (keycode == KEY_ESC)
-		close_win(game);
-}
-
 void	rotate_player(t_game *game, double angle)
 {
 	double	old_x;
@@ -42,6 +29,28 @@ void	rotate_player(t_game *game, double angle)
 			* sin(angle));
 	game->player.plane_y = (old_plane_x * sin(angle)) + (old_plane_y
 			* cos(angle));
+}
+
+void	handle_arrow(int keycode, t_game *game)
+{
+	if (keycode == KEY_RIGHT)
+		rotate_player(game, 0.10);	
+	if (keycode == KEY_LEFT)
+		rotate_player(game, -0.10);
+}
+
+void	handle_input(int keycode, t_game *game)
+{
+	double	movespeed;
+
+	handle_arrow(keycode, game);
+	movespeed = 0.10;
+	if (keycode == KEY_W || keycode == KEY_S)
+		move_walk(keycode, movespeed, game);
+	else if (keycode == KEY_A || keycode == KEY_D )
+		move_strafe(keycode, movespeed, game);
+	else if (keycode == KEY_ESC)
+		close_win(game);
 }
 
 void	handle_mouse_input(int x, int y, t_game *game)
