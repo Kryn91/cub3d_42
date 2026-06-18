@@ -53,6 +53,8 @@ typedef struct s_enemy
 {
 	double		pos_x;
 	double		pos_y;
+	double		transform_x;
+	double		transform_y;
 	t_texture	tex;
 }	t_enemy;
 
