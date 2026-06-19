@@ -39,18 +39,31 @@ void	handle_arrow(int keycode, t_game *game)
 		rotate_player(game, -0.10);
 }
 
-void	handle_input(int keycode, t_game *game)
+void	key_press(int keycode, t_game *game)
 {
-	double	movespeed;
-
 	handle_arrow(keycode, game);
-	movespeed = 0.10;
-	if (keycode == KEY_W || keycode == KEY_S)
-		move_walk(keycode, movespeed, game);
-	else if (keycode == KEY_A || keycode == KEY_D )
-		move_strafe(keycode, movespeed, game);
+	if (keycode == KEY_A)
+		game->input.A = true;
+	if (keycode == KEY_D)
+		game->input.D = true;
+	if (keycode == KEY_S)
+		game->input.S = true;
+	if (keycode == KEY_W)
+		game->input.W = true;
 	else if (keycode == KEY_ESC)
 		close_win(game);
+}
+
+void	key_release(int keycode, t_game *game)
+{
+	if (keycode == KEY_A)
+		game->input.A = false;
+	if (keycode == KEY_D)
+		game->input.D = false;
+	if (keycode == KEY_S)
+		game->input.S = false;
+	if (keycode == KEY_W)
+		game->input.W = false;
 }
 
 void	handle_mouse_input(int x, int y, t_game *game)

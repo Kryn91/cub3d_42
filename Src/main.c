@@ -5,8 +5,7 @@
 #include "mlx.h"
 #include "init_player.h"
 #include "checker.h"
-
-#include "stdio.h"
+#include "game_loop.h"
 
 int		render(t_game *game);
 void	init(t_game *game);
@@ -16,10 +15,11 @@ int	run_game(t_game *game)
 	game->mlx = mlx_init();
 	init(game);
 	game->win = mlx_new_window(game->mlx, SCREEN_WIDTH, SCREEN_HEIGHT, "cub3d");
-	mlx_loop_hook(game->mlx, (void *)render, game);
 	mlx_hook(game->win, 17, 0, (void *)close_win, game);
-	mlx_hook(game->win, 2, 1L << 0, (void *)handle_input, game);
+	mlx_hook(game->win, 2, 1L << 0, (void *)key_press, game);
+	mlx_hook(game->win, 3, 1L << 1, (void *)key_release, game);
 	mlx_hook(game->win, 6, 1L << 6, (void *)handle_mouse_input, game);
+	mlx_loop_hook(game->mlx, (void *)game_loop, game);
 	mlx_loop(game->mlx);
 	return (0);
 }

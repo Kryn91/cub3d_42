@@ -58,12 +58,21 @@ typedef struct s_enemy
 	t_texture	tex;
 }	t_enemy;
 
+typedef struct s_input
+{
+    bool    A;
+    bool    D;
+    bool    W;
+    bool    S;
+}   t_input;
+
 typedef struct s_game
 {
 	void		*mlx;
 	void		*win;
 	t_player	player;
 	t_map		map;
+	t_input		input;
 	t_list		*enemy_lst;
 	double		time;
 	double		old_time;

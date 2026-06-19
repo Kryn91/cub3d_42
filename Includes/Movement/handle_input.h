@@ -13,7 +13,8 @@
 # define KEY_LEFT   65361
 # define MOUSE_SENSIBILITY 0.005
 
-void    handle_input(int keycode, t_game *game);
+void    key_press(int keycode, t_game *game);
+void	key_release(int keycode, t_game *game);
 void	close_win(t_game *game);
 void    handle_mouse_input(int x, int y, t_game *game);
 #endif
