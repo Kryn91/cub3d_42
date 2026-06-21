@@ -40,8 +40,10 @@ int    transform_color(char *str)
     int     color;
     
     split = ft_split(str, ',');
-    if (!split || !split[0] || !split[1] || !split[2])
-        return (free_array(split), -1);
+    if (!split)
+        return (0);
+    if (!split[0] || !split[1] || !split[2])
+        return (free_split(split), -1);
     r = ft_atoi(split[0]);
     g = ft_atoi(split[1]);
     b = ft_atoi(split[2]);
@@ -50,9 +52,10 @@ int    transform_color(char *str)
         ft_putstr_fd("Error\nColor is not rgb :", 2);
         ft_putstr_fd(str, 2);
         ft_putstr_fd("\n", 2);
-        free_array(split);
+        free_split(split);
+        return (-1);
     }
-    free_array(split);
+    free_split(split);
     return (color);
 }
 

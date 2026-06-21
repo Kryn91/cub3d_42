@@ -18,6 +18,20 @@ void    free_array(char **arr)
         free(arr[i]);
         i++;
     }
+    free(arr);
+}
+
+void    free_split(char **str)
+{
+    size_t i;
+
+    i = 0;
+    while (str[i])
+    {
+        free(str[i]);
+        i++;
+    }
+    free(str);
 }
 
 void    free_map(t_game *game)

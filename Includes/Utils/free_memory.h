@@ -6,4 +6,5 @@
 void    free_tab(size_t size, char **tab);
 void    free_array(char **arr);
 void    free_map(t_game *game);
+void    free_split(char **str);
 #endif
