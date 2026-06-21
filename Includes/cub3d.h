@@ -37,6 +37,12 @@ typedef struct s_player
 	double		rotation_angle;
 }	t_player;
 
+typedef struct s_fps
+{
+	double	last_frame;
+	double	cap;
+}	t_fps;
+
 typedef struct s_map
 {
 	char		**arr;
@@ -66,6 +72,12 @@ typedef struct s_input
     bool    S;
 }   t_input;
 
+typedef struct s_time
+{
+    double  last_time;
+    double  delta_time;
+}   t_time;
+
 typedef struct s_game
 {
 	void		*mlx;
@@ -74,6 +86,8 @@ typedef struct s_game
 	t_map		map;
 	t_input		input;
 	t_list		*enemy_lst;
+	t_time		delta_time;
+	t_fps		fps;
 	double		time;
 	double		old_time;
 	t_texture	hand[2];

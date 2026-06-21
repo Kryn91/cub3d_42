@@ -58,7 +58,6 @@ void	move_left(t_game *game, double movespeed)
 		game->player.pos_y -= game->player.plane_y * movespeed;
 		game->player.pos_x -= game->player.plane_x * movespeed;
 	}
-
 }
 
 void	move_player(t_game *game)

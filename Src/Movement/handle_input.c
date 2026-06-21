@@ -66,13 +66,18 @@ void	key_release(int keycode, t_game *game)
 		game->input.W = false;
 }
 
-void	handle_mouse_input(int x, int y, t_game *game)
+void handle_mouse_input(int x, int y, t_game *game)
 {
-	int	delta;
+    int center_x = SCREEN_WIDTH / 2;
+    int center_y = SCREEN_HEIGHT / 2;
 
-	(void)y;
-	delta = x - game->player.mouse_x;
-	game->player.mouse_x = x;
-	rotate_player(game, delta * MOUSE_SENSIBILITY);
-	game->player.rotation_angle += delta * MOUSE_SENSIBILITY;
+    int delta = x - game->player.mouse_x;
+    game->player.mouse_x = x;
+
+    if (x == center_x && y == center_y)
+        return;
+
+    rotate_player(game, delta * MOUSE_SENSIBILITY);
+
+    mlx_mouse_move(game->mlx, game->win, center_x, center_y);
 }
