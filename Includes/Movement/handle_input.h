@@ -9,9 +9,9 @@
 # define KEY_S		115
 # define KEY_D		100
 # define KEY_ESC	65307
-# define KEY_RIGHT  65363 
+# define KEY_RIGHT  65363
 # define KEY_LEFT   65361
-# define MOUSE_SENSIBILITY 0.005
+# define MOUSE_SENSIBILITY 0.00005
 
 void    key_press(int keycode, t_game *game);
 void	key_release(int keycode, t_game *game);

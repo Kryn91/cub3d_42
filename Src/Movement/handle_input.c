@@ -29,12 +29,13 @@ void	rotate_player(t_game *game, double angle)
 			* sin(angle));
 	game->player.plane_y = (old_plane_x * sin(angle)) + (old_plane_y
 			* cos(angle));
+	game->player.rotation_angle += angle;
 }
 
 void	handle_arrow(int keycode, t_game *game)
 {
 	if (keycode == KEY_RIGHT)
-		rotate_player(game, 0.10);	
+		rotate_player(game, 0.10);
 	if (keycode == KEY_LEFT)
 		rotate_player(game, -0.10);
 }
