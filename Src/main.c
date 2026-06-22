@@ -6,6 +6,7 @@
 #include "init_player.h"
 #include "checker.h"
 #include "game_loop.h"
+#include "init_door.h"
 
 int		render(t_game *game);
 void	init(t_game *game);
@@ -37,6 +38,7 @@ int		main(int ac, char **av)
 	init_player(game);
 	game->fps.cap = 60;
 	checker(game);
+	init_door(game);
 	if (run_game(game) != 0)
 		return (1);
 	free_map(game);

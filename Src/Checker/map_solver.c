@@ -5,6 +5,13 @@
 #include "free_memory.h"
 #include "solver.h"
 
+bool    is_valid_char(char c)
+{
+    if (c != '1' && c != '0' && c != 'N' && c != 'S'
+        && c != 'E'&& c != 'W' && c != 'D')
+        return (false);
+    return (true);
+}
 char **cpy_map(char **map, int width, int heigth)
 {
     int i;
@@ -20,19 +27,16 @@ char **cpy_map(char **map, int width, int heigth)
         {
             if (j >= (int)ft_strlen(map[i]))
                 cpy[i][j] = '_';
-            else if (map[i][j] != '1' && map[i][j] != '0'
-            && map[i][j] != 'N' && map[i][j] != 'S'
-            && map[i][j] != 'E'&& map[i][j] != 'W')
+            else if (is_valid_char(map[i][j]) == false)
                 cpy[i][j] = '_';
             else
                 cpy[i][j] = map[i][j];
             j++;
         }
-        cpy[i][j] = '\n';
+        cpy[i][j] = '\0';
         i++;
     }
-    cpy[i] = NULL;
-    return (cpy); 
+    return (cpy[i] = NULL, cpy); 
 }
 
 bool check_error(char c)
@@ -51,7 +55,7 @@ bool    flood_fill(char **map, int start_x, int start_y, int width, int heigth)
     t_point  p; 
     char c;
    
-    stack_init(&stack, width * heigth);
+    stack_init(&stack, width * heigth  * 4);
     stack_push(&stack, start_x, start_y);
     while (!stack_empty(&stack)) 
     {

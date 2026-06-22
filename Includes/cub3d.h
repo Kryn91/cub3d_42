@@ -78,11 +78,26 @@ typedef struct s_time
     double  delta_time;
 }   t_time;
 
+typedef	enum e_door
+{
+	OPEN, CLOSE, PROGRESS
+}	e_door;
+
+typedef	struct	s_door
+{
+	double	x;
+	double	y;
+	double	progress;
+	e_door	state;
+	struct s_door *next;
+}	t_door;
+
 typedef struct s_game
 {
 	void		*mlx;
 	void		*win;
 	t_player	player;
+	t_door		*door;
 	t_map		map;
 	t_input		input;
 	t_list		*enemy_lst;
