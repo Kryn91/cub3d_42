@@ -2,39 +2,45 @@
 #include "cub3d.h"
 #include "movement.h"
 
-bool	isColiding(double pos_x, double pos_y, t_game *game)
-{
-	int	posx;
-	int	posy;
+#define PLAYER_RADIUS 0.15
 
-	posx = (int)pos_x;
-	posy = (int)pos_y;
-	if (game->map.arr[posy][posx] == '1')
+bool	isColiding(double x, double y, t_game *game)
+{
+	if (game->map.arr[(int)y][(int)(x + PLAYER_RADIUS)] == '1')
+		return (true);
+	if (game->map.arr[(int)y][(int)(x - PLAYER_RADIUS)] == '1')
+		return (true);
+	if (game->map.arr[(int)(y + PLAYER_RADIUS)][(int)x] == '1')
+		return (true);
+	if (game->map.arr[(int)(y - PLAYER_RADIUS)][(int)x] == '1')
 		return (true);
 	return (false);
 }
 
 void	move_forward(t_game *game, double movespeed)
 {
-	if (!isColiding(game->player.pos_x + game->player.dir_x
-			* movespeed, game->player.pos_y + game->player.dir_y * movespeed,
-			game))	
-	{
+	double	new_x;
+	double	new_y;
+	
+	new_x = game->player.pos_x + game->player.dir_x * movespeed;
+	new_y = game->player.pos_y + game->player.dir_y * movespeed;
+	if (!isColiding(new_x, game->player.pos_y, game))	
 		game->player.pos_x += game->player.dir_x * movespeed;
+	if (!isColiding(game->player.pos_x, new_y, game))
 		game->player.pos_y += game->player.dir_y * movespeed;
-	}
 }
 
 void	move_player_back(t_game *game, double movespeed)
 {
-
-	if (!isColiding(game->player.pos_x
-			- game->player.dir_x * movespeed, game->player.pos_y
-			- game->player.dir_y * movespeed, game))
-	{
+	double	new_x;
+	double	new_y;
+	
+	new_x = game->player.pos_x - game->player.dir_x * movespeed;
+	new_y = game->player.pos_y - game->player.dir_y * movespeed;
+	if (!isColiding(new_x, game->player.pos_y, game))	
 		game->player.pos_x -= game->player.dir_x * movespeed;
+	if (!isColiding(game->player.pos_x, new_y, game))
 		game->player.pos_y -= game->player.dir_y * movespeed;
-	}
 }
 
 void	move_right(t_game *game, double movespeed)
@@ -46,7 +52,6 @@ void	move_right(t_game *game, double movespeed)
 		game->player.pos_x += game->player.plane_x * movespeed;
 		game->player.pos_y += game->player.plane_y * movespeed;
 	}
-
 }
 
 void	move_left(t_game *game, double movespeed)
