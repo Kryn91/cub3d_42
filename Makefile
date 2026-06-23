@@ -13,10 +13,13 @@ MLX_DIR := $(LIB_DIR)/Mlx
 GNL_DIR := $(LIB_DIR)/Gnl
 INC_PARSING := $(INC_DIR)/Parsing
 INC_MOVEMENT := $(INC_DIR)/Movement
+<<<<<<< Updated upstream
 INC_CHECKER := $(INC_DIR)/Checker
 INC_GAME := $(INC_DIR)/Game
 INC_RENDER := $(INC_DIR)/Rendering
 INC_UTILS := $(INC_DIR)/Utils
+=======
+>>>>>>> Stashed changes
 
 # MLX
 MLX_URL := https://github.com/42paris/minilibx-linux.git
