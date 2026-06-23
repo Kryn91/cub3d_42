@@ -1,4 +1,5 @@
 #include "free_memory.h"
+#include "mlx.h"
 
 void    free_tab(size_t size, char **tab)
 {
@@ -9,10 +10,12 @@ void    free_tab(size_t size, char **tab)
         i++;
     }
 }
-
+#include <stdio.h>
 void    free_array(char **arr)
 {
     size_t  i = 0 ;
+    if (arr)
+        return ;
     while (arr[i])
     {
         free(arr[i]);
@@ -32,6 +35,14 @@ void    free_split(char **str)
         i++;
     }
     free(str);
+}
+
+void    free_texture(t_game *game)
+{
+    mlx_destroy_image(game->mlx, game->map.walls[0].img.img_ptr);
+    mlx_destroy_image(game->mlx, game->map.walls[1].img.img_ptr);
+    mlx_destroy_image(game->mlx, game->map.walls[2].img.img_ptr);
+    mlx_destroy_image(game->mlx, game->map.walls[3].img.img_ptr);
 }
 
 void    free_map(t_game *game)

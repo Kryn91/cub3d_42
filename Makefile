@@ -47,6 +47,7 @@ SRCS :=	main.c						\
 		Rendering/render_enemy.c	\
 		Utils/free_memory.c			\
 		Utils/delta_time.c 			\
+		Utils/free_list.c			\
 		Movement/handle_input.c		\
 		Movement/movement.c			\
 		Game/game_loop.c			

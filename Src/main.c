@@ -2,6 +2,7 @@
 #include "cub3d.h"
 #include "handle_input.h"
 #include "free_memory.h"
+#include "free_list.h"
 #include "mlx.h"
 #include "init_player.h"
 #include "checker.h"
@@ -41,7 +42,11 @@ int		main(int ac, char **av)
 	init_door(game);
 	if (run_game(game) != 0)
 		return (1);
+	mlx_destroy_window(game->mlx, game->win);
+	mlx_destroy_display(game->mlx);
 	free_map(game);
+	free_door(game->door);
+	free_texture(game);
 	free(game);
 	return (0);
 }
