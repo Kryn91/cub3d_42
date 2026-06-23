@@ -1,7 +1,8 @@
-#include "raycasting.h"
+#include "render.h"
 
 void	ray_init(t_game *game, t_ray *ray, int x)
 {
+	ray->x = x;
 	ray->cam_x = 2 * x / (double)SCREEN_WIDTH - 1;
 	ray->dir_x = game->player.dir_x + game->player.plane_x * ray->cam_x;
 	ray->dir_y = game->player.dir_y + game->player.plane_y * ray->cam_x;
@@ -18,9 +19,22 @@ void	ray_init(t_game *game, t_ray *ray, int x)
 	ray->map_x = (int) game->player.pos_x;
 	ray->map_y = (int) game->player.pos_y;
 	ray->side = 0;
+	ray->door_rays = NULL;
 }
 
-void	ray_collision(t_game *game, t_ray *ray)
+void	door_collision(t_game *game, t_ray *ray, int x)
+{
+	t_ray	door_ray;
+
+	door_ray = *ray;
+	line_calc(game, &door_ray, x);
+	if (ray->wall_dist <= 0)
+		return ;
+	tex_calc_door(game, &door_ray);
+	ft_lstadd_back(&ray->door_rays, ft_lstnew(ray));
+}
+
+void	ray_collision(t_game *game, t_ray *ray, int x)
 {
 	while (ray->map_x >= 0 && ray->map_x < game->map.width
 		&& ray->map_y >= 0 && ray->map_y < game->map.height
@@ -38,6 +52,8 @@ void	ray_collision(t_game *game, t_ray *ray)
 			ray->side_dist_y += ray->delta_dist_y;
 			ray->side = 1;
 		}
+		if (game->map.arr[ray->map_y][ray->map_x] == 'D')
+			door_collision(game, ray, x);
 	}
 }
 

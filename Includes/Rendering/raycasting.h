@@ -2,12 +2,12 @@
 # define RAYCASTING_H
 
 # include "cub3d.h"
-# include "render.h"
 # include "mlx.h"
 # include <math.h>
 
 typedef struct s_ray
 {
+	int		x;
 	double	cam_x;
 	double	dir_x;
 	double	dir_y;
@@ -28,14 +28,18 @@ typedef struct s_ray
 	double	tex_y;
 	int		color;
 	double	tex_step;
+	t_list	*door_rays;
 	t_img	tex_img;
 }	t_ray;
 
 void	tex_calc(t_game *game, t_ray *ray);
+void	tex_calc_door(t_game *game, t_ray *ray);
 void	ray_init(t_game *game, t_ray *ray, int x);
-void	ray_collision(t_game *game, t_ray *ray);
+void	ray_collision(t_game *game, t_ray *ray, int x);
+// void	door_collision(t_game *game, t_img *img, int x);
 void	side_dists_calc(t_game *game, t_ray *ray);
 void	line_calc(t_game *game, t_ray *ray, int x);
 int		side_calc(t_ray *ray);
+
 
 #endif

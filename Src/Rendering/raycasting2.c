@@ -20,3 +20,25 @@ void	tex_calc(t_game *game, t_ray *ray)
 		(game->map.walls[wall_side].img.img_ptr, &ray->tex_img.bpp,
 			&ray->tex_img.size_line, &ray->tex_img.endian);
 }
+
+#include <stdio.h>
+
+void	tex_calc_door(t_game *game, t_ray *ray)
+{
+	double	wall_x;
+
+
+	if (ray->side == 0)
+		wall_x = game->player.pos_y + ray->dir_y * ray->wall_dist;
+	else
+		wall_x = game->player.pos_x + ray->dir_x * ray->wall_dist;
+	wall_x -= floor(wall_x);
+	ray->tex_x = wall_x * game->map.walls[0].width;
+	ray->tex_step = (double) game->map.walls[0].height
+		/ ray->line_length;
+	ray->tex_y = (ray->wall_start - SCREEN_HEIGHT / 2 + ray->line_length / 2)
+		* ray->tex_step;
+	ray->tex_img.addr = mlx_get_data_addr
+		(game->map.walls[0].img.img_ptr, &ray->tex_img.bpp,
+			&ray->tex_img.size_line, &ray->tex_img.endian);
+}

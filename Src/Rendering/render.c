@@ -44,12 +44,41 @@ void	render_scene(t_game *game, t_ray *ray, t_img *img, int x)
 	{
 		ray_init(game, ray, x);
 		side_dists_calc(game, ray);
-		ray_collision(game, ray);
+		ray_collision(game, ray, x);
 		line_calc(game, ray, x);
 		if (ray->wall_dist <= 0)
 			continue ;
 		tex_calc(game, ray);
 		render_wall(game, ray, x, img);
+		render_doors(ray, img);
+	}
+}
+
+#include <stdio.h>
+
+void	render_doors(t_ray *ray, t_img *image)
+{
+	int		color;
+	int		i;
+	t_ray	*door_ray;
+	t_list	*lst;
+
+	lst = ray->door_rays;
+	i = ray->wall_start;
+	while (lst)
+	{
+		door_ray = (t_ray *) lst->content;
+		while (i < door_ray->wall_end)
+		{
+			color = *(unsigned int *)(door_ray->tex_img.addr + door_ray->tex_x
+					* door_ray->tex_img.bpp / 8
+					+ (int) door_ray->tex_y * door_ray->tex_img.size_line);
+			mlx_pixel_put_img(image, door_ray->x, i, color);
+			door_ray->tex_y += door_ray->tex_step;
+			i++;
+			// printf("%x\n", color);
+		}
+		lst = lst->next;
 	}
 }
 
