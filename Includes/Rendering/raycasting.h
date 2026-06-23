@@ -7,6 +7,7 @@
 
 typedef struct s_ray
 {
+	int		door;
 	int		x;
 	double	cam_x;
 	double	dir_x;
@@ -28,14 +29,13 @@ typedef struct s_ray
 	double	tex_y;
 	int		color;
 	double	tex_step;
-	t_list	*door_rays;
 	t_img	tex_img;
 }	t_ray;
 
 void	tex_calc(t_game *game, t_ray *ray);
 void	tex_calc_door(t_game *game, t_ray *ray);
 void	ray_init(t_game *game, t_ray *ray, int x);
-void	ray_collision(t_game *game, t_ray *ray, int x);
+void	ray_collision(t_game *game, t_ray *ray);
 // void	door_collision(t_game *game, t_img *img, int x);
 void	side_dists_calc(t_game *game, t_ray *ray);
 void	line_calc(t_game *game, t_ray *ray, int x);

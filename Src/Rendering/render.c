@@ -4,14 +4,29 @@
 #include "render.h"
 #include "raycasting.h"
 
-void	render_wall(t_game *game, t_ray *ray, int x, t_img *image)
+void	render_door(t_game *game, t_ray *ray, t_img *image, int x)
 {
-	int		color;
-	int		i;
+	int	color;
+	int	i;
 
-	i = -1;
-	while (++i < ray->wall_start)
-		mlx_pixel_put_img(image, x, i, game->map.ceiling_color);
+	i = ray->wall_start;
+	while (i < ray->wall_end)
+	{
+		color = *(unsigned int *)(game->map.walls[0].img.addr + ray->tex_x
+				* game->map.walls[0].img.bpp / 8
+				+ (int) ray->tex_y * game->map.walls[0].img.size_line);
+		mlx_pixel_put_img(image, x, i, color);
+		ray->tex_y += ray->tex_step;
+		i++;
+	}
+}
+
+void	render_wall(t_ray *ray, int x, t_img *image)
+{
+	int	color;
+	int	i;
+
+	i = ray->wall_start;
 	while (i < ray->wall_end)
 	{
 		color = *(unsigned int *)(ray->tex_img.addr + ray->tex_x
@@ -21,6 +36,23 @@ void	render_wall(t_game *game, t_ray *ray, int x, t_img *image)
 		ray->tex_y += ray->tex_step;
 		i++;
 	}
+}
+
+void	render_walls(t_game *game, t_ray *ray, int x, t_img *image)
+{
+	int		i;
+
+	i = 0;
+	while (i < ray->wall_start)
+	{
+		mlx_pixel_put_img(image, x, i, game->map.ceiling_color);
+		i++;
+	}
+	if (ray->door == 1)
+		render_door(game, ray, image, x);
+	else
+		render_wall(ray, x, image);
+	i = ray->wall_end;
 	while (i < SCREEN_HEIGHT)
 	{
 		mlx_pixel_put_img(image, x, i, game->map.floor_color);
@@ -38,47 +70,19 @@ void	render_hand(t_game *game, t_img *img)
 	sprite_to_img(&game->hand[0], img, pos_x, pos_y);
 }
 
+
 void	render_scene(t_game *game, t_ray *ray, t_img *img, int x)
 {
 	while (++x <= SCREEN_WIDTH - 1)
 	{
 		ray_init(game, ray, x);
 		side_dists_calc(game, ray);
-		ray_collision(game, ray, x);
+		ray_collision(game, ray);
 		line_calc(game, ray, x);
 		if (ray->wall_dist <= 0)
 			continue ;
 		tex_calc(game, ray);
-		render_wall(game, ray, x, img);
-		render_doors(ray, img);
-	}
-}
-
-#include <stdio.h>
-
-void	render_doors(t_ray *ray, t_img *image)
-{
-	int		color;
-	int		i;
-	t_ray	*door_ray;
-	t_list	*lst;
-
-	lst = ray->door_rays;
-	i = ray->wall_start;
-	while (lst)
-	{
-		door_ray = (t_ray *) lst->content;
-		while (i < door_ray->wall_end)
-		{
-			color = *(unsigned int *)(door_ray->tex_img.addr + door_ray->tex_x
-					* door_ray->tex_img.bpp / 8
-					+ (int) door_ray->tex_y * door_ray->tex_img.size_line);
-			mlx_pixel_put_img(image, door_ray->x, i, color);
-			door_ray->tex_y += door_ray->tex_step;
-			i++;
-			// printf("%x\n", color);
-		}
-		lst = lst->next;
+		render_walls(game, ray, x, img);
 	}
 }
 

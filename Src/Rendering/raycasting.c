@@ -19,22 +19,47 @@ void	ray_init(t_game *game, t_ray *ray, int x)
 	ray->map_x = (int) game->player.pos_x;
 	ray->map_y = (int) game->player.pos_y;
 	ray->side = 0;
-	ray->door_rays = NULL;
+	ray->door = 0;
 }
+#include "stdio.h"
 
-void	door_collision(t_game *game, t_ray *ray, int x)
+int	door_check(t_game *game, t_ray *ray)
 {
-	t_ray	door_ray;
+	double	door_x;
+	t_door	*door;
 
-	door_ray = *ray;
-	line_calc(game, &door_ray, x);
-	if (ray->wall_dist <= 0)
-		return ;
-	tex_calc_door(game, &door_ray);
-	ft_lstadd_back(&ray->door_rays, ft_lstnew(ray));
+	door_x = 0;
+	if (ray->side == 0)
+	{
+		ray->wall_dist = fabs(ray->side_dist_x - ray->delta_dist_x);
+ 		door_x = game->player.pos_y + ray->dir_y * ray->wall_dist;
+	}
+	else
+	{
+		ray->wall_dist = fabs(ray->side_dist_y - ray->delta_dist_y);
+		door_x = game->player.pos_x + ray->dir_x * ray->wall_dist;
+	}
+	door_x -= floor(door_x);
+	door = game->door;
+	while (door)
+	{
+		if (ray->map_x == door->x && ray->map_y == door->y)
+		{
+			// printf("%f, %f\n", door_x, door->progress);
+			if (door_x < door->progress)
+			{
+				ray->door = 1;
+				return (1);
+			}
+			break ;
+		}
+		door = door->next;
+	}
+	// printf("===DEBUG===");
+	return (0);
 }
 
-void	ray_collision(t_game *game, t_ray *ray, int x)
+void	ray_collision(t_game *game, t_ray *ray)
 {
 	while (ray->map_x >= 0 && ray->map_x < game->map.width
 		&& ray->map_y >= 0 && ray->map_y < game->map.height
@@ -53,7 +78,10 @@ void	ray_collision(t_game *game, t_ray *ray, int x)
 			ray->side = 1;
 		}
 		if (game->map.arr[ray->map_y][ray->map_x] == 'D')
-			door_collision(game, ray, x);
+		{
+			if (door_check(game, ray))
+				break ;
+		}
 	}
 }
 

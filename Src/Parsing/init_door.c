@@ -15,7 +15,7 @@ void    lst_add_back(int y, int x, t_door **door)
     new->x = x;
     new->y = y;
     new->state = CLOSE;
-    new->progress = 0.0;
+    new->progress = 0.5;
     new->next = NULL;
     if (!*door)
     {
@@ -36,10 +36,10 @@ int create_door(char **map, t_door **door)
     y = 0;
     while (map[y])
     {
-        x = 0; 
+        x = 0;
         while (map[y][x])
         {
-            if (map[y][x] == 'D') 
+            if (map[y][x] == 'D')
                 lst_add_back(y, x, door);
             x++;
         }
