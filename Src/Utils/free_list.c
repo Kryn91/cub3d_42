@@ -9,7 +9,7 @@ void    free_door(t_door *door)
     tmp = door;
     while (tmp)
     {
-        next = door->next;
+        next = tmp->next;
         free(tmp);
         tmp = next;
     }

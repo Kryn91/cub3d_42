@@ -14,7 +14,7 @@ void    free_tab(size_t size, char **tab)
 void    free_array(char **arr)
 {
     size_t  i = 0 ;
-    if (arr)
+    if (!arr)
         return ;
     while (arr[i])
     {

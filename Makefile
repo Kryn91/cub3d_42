@@ -50,8 +50,10 @@ SRCS :=	main.c						\
 		Utils/free_list.c			\
 		Movement/handle_input.c		\
 		Movement/movement.c			\
+		Movement/interact.c			\
 		Movement/colision.c 		\
-		Game/game_loop.c			
+		Game/game_loop.c			\
+		Game/door.c	
 
 LIBFT := $(LIBFT_DIR)/libft.a
 

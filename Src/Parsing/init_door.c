@@ -15,7 +15,7 @@ void    lst_add_back(int y, int x, t_door **door)
     new->x = x;
     new->y = y;
     new->state = CLOSE;
-    new->progress = 0.5;
+    new->progress = 1.0;
     new->next = NULL;
     if (!*door)
     {

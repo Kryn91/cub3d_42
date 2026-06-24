@@ -9,17 +9,10 @@ void	move_forward(t_game *game, double movespeed)
 	
 	new_x = game->player.pos_x + game->player.dir_x * movespeed;
 	new_y = game->player.pos_y + game->player.dir_y * movespeed;
-	if (!isColiding(new_x, game->player.pos_y, game) &&
-		!isDoor(new_x, game->player.pos_y, game))
+	if (!isColiding(new_x, game->player.pos_y, game))
 		game->player.pos_x += game->player.dir_x * movespeed;
-	if (!isColiding(game->player.pos_x, new_y, game)
-	 && !isDoor(game->player.pos_x, new_y, game))
+	if (!isColiding(game->player.pos_x, new_y, game))
 		game->player.pos_y += game->player.dir_y * movespeed;
-	if (isDoor(new_x, game->player.pos_y, game) && Door_is_open(new_x, game->player.pos_y, game))
-		game->player.pos_x += game->player.dir_x * movespeed;
-	if (isDoor(game->player.pos_x, new_y, game) && Door_is_open(new_x, game->player.pos_y, game))
-		game->player.pos_y += game->player.dir_y * movespeed;
-
 }
 
 void	move_player_back(t_game *game, double movespeed)

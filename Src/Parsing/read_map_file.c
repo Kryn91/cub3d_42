@@ -35,14 +35,12 @@ char	**add_map_line(char **map, char *line)
 	i = 0;
 	while (map && map[i])
 	{
-		new_map[i] = ft_strdup(map[i]);
-		if (!new_map[i])
-			return (free_array(new_map), NULL);
+		new_map[i] = map[i];
 		i++;
 	}
 	new_map[i] = ft_strtrim(line, "\n");
 	if (!new_map[i])
-		return (free_array(new_map), perror("strdup"), NULL);
+		return (free(new_map), perror("strdup"), NULL);
 	new_map[i + 1] = NULL;
 	free(map);
 	return (new_map);

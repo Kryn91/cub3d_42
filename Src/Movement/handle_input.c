@@ -2,12 +2,17 @@
 #include "movement.h"
 #include "stdlib.h"
 #include <math.h>
+#include "free_memory.h"
+#include "free_list.h"
 #include "mlx.h"
 
 void	close_win(t_game *game)
 {
+	free_texture(game);	
 	mlx_destroy_window(game->mlx, game->win);
 	mlx_destroy_display(game->mlx);
+	free_map(game);
+	free_door(game->door);
 	free(game->mlx);
 	exit(0);
 }

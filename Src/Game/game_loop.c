@@ -1,7 +1,9 @@
 #include "game_loop.h"
 #include "movement.h"
 #include "delta_time.h"
+#include "door.h"
 #include "render.h"
+#include "interact.h"
 
 int game_loop(t_game *game)
 {
@@ -13,6 +15,8 @@ int game_loop(t_game *game)
     game->fps.last_frame = now;
     set_delta_time(game);
     move_player(game);
+    interact(game);
+    handle_door(game);
     render(game);
     return (0);
 }

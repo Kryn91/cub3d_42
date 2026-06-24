@@ -4,7 +4,6 @@
 # include "cub3d.h"
 # define PLAYER_RADIUS 0.15
 
-bool    isDoor(double x, int y, t_game *game);
 bool	isColiding(double x, double y, t_game *game);
-bool    Door_is_open(double x, int y, t_game *game);
+t_door    *find_door(int x, int y, t_game *game);
 #endif
