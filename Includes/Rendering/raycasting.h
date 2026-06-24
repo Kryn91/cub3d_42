@@ -29,6 +29,7 @@ typedef struct s_ray
 	double	tex_y;
 	int		color;
 	double	tex_step;
+	int		door_side;
 	t_img	tex_img;
 }	t_ray;
 

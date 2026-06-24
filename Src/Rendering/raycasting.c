@@ -19,33 +19,50 @@ void	ray_init(t_game *game, t_ray *ray, int x)
 	ray->map_x = (int) game->player.pos_x;
 	ray->map_y = (int) game->player.pos_y;
 	ray->side = 0;
+	ray->door_side = -1;
 	ray->door = 0;
 }
-#include "stdio.h"
+
+int	door_calc_render_validity(t_game *game, t_ray *ray, double *door_x)
+{
+	if (ray->side != ray->door_side)
+		return (0);
+	if (ray->door_side == 0)
+	{
+		ray->wall_dist = fabs(ray->side_dist_x - ray->delta_dist_x / 2.0);
+		*door_x = game->player.pos_y + ray->dir_y * ray->wall_dist;
+		if (*door_x < ray->map_y || *door_x > ray->map_y + 1.0)
+			return (0);
+	}
+	else
+	{
+		ray->wall_dist = fabs(ray->side_dist_y - ray->delta_dist_y / 2.0);
+		*door_x = game->player.pos_x + ray->dir_x * ray->wall_dist;
+		if (*door_x < ray->map_x || *door_x > ray->map_x + 1.0)
+			return (0);
+	}
+	if (*door_x < ray->map_y || *door_x > ray->map_y + 1.0)
+		return (0);
+	return (1);
+}
 
 int	door_check(t_game *game, t_ray *ray)
 {
 	double	door_x;
 	t_door	*door;
 
-	door_x = 0;
-	if (ray->side == 0)
-	{
-		ray->wall_dist = fabs(ray->side_dist_x - ray->delta_dist_x);
- 		door_x = game->player.pos_y + ray->dir_y * ray->wall_dist;
-	}
+	if (game->map.arr[ray->map_y][ray->map_x - 1] == '1')
+		ray->door_side = 1;
 	else
-	{
-		ray->wall_dist = fabs(ray->side_dist_y - ray->delta_dist_y);
-		door_x = game->player.pos_x + ray->dir_x * ray->wall_dist;
-	}
+		ray->door_side = 0;
+	if (!door_calc_render_validity(game, ray, &door_x))
+		return (0);
 	door_x -= floor(door_x);
 	door = game->door;
 	while (door)
 	{
 		if (ray->map_x == door->x && ray->map_y == door->y)
 		{
-			// printf("%f, %f\n", door_x, door->progress);
 			if (door_x < door->progress)
 			{
 				ray->door = 1;
@@ -55,7 +72,6 @@ int	door_check(t_game *game, t_ray *ray)
 		}
 		door = door->next;
 	}
-	// printf("===DEBUG===");
 	return (0);
 }
 
@@ -115,10 +131,20 @@ void	side_dists_calc(t_game *game, t_ray *ray)
 
 void	line_calc(t_game *game, t_ray *ray, int x)
 {
-	if (ray->side == 0)
-		ray->wall_dist = fabs(ray->side_dist_x - ray->delta_dist_x);
+	if (ray->door == true)
+	{
+		if (ray->door_side == 0)
+			ray->wall_dist = fabs(ray->side_dist_x - (ray->delta_dist_x / 2.0));
+		else
+			ray->wall_dist = fabs(ray->side_dist_y - (ray->delta_dist_y / 2.0));
+	}
 	else
-		ray->wall_dist = fabs(ray->side_dist_y - ray->delta_dist_y);
+	{
+		if (ray->side == 0)
+			ray->wall_dist = fabs(ray->side_dist_x - ray->delta_dist_x);
+		else
+			ray->wall_dist = fabs(ray->side_dist_y - ray->delta_dist_y);
+	}
 	game->wall_dist_buf[x] = ray->wall_dist;
 	if (ray->wall_dist <= 0)
 		return ;

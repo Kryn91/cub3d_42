@@ -16,14 +16,29 @@ void	init_img(t_game *game, t_img *img, int width, int height)
 		(img->img_ptr, &img->bpp, &img->size_line, &img->endian);
 }
 
+void	draw_pixels(t_img *img, unsigned int color, int pos_x, int pos_y)
+{
+	int	i;
+	int	j;
+
+	j = -1;
+	while (++j < PIXEL_SIZE)
+	{
+		i = -1;
+		while (++i < PIXEL_SIZE)
+		{
+			if (pos_x + i < 0 || pos_y + j < 0 || pos_x + i > SCREEN_WIDTH
+				|| pos_y + i > SCREEN_HEIGHT)
+				continue ;
+			mlx_pixel_put_img(img, pos_x + i, pos_y + j, color);
+		}
+	}
+}
+
 void	sprite_to_img(t_texture *tex, t_img *img, int pos_x, int pos_y)
 {
-	int				i;
-	int				j;
 	int				x;
 	int				y;
-	int				draw_pos_x;
-	int				draw_pos_y;
 	unsigned int	color;
 
 	y = -1;
@@ -36,21 +51,8 @@ void	sprite_to_img(t_texture *tex, t_img *img, int pos_x, int pos_y)
 					+ x * (tex->img.bpp / 8));
 			if (color == 0xFF000000)
 				continue ;
-			j = -1;
-			while (++j < PIXEL_SIZE)
-			{
-				i = -1;
-				while (++i < PIXEL_SIZE)
-				{
-					draw_pos_x = pos_x + x * PIXEL_SIZE + i;
-					draw_pos_y = pos_y + y * PIXEL_SIZE + j;
-					if (draw_pos_x < 0 || draw_pos_y < 0
-						|| draw_pos_x > SCREEN_WIDTH
-						|| draw_pos_y > SCREEN_HEIGHT)
-						continue ;
-					mlx_pixel_put_img(img, draw_pos_x, draw_pos_y, color);
-				}
-			}
+			draw_pixels(img, color, pos_x + x * PIXEL_SIZE,
+				pos_y + y * PIXEL_SIZE);
 		}
 	}
 }
