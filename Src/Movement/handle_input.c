@@ -2,7 +2,7 @@
 #include "movement.h"
 #include "stdlib.h"
 #include <math.h>
-#include <stdio.h>
+#include "mlx.h"
 
 void	close_win(t_game *game)
 {
@@ -51,6 +51,8 @@ void	key_press(int keycode, t_game *game)
 		game->input.S = true;
 	if (keycode == KEY_W)
 		game->input.W = true;
+	if (keycode == KEY_E)
+		game->input.E = true;
 	else if (keycode == KEY_ESC)
 		close_win(game);
 }
@@ -65,6 +67,8 @@ void	key_release(int keycode, t_game *game)
 		game->input.S = false;
 	if (keycode == KEY_W)
 		game->input.W = false;
+	if (keycode == KEY_E)
+		game->input.E = false;
 }
 
 void handle_mouse_input(int x, int y, t_game *game)

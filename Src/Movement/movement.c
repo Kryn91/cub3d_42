@@ -1,21 +1,6 @@
-#include "bool.h"
 #include "cub3d.h"
 #include "movement.h"
-
-#define PLAYER_RADIUS 0.15
-
-bool	isColiding(double x, double y, t_game *game)
-{
-	if (game->map.arr[(int)y][(int)(x + PLAYER_RADIUS)] == '1')
-		return (true);
-	if (game->map.arr[(int)y][(int)(x - PLAYER_RADIUS)] == '1')
-		return (true);
-	if (game->map.arr[(int)(y + PLAYER_RADIUS)][(int)x] == '1')
-		return (true);
-	if (game->map.arr[(int)(y - PLAYER_RADIUS)][(int)x] == '1')
-		return (true);
-	return (false);
-}
+#include "colision.h"
 
 void	move_forward(t_game *game, double movespeed)
 {
@@ -24,10 +9,17 @@ void	move_forward(t_game *game, double movespeed)
 	
 	new_x = game->player.pos_x + game->player.dir_x * movespeed;
 	new_y = game->player.pos_y + game->player.dir_y * movespeed;
-	if (!isColiding(new_x, game->player.pos_y, game))	
+	if (!isColiding(new_x, game->player.pos_y, game) &&
+		!isDoor(new_x, game->player.pos_y, game))
 		game->player.pos_x += game->player.dir_x * movespeed;
-	if (!isColiding(game->player.pos_x, new_y, game))
+	if (!isColiding(game->player.pos_x, new_y, game)
+	 && !isDoor(game->player.pos_x, new_y, game))
 		game->player.pos_y += game->player.dir_y * movespeed;
+	if (isDoor(new_x, game->player.pos_y, game) && Door_is_open(new_x, game->player.pos_y, game))
+		game->player.pos_x += game->player.dir_x * movespeed;
+	if (isDoor(game->player.pos_x, new_y, game) && Door_is_open(new_x, game->player.pos_y, game))
+		game->player.pos_y += game->player.dir_y * movespeed;
+
 }
 
 void	move_player_back(t_game *game, double movespeed)

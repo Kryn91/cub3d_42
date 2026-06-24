@@ -1,11 +1,8 @@
 #include "libft.h"
 #include "cub3d.h"
 #include "handle_input.h"
-<<<<<<< Updated upstream
 #include "free_memory.h"
 #include "free_list.h"
-=======
->>>>>>> Stashed changes
 #include "mlx.h"
 #include "init_player.h"
 #include "checker.h"
@@ -30,17 +27,6 @@ int	run_game(t_game *game)
 	return (0);
 }
 
-int	run_game(t_game *game)
-{
-	game->mlx = mlx_init();
-	init_test(game);
-	game->win = mlx_new_window(game->mlx, game->screen_x, game->screen_y, "cub3d");
-	mlx_loop_hook(game->mlx, (void *)ray, game);
-	mlx_hook(game->win,  17, 0, (void *)close_win, game);
-	mlx_hook(game->win, 2, 1L << 0, (void *)handle_input, game);
-	mlx_loop(game->mlx);
-	return (0);
-}
 int		main(int ac, char **av)
 {
 	t_game	*game;

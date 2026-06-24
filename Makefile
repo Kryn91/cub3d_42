@@ -13,13 +13,10 @@ MLX_DIR := $(LIB_DIR)/Mlx
 GNL_DIR := $(LIB_DIR)/Gnl
 INC_PARSING := $(INC_DIR)/Parsing
 INC_MOVEMENT := $(INC_DIR)/Movement
-<<<<<<< Updated upstream
 INC_CHECKER := $(INC_DIR)/Checker
 INC_GAME := $(INC_DIR)/Game
 INC_RENDER := $(INC_DIR)/Rendering
 INC_UTILS := $(INC_DIR)/Utils
-=======
->>>>>>> Stashed changes
 
 # MLX
 MLX_URL := https://github.com/42paris/minilibx-linux.git
@@ -53,6 +50,7 @@ SRCS :=	main.c						\
 		Utils/free_list.c			\
 		Movement/handle_input.c		\
 		Movement/movement.c			\
+		Movement/colision.c 		\
 		Game/game_loop.c			
 
 LIBFT := $(LIBFT_DIR)/libft.a

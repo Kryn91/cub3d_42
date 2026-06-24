@@ -2,7 +2,6 @@
 #define HANDLE_INPUT_H
 
 #include "cub3d.h"
-#include "mlx.h"
 
 # define KEY_W		119
 # define KEY_A		97
@@ -11,6 +10,8 @@
 # define KEY_ESC	65307
 # define KEY_RIGHT  65363
 # define KEY_LEFT   65361
+# define KEY_E      101
+
 # define MOUSE_SENSIBILITY 0.005
 
 void    key_press(int keycode, t_game *game);

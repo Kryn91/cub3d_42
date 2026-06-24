@@ -70,6 +70,7 @@ typedef struct s_input
     bool    D;
     bool    W;
     bool    S;
+	bool	E;
 }   t_input;
 
 typedef struct s_time
