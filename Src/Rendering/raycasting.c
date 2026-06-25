@@ -41,8 +41,6 @@ int	door_calc_render_validity(t_game *game, t_ray *ray, double *door_x)
 		if (*door_x < ray->map_x || *door_x > ray->map_x + 1.0)
 			return (0);
 	}
-	if (*door_x < ray->map_y || *door_x > ray->map_y + 1.0)
-		return (0);
 	return (1);
 }
 

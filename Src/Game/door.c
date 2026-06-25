@@ -1,5 +1,7 @@
 #include "door.h"
 
+#include <stdio.h>
+
 void    open_door(t_game *game)
 {
     t_door *tmp;
@@ -9,12 +11,16 @@ void    open_door(t_game *game)
     {
         if (tmp->state == PROGRESS)
         {
-            if (tmp->progress < 1)
-                tmp->progress += 0.10;
-            if (tmp->progress == 1)
+            if (tmp->progress > 0)
+                tmp->progress -= 0.01;
+            printf("Progress state: %f\n", tmp->progress);
+            if (tmp->progress < 0.05)
+            {
+                printf("DEBUG");
                 tmp->state = OPEN;
+            }
         }
-        tmp = tmp->next; 
+        tmp = tmp->next;
     }
 }
 

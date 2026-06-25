@@ -4,10 +4,9 @@
 
 void interact(t_game *game)
 {
-    int x = (int)game->player.pos_x + game->player.dir_x;
-    int y = (int)game->player.pos_y + game->player.dir_y;
+    int x = (int)(game->player.pos_x + game->player.dir_x);
+    int y = (int)(game->player.pos_y + game->player.dir_y);
     t_door *door;
-
     if (!game->input.E)
         return;
 

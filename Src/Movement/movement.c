@@ -6,7 +6,7 @@ void	move_forward(t_game *game, double movespeed)
 {
 	double	new_x;
 	double	new_y;
-	
+
 	new_x = game->player.pos_x + game->player.dir_x * movespeed;
 	new_y = game->player.pos_y + game->player.dir_y * movespeed;
 	if (!isColiding(new_x, game->player.pos_y, game))
@@ -19,10 +19,10 @@ void	move_player_back(t_game *game, double movespeed)
 {
 	double	new_x;
 	double	new_y;
-	
+
 	new_x = game->player.pos_x - game->player.dir_x * movespeed;
 	new_y = game->player.pos_y - game->player.dir_y * movespeed;
-	if (!isColiding(new_x, game->player.pos_y, game))	
+	if (!isColiding(new_x, game->player.pos_y, game))
 		game->player.pos_x -= game->player.dir_x * movespeed;
 	if (!isColiding(game->player.pos_x, new_y, game))
 		game->player.pos_y -= game->player.dir_y * movespeed;
