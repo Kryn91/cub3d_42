@@ -81,7 +81,7 @@ typedef struct s_time
 
 typedef	enum e_door
 {
-	OPEN, CLOSE, PROGRESS
+	OPEN, CLOSE, PROGRESS, CLOSING
 }	e_door;
 
 typedef	struct	s_door

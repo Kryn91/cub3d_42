@@ -1,5 +1,4 @@
 #include "door.h"
-
 #include <stdio.h>
 
 void    open_door(t_game *game)
@@ -13,12 +12,15 @@ void    open_door(t_game *game)
         {
             if (tmp->progress > 0)
                 tmp->progress -= 0.01;
-            printf("Progress state: %f\n", tmp->progress);
             if (tmp->progress < 0.05)
-            {
-                printf("DEBUG");
                 tmp->state = OPEN;
-            }
+        }
+        if (tmp->state == CLOSING)
+        {
+            if (tmp->progress < 1)
+                tmp->progress += 0.01;
+            if (tmp->progress == 1)
+                tmp->state = CLOSE;
         }
         tmp = tmp->next;
     }

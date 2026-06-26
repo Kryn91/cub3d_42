@@ -20,4 +20,8 @@ void interact(t_game *game)
     {
         door->state = PROGRESS;
     }
+    if (door->state == OPEN)
+    {
+        door->state = CLOSING;
+    }
 }
