@@ -19,7 +19,7 @@ void    open_door(t_game *game)
         if (tmp->state == CLOSING)
         {
             if (tmp->progress < 1)
-                tmp->progress += 0.01;
+                tmp->progress += 0.03;
             if (tmp->progress == 1)
                 tmp->state = CLOSE;
         }
