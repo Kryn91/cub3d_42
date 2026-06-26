@@ -7,7 +7,8 @@
 
 typedef struct s_ray
 {
-	int		door;
+	double	door_x;
+	t_door	*door;
 	int		x;
 	double	cam_x;
 	double	dir_x;
@@ -41,6 +42,7 @@ void	ray_collision(t_game *game, t_ray *ray);
 void	side_dists_calc(t_game *game, t_ray *ray);
 void	line_calc(t_game *game, t_ray *ray, int x);
 int		side_calc(t_ray *ray);
+t_door	*find_door(int x, int y, t_game *game);
 
 
 #endif

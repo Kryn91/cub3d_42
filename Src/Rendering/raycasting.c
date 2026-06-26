@@ -20,25 +20,25 @@ void	ray_init(t_game *game, t_ray *ray, int x)
 	ray->map_y = (int) game->player.pos_y;
 	ray->side = 0;
 	ray->door_side = -1;
-	ray->door = 0;
+	ray->door = NULL;
 }
 
-int	door_calc_render_validity(t_game *game, t_ray *ray, double *door_x)
+int	door_render_calc(t_game *game, t_ray *ray)
 {
 	if (ray->side != ray->door_side)
 		return (0);
 	if (ray->door_side == 0)
 	{
 		ray->wall_dist = fabs(ray->side_dist_x - ray->delta_dist_x / 2.0);
-		*door_x = game->player.pos_y + ray->dir_y * ray->wall_dist;
-		if (*door_x < ray->map_y || *door_x > ray->map_y + 1.0)
+		ray->door_x = game->player.pos_y + ray->dir_y * ray->wall_dist;
+		if (ray->door_x < ray->map_y || ray->door_x > ray->map_y + 1.0)
 			return (0);
 	}
 	else
 	{
 		ray->wall_dist = fabs(ray->side_dist_y - ray->delta_dist_y / 2.0);
-		*door_x = game->player.pos_x + ray->dir_x * ray->wall_dist;
-		if (*door_x < ray->map_x || *door_x > ray->map_x + 1.0)
+		ray->door_x = game->player.pos_x + ray->dir_x * ray->wall_dist;
+		if (ray->door_x < ray->map_x || ray->door_x > ray->map_x + 1.0)
 			return (0);
 	}
 	return (1);
@@ -46,30 +46,17 @@ int	door_calc_render_validity(t_game *game, t_ray *ray, double *door_x)
 
 int	door_check(t_game *game, t_ray *ray)
 {
-	double	door_x;
-	t_door	*door;
-
 	if (game->map.arr[ray->map_y][ray->map_x - 1] == '1')
 		ray->door_side = 1;
 	else
 		ray->door_side = 0;
-	if (!door_calc_render_validity(game, ray, &door_x))
+	if (!door_render_calc(game, ray))
 		return (0);
-	door_x -= floor(door_x);
-	door = game->door;
-	while (door)
-	{
-		if (ray->map_x == door->x && ray->map_y == door->y)
-		{
-			if (door_x < door->progress)
-			{
-				ray->door = 1;
-				return (1);
-			}
-			break ;
-		}
-		door = door->next;
-	}
+	ray->door_x -= floor(ray->door_x);
+	ray->door = find_door(ray->map_x, ray->map_y, game);
+	if (ray->door && ray->door_x < ray->door->progress)
+		return (1);
+	ray->door = NULL;
 	return (0);
 }
 
@@ -129,7 +116,7 @@ void	side_dists_calc(t_game *game, t_ray *ray)
 
 void	line_calc(t_game *game, t_ray *ray, int x)
 {
-	if (ray->door == true)
+	if (ray->door)
 	{
 		if (ray->door_side == 0)
 			ray->wall_dist = fabs(ray->side_dist_x - (ray->delta_dist_x / 2.0));

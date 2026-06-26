@@ -12,6 +12,7 @@ void	render_door(t_game *game, t_ray *ray, t_img *image, int x)
 	i = ray->wall_start;
 	while (i < ray->wall_end)
 	{
+		// printf("%d, %f\n", ray->tex_x, ray->tex_y);
 		color = *(unsigned int *)(game->map.walls[0].img.addr + ray->tex_x
 				* game->map.walls[0].img.bpp / 8
 				+ (int) ray->tex_y * game->map.walls[0].img.size_line);
@@ -48,7 +49,7 @@ void	render_walls(t_game *game, t_ray *ray, int x, t_img *image)
 		mlx_pixel_put_img(image, x, i, game->map.ceiling_color);
 		i++;
 	}
-	if (ray->door == 1)
+	if (ray->door)
 		render_door(game, ray, image, x);
 	else
 		render_wall(ray, x, image);

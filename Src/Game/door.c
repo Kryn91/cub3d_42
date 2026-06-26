@@ -11,7 +11,8 @@ void    open_door(t_game *game)
         if (tmp->state == PROGRESS)
         {
             if (tmp->progress > 0)
-                tmp->progress -= 0.01;
+                tmp->progress -= 0.03;
+            printf("Progress state: %f\n", tmp->progress);
             if (tmp->progress < 0.05)
                 tmp->state = OPEN;
         }
