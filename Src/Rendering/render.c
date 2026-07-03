@@ -3,6 +3,7 @@
 #include "mlx.h"
 #include "render.h"
 #include "raycasting.h"
+#include "cub3d.h"
 
 void	render_door(t_game *game, t_ray *ray, t_img *image, int x)
 {
@@ -98,7 +99,7 @@ int	render(t_game *game)
 	render_scene(game, &ray, &img, x);
 	render_minimap(game, &img);
 	render_hand(game, &img);
-	render_enemy(game, &img);
+	render_entity(game, &img);
 	mlx_put_image_to_window(game->mlx, game->win, img.img_ptr, 0, 0);
 	mlx_destroy_image(game->mlx, img.img_ptr);
 	return (0);

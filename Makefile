@@ -1,6 +1,6 @@
 NAME    := cub3d
 CC      := cc
-CFLAGS  := -Wall -Wextra -Werror -MMD -g3
+CFLAGS  := -Wall -Wextra -Werror -g3
 MLX_FLAG := -lmlx -lXext -lX11 -lm
 
 # Folder
@@ -44,7 +44,7 @@ SRCS :=	main.c						\
 		Rendering/mlx_render.c		\
 		Rendering/raycasting.c		\
 		Rendering/raycasting2.c		\
-		Rendering/render_enemy.c	\
+		Rendering/render_entity.c	\
 		Utils/free_memory.c			\
 		Utils/delta_time.c 			\
 		Utils/free_list.c			\
@@ -53,7 +53,8 @@ SRCS :=	main.c						\
 		Movement/interact.c			\
 		Movement/colision.c 		\
 		Game/game_loop.c			\
-		Game/door.c	
+		Game/door.c					\
+		Game/attack.c
 
 LIBFT := $(LIBFT_DIR)/libft.a
 
@@ -89,7 +90,7 @@ $(NAME): $(OBJS)
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 	@mkdir -p $(dir $@)
-	$(CC) $(CFLAGS) $(IFLAGS) -c $< -o $@
+	$(CC) $(CFLAGS) -MMD $(IFLAGS) -c $< -o $@
 
 clean:
 	rm -rf $(OBJ_DIR)

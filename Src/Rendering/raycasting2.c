@@ -1,5 +1,6 @@
 #include "raycasting.h"
-#include <stdio.h>
+#include "cub3d.h"
+#include "mlx.h"
 
 void	tex_calc(t_game *game, t_ray *ray)
 {

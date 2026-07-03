@@ -1,5 +1,7 @@
 #include "door.h"
-#include <stdio.h>
+#include "cub3d.h"
+
+#include "stdio.h"
 
 void    open_door(t_game *game)
 {
@@ -12,7 +14,7 @@ void    open_door(t_game *game)
         {
             if (tmp->progress > 0)
                 tmp->progress -= 0.03;
-            printf("Progress state: %f\n", tmp->progress);
+            // printf("Progress state: %f\n", tmp->progress);
             if (tmp->progress < 0.05)
                 tmp->state = OPEN;
         }

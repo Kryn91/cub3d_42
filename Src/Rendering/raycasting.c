@@ -1,4 +1,6 @@
 #include "render.h"
+#include "cub3d.h"
+#include "raycasting.h"
 
 void	ray_init(t_game *game, t_ray *ray, int x)
 {

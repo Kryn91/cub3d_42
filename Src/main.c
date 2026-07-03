@@ -8,6 +8,7 @@
 #include "checker.h"
 #include "game_loop.h"
 #include "init_door.h"
+#include "attack.h"
 
 int		render(t_game *game);
 void	init(t_game *game);
@@ -22,6 +23,7 @@ int	run_game(t_game *game)
 	mlx_hook(game->win, 3, 1L << 1, (void *)key_release, game);
 	mlx_mouse_hide(game->mlx, game->win);
 	mlx_hook(game->win, 6, 1L << 6, (void *)handle_mouse_input, game);
+	mlx_mouse_hook(game->win, (void *)handle_mouse, game);
 	mlx_loop_hook(game->mlx, (void *)game_loop, game);
 	mlx_loop(game->mlx);
 	return (0);
