@@ -1,7 +1,6 @@
 #ifndef PLAYER_H
 # define PLAYER_H
 
-# include "cub3d.h"
 # include "bool.h"
 
 typedef struct s_player

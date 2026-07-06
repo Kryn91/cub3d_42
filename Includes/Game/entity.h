@@ -1,8 +1,8 @@
 #ifndef ENTITY_H
 # define ENTITY_H
 
+# define ENEMY_PATH "chemin/a mettre"
 # include "render.h"
-# include "cub3d.h"
 
 typedef struct s_projectile_data
 {

@@ -9,6 +9,8 @@
 #include "game_loop.h"
 #include "init_door.h"
 #include "attack.h"
+#include "init_enemy.h"
+#include "init_texture.h"
 
 int		render(t_game *game);
 void	init(t_game *game);
@@ -16,7 +18,7 @@ void	init(t_game *game);
 int	run_game(t_game *game)
 {
 	game->mlx = mlx_init();
-	init(game);
+	init_texture(game);
 	game->win = mlx_new_window(game->mlx, SCREEN_WIDTH, SCREEN_HEIGHT, "cub3d");
 	mlx_hook(game->win, 17, 0, (void *)close_win, game);
 	mlx_hook(game->win, 2, 1L << 0, (void *)key_press, game);
@@ -42,6 +44,7 @@ int		main(int ac, char **av)
 	game->fps.cap = 60;
 	checker(game);
 	init_door(game);
+	init_enemy(game);
 	if (run_game(game) != 0)
 		return (1);
 	mlx_destroy_window(game->mlx, game->win);

@@ -8,7 +8,7 @@
 bool    is_valid_char(char c)
 {
     if (c != '1' && c != '0' && c != 'N' && c != 'S'
-        && c != 'E'&& c != 'W' && c != 'D')
+        && c != 'E'&& c != 'W' && c != 'D' && c!= 'O')
         return (false);
     return (true);
 }

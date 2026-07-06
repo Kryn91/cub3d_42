@@ -1,6 +1,6 @@
 NAME    := cub3d
 CC      := cc
-CFLAGS  := -Wall -Wextra -Werror -g3
+CFLAGS  := -Wall -Wextra -Werror -g3 -g -O0
 MLX_FLAG := -lmlx -lXext -lX11 -lm
 
 # Folder
@@ -34,11 +34,12 @@ SRCS :=	main.c						\
 		Parsing/color_parser.c		\
 		Parsing/init_player.c		\
 		Parsing/init_door.c 		\
+		Parsing/init_enemy.c		\
+		Parsing/init_texture.c		\
 		Checker/checker.c 			\
 		Checker/map_checker.c		\
 		Checker/map_solver.c		\
 		Checker/solver.c			\
-		Rendering/test.c			\
 		Rendering/render.c			\
 		Rendering/minimap.c			\
 		Rendering/mlx_render.c		\

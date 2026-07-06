@@ -16,7 +16,8 @@ bool    check_valid_char(t_map *map)
             if (map->arr[i][j] != '1'  && map->arr[i][j] != '0' 
                 && map->arr[i][j] != 'N' && map->arr[i][j] != 'S'
                 && map->arr[i][j] != 'E' && map->arr[i][j] != 'W'
-                && map->arr[i][j] != ' ' && map->arr[i][j] != 'D')
+                && map->arr[i][j] != ' ' && map->arr[i][j] != 'D'
+                && map->arr[i][j] != 'O')
             {
                 ft_putstr_fd("Error\nInvalid map char :", 2);
                 ft_putchar_fd(map->arr[i][j], 2);

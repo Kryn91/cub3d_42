@@ -1,7 +1,7 @@
-#include "cub3d.h"
+#include "init_texture.h"
+#include "bool.h"
+#include "entity.h"
 #include "mlx.h"
-
-#include <stdio.h>
 
 void	init_tex(t_game *game, t_texture *tex, char *path)
 {
@@ -12,36 +12,35 @@ void	init_tex(t_game *game, t_texture *tex, char *path)
 			&tex->img.size_line, &tex->img.endian);
 }
 
-void	init(t_game *game)
+bool	init_enemy_tex(t_game *game, t_list *enemy)
 {
-	t_entity	*enemy1;
-	t_entity	*enemy2;
+	t_list *temp;
+	t_entity *entity;
+	temp = enemy;
+	while (temp)
+	{
+		entity = ((t_entity *)temp->content);
+		if (entity)
+		{
+			init_tex(game, &entity->tex, "Assets/Hand/weapon_idle.xpm");
+			temp->content = entity;
+		}
+		temp = temp->next;
+	}
+	return (true);
+}
 
+void	init_texture(t_game *game)
+{
 	init_tex(game, game->map.walls, game->map.walls[0].path);
 	init_tex(game, game->map.walls + 1, game->map.walls[1].path);
 	init_tex(game, game->map.walls + 2, game->map.walls[2].path);
 	init_tex(game, game->map.walls + 3, game->map.walls[3].path);
 	init_tex(game, game->hand, "Assets/Hand/weapon_idle.xpm");
 	init_tex(game, game->hand + 1, "Assets/Hand/weapon_attack.xpm");
+	init_enemy_tex(game, game->entity_lst);
 	game->projectile = malloc(sizeof(t_entity));
-	enemy1 = malloc(sizeof(t_entity));
-	enemy2 = malloc(sizeof(t_entity));
 	game->projectile->type = PROJECTILE;
 	game->projectile->state = 0;
-	enemy1->type = ENEMY;
-	enemy2->type = ENEMY;
 	init_tex(game, &game->projectile->tex, "Assets/Hand/weapon_idle.xpm");
-	enemy1->pos_x = 25.5;
-	enemy1->pos_y = 4.5;
-	enemy1->spec.e_data.hit_radius = 0.5;
-	enemy1->state = 1;
-	init_tex(game, &enemy1->tex, "Assets/Hand/weapon_attack.xpm");
-	enemy2->pos_x = 27.3;
-	enemy2->pos_y = 4.7;
-	enemy2->spec.e_data.hit_radius = 0.5;
-	enemy2->state = 1;
-	init_tex(game, &enemy2->tex, "Assets/Hand/weapon_attack.xpm");
-	ft_lstadd_front(&game->entity_lst, ft_lstnew(game->projectile));
-	ft_lstadd_front(&game->entity_lst, ft_lstnew(enemy1));
-	ft_lstadd_front(&game->entity_lst, ft_lstnew(enemy2));
 }
