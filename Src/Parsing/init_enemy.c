@@ -16,10 +16,11 @@ t_entity    *create_entity(int x, int y)
         return (NULL);
     content->type = ENEMY;
     content->state = 1;
-    content->pos_x = x;
-    content->pos_y = y;
-    content->transform_x = -1;
-    content->transform_y = 0;
+    content->pos_x = x + 0.5;
+    content->pos_y = y + 0.5;
+    content->dir_x = -1;
+    content->dir_y = 0;
+    content->estate = PATROL;
     content->spec.e_data.hp = 100;
     content->spec.e_data.hit_radius = 0.5;
     return (content);

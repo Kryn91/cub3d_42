@@ -14,7 +14,7 @@ typedef struct s_fps
 	double	last_frame;
 	double	cap;
 }	t_fps;
-
+	
 typedef struct s_time
 {
 	double	last_time;

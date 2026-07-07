@@ -2,6 +2,7 @@
 # define ENTITY_H
 
 # define ENEMY_PATH "chemin/a mettre"
+# define ENEMY_RADIUS 0.25
 # include "render.h"
 
 typedef struct s_projectile_data
@@ -28,14 +29,23 @@ typedef enum e_entity_type
 	PROJECTILE
 }	t_entity_type;
 
+typedef enum e_enemy_state
+{
+	PATROL,
+	CHASE
+}	t_enemy_state;
+
 typedef struct s_entity
 {
 	t_entity_type	type;
 	double			pos_x;
 	double			pos_y;
+	double			dir_x;
+	double			dir_y;
 	double			transform_x;
 	double			transform_y;
 	int				state;
+	t_enemy_state	estate;
 	t_texture		tex;
 	t_entity_spec	spec;
 }	t_entity;

@@ -84,10 +84,10 @@ bool    map_solver(t_game *game)
 
     map = &game->map;
     map_cpy = cpy_map(map->arr, map->width, map->height);
-    for (int i =0; map_cpy[i]; i++)
-    {
-        ft_putstr_fd(map_cpy[i], 1);
-    }
+    //for (int i =0; map_cpy[i]; i++)
+    //{
+    //    ft_putstr_fd(map_cpy[i], 1);
+    //}
     if (flood_fill(map_cpy, game->player.pos_x, game->player.pos_y,
             map->width, map->height) == false)
         return (free_array(map_cpy), false);

@@ -22,7 +22,7 @@ bool	init_enemy_tex(t_game *game, t_list *enemy)
 		entity = ((t_entity *)temp->content);
 		if (entity)
 		{
-			init_tex(game, &entity->tex, "Assets/Hand/weapon_idle.xpm");
+			init_tex(game, &entity->tex, "Assets/Entity/Enemy.xpm");
 			temp->content = entity;
 		}
 		temp = temp->next;
@@ -43,4 +43,5 @@ void	init_texture(t_game *game)
 	game->projectile->type = PROJECTILE;
 	game->projectile->state = 0;
 	init_tex(game, &game->projectile->tex, "Assets/Hand/weapon_idle.xpm");
+	ft_lstadd_front(&game->entity_lst, ft_lstnew(game->projectile));
 }

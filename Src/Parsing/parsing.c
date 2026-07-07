@@ -97,7 +97,7 @@ void    parsing(int ac, char **av, t_game *game)
     parse_map(av[1], game);
     init_map_size(&game->map);
     color_parser(game);
-    debug_map(&game->map);
+    //debug_map(&game->map);
     if (!game->map.arr)
         exit(1);
 }

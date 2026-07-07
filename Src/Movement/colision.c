@@ -13,6 +13,7 @@ t_door    *find_door(int x, int y, t_game *game)
     }
     return (NULL);
 }
+
 bool	check_wall_radius(double x, double y, t_game *game)
 {
 	if (game->map.arr[(int)y][(int)(x + PLAYER_RADIUS)] == '1')
