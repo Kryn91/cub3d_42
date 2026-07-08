@@ -1,24 +1,26 @@
 #include "enemy_patrol.h"
 #include "enemy_colision.h"
 
-void    choose_direction(t_entity *enemy, t_game *game)
+void    change_dir(t_entity *enemy, double x, double y)
 {
-    (void)enemy;
-    (void)game;
+    enemy->dir_x = x;
+    enemy->dir_y = y;
 }
-#include <stdio.h>
+
 void    patrol(t_entity *enemy, t_game *game)
 {
-    double movespeed = 0.10;
+    double movespeed = 0.06;
     double  new_x;
     double  new_y;
     new_x = enemy->pos_x + enemy->dir_x * movespeed;
     new_y = enemy->pos_y + enemy->dir_y * movespeed;
-    printf("ENEMY : x=%f y=%f\n", new_x, new_y);
     if (e_isColiding(new_x, new_y, game) == false)
     {
-        printf("is coliding\n");
-        enemy->pos_x = new_x;
-        enemy->pos_y = new_y;
+        if (!e_isColiding(new_x, enemy->pos_y, game))
+            enemy->pos_x = new_x;
+        if (!e_isColiding(enemy->pos_x, new_y, game))
+            enemy->pos_y = new_y;
     }
+    else if (e_isColiding(new_x, new_y, game))
+        choose_direction(enemy, game);
 }

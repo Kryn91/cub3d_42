@@ -34,14 +34,14 @@ bool	e_check_door(double x, double y, t_game *game)
 
 bool    enemy_colision(double x, double y, t_game *game)
 {
-	if ((int)(x + ENEMY_RADIUS) >= game->map.width || (int)(x + ENEMY_RADIUS) < 0)
-		return (true);
-	if ((int)(x - ENEMY_RADIUS) >= game->map.width || (int)(x - ENEMY_RADIUS) < 0)
-		return (true);
-	if ((int)(y + ENEMY_RADIUS) >= game->map.width || (int)(y + ENEMY_RADIUS) < 0)
-		return (true);
-	if ((int)(y - ENEMY_RADIUS) >= game->map.width || (int)(y - ENEMY_RADIUS) < 0)
-		return (true);
+	//if ((int)(x + ENEMY_RADIUS) >= game->map.width || (int)(x + ENEMY_RADIUS) < 0)
+	//	return (true);
+	//if ((int)(x - ENEMY_RADIUS) >= game->map.width || (int)(x - ENEMY_RADIUS) < 0)
+	//	return (true);
+	//if ((int)(y + ENEMY_RADIUS) >= game->map.width || (int)(y + ENEMY_RADIUS) < 0)
+//		return (true);
+///	if ((int)(y - ENEMY_RADIUS) >= game->map.width || (int)(y - ENEMY_RADIUS) < 0)
+//		return (true);
 	if ((int)y < 0 || (int)x < 0)
 		return (true);
     if (game->map.arr[(int)y][(int)(x + ENEMY_RADIUS)] == '1')
