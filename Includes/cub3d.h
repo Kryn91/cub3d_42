@@ -14,7 +14,7 @@ typedef struct s_fps
 	double	last_frame;
 	double	cap;
 }	t_fps;
-	
+
 typedef struct s_time
 {
 	double	last_time;
@@ -37,6 +37,7 @@ typedef struct s_game
 	t_texture	hand[2];
 	t_entity	*projectile;
 	double		wall_dist_buf[SCREEN_WIDTH];
+	int			hand_frame;
 }	t_game;
 
 void	parsing(int ac, char **av, t_game *game);

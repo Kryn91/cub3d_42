@@ -67,9 +67,10 @@ void	render_hand(t_game *game, t_img *img)
 	int		pos_x;
 	int		pos_y;
 
-	pos_x = SCREEN_WIDTH / 2.0 - game->hand[0].width * PIXEL_SIZE / 2.0;
-	pos_y = SCREEN_HEIGHT - game->hand[0].height * PIXEL_SIZE;
-	sprite_to_img(&game->hand[0], img, pos_x, pos_y);
+	pos_x = SCREEN_WIDTH / 2.0 - game->hand[game->hand_frame].width * PIXEL_SIZE / 2.0;
+	pos_y = SCREEN_HEIGHT - game->hand[game->hand_frame].height * PIXEL_SIZE;
+	sprite_to_img(&game->hand[game->hand_frame], img, pos_x, pos_y);
+	game->hand_frame = 0;
 }
 
 

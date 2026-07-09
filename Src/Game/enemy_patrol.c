@@ -1,5 +1,6 @@
 #include "enemy_patrol.h"
 #include "enemy_colision.h"
+#include "enemy_choose_direction.h"
 
 void    change_dir(t_entity *enemy, double x, double y)
 {

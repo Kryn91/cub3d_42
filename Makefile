@@ -57,8 +57,9 @@ SRCS :=	main.c						\
 		Game/door.c					\
 		Game/attack.c				\
 		Game/enemy_patrol.c			\
-		Game/enemy_colision.c
-		
+		Game/enemy_colision.c		\
+		Game/enemy_choose_direction.c
+
 
 LIBFT := $(LIBFT_DIR)/libft.a
 

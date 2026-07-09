@@ -42,6 +42,7 @@ int		main(int ac, char **av)
 	parsing(ac, av, game);
 	init_player(game);
 	game->fps.cap = 60;
+	game->hand_frame = 0;
 	checker(game);
 	init_door(game);
 	init_enemy(game);

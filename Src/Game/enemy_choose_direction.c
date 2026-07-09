@@ -1,4 +1,6 @@
 #include "enemy_choose_direction.h"
+#include "enemy_colision.h"
+#include "enemy_patrol.h"
 
 void    change_rigth_direction(t_entity *enemy, double new_x, double new_y, t_game *game)
 {
