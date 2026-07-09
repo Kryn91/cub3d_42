@@ -5,6 +5,8 @@
 # define SCREEN_WIDTH 1400
 # define SCREEN_HEIGHT 900
 
+# include "vector_manipulation.h"
+
 typedef struct s_game t_game;
 
 typedef struct s_img
@@ -28,7 +30,7 @@ typedef struct s_texture
 void	mlx_pixel_put_img(t_img *img, int x, int y, int color);
 void	init_img(t_game *game, t_img *image, int x, int y);
 void	render_minimap(t_game *game, t_img *image);
-void	sprite_to_img(t_texture *tex, t_img *img, int pos_x, int pos_y);
+void	sprite_to_img(t_texture *tex, t_img *img, t_vec pos, double size_mod);
 void	render_entity(t_game *game, t_img *img);
 int		render(t_game *game);
 // void	render_doors(t_ray *ray, t_img *image);

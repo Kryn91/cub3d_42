@@ -1,6 +1,7 @@
 #include <stdlib.h>
 #include "enemy_choose_direction.h"
 #include "enemy_colision.h"
+#include "vector_manipulation.h"
 
 void choose_direction(t_entity *enemy, t_game *game)
 {

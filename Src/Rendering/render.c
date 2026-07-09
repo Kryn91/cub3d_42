@@ -65,12 +65,20 @@ void	render_walls(t_game *game, t_ray *ray, int x, t_img *image)
 
 void render_hand(t_game *game, t_img *img)
 {
-	int pos_x;
-	int pos_y;
+	t_vec	pos;
 
-    pos_x = SCREEN_WIDTH * 0.05;
-    pos_y = SCREEN_HEIGHT - game->hand.tex[game->hand.frame].height * PIXEL_SIZE;
-    sprite_to_img(&game->hand.tex[game->hand.frame], img, pos_x, pos_y);
+	if (game->hand.frame == 0)
+	{
+    	pos.x = SCREEN_WIDTH * 0.05;
+    	pos.y = SCREEN_HEIGHT - game->hand.tex[game->hand.frame].height * PIXEL_SIZE * 1;
+	    sprite_to_img(&game->hand.tex[game->hand.frame], img, pos, 1);
+	}
+	else
+	{
+    	pos.x = SCREEN_WIDTH * 0.15;
+   		pos.y = SCREEN_HEIGHT - game->hand.tex[game->hand.frame].height * PIXEL_SIZE * 0.9;
+	    sprite_to_img(&game->hand.tex[game->hand.frame], img, pos, 0.9);
+	}
     if (game->hand.frame == 1 &&
         get_time() - game->hand.last_frame_time > 500)
     {
