@@ -48,7 +48,7 @@ int create_door(char **map, t_door **door)
     return (0);
 }
 
-void	debug_doors(t_game *game)
+/*void	debug_doors(t_game *game)
 {
 	t_door	*door;
 	int		i;
@@ -74,7 +74,7 @@ void	debug_doors(t_game *game)
 
 	printf("Total doors: %d\n", i);
 	printf("===========================\n");
-}
+}*/
 
 void    init_door(t_game *game)
 {
@@ -89,5 +89,5 @@ void    init_door(t_game *game)
         exit (1);
     }
     game->door = door;
-    debug_doors(game);
+    //debug_doors(game);
 }

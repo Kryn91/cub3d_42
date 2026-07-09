@@ -15,6 +15,7 @@ typedef struct s_enemy_data
 {
 	double	hp;
 	double	hit_radius;
+	double	last_attack;
 }	t_enemy_data;
 
 typedef union u_entity_spec

@@ -26,40 +26,43 @@ MLX_BRANCH := fedora
 #  Src Files
 # ============================================================
 
-SRCS :=	main.c						\
-		Parsing/parsing.c			\
-		Parsing/read_map_file.c		\
-		Parsing/texture_parser.c	\
-		Parsing/texture_parsing.c	\
-		Parsing/color_parser.c		\
-		Parsing/init_player.c		\
-		Parsing/init_door.c 		\
-		Parsing/init_enemy.c		\
-		Parsing/init_texture.c		\
-		Checker/checker.c 			\
-		Checker/map_checker.c		\
-		Checker/map_solver.c		\
-		Checker/solver.c			\
-		Rendering/render.c			\
-		Rendering/minimap.c			\
-		Rendering/mlx_render.c		\
-		Rendering/raycasting.c		\
-		Rendering/raycasting2.c		\
-		Rendering/render_entity.c	\
-		Utils/free_memory.c			\
-		Utils/delta_time.c 			\
-		Utils/free_list.c			\
-		Movement/handle_input.c		\
-		Movement/movement.c			\
-		Movement/interact.c			\
-		Movement/colision.c 		\
-		Game/game_loop.c			\
-		Game/door.c					\
-		Game/attack.c				\
-		Game/enemy_patrol.c			\
-		Game/enemy_colision.c		\
-		Game/enemy_choose_direction.c
-
+SRCS :=	main.c							\
+		Parsing/parsing.c				\
+		Parsing/read_map_file.c			\
+		Parsing/texture_parser.c		\
+		Parsing/texture_parsing.c		\
+		Parsing/color_parser.c			\
+		Parsing/init_player.c			\
+		Parsing/init_door.c 			\
+		Parsing/init_enemy.c			\
+		Parsing/init_texture.c			\
+		Checker/checker.c 				\
+		Checker/map_checker.c			\
+		Checker/map_solver.c			\
+		Checker/solver.c				\
+		Rendering/render.c				\
+		Rendering/minimap.c				\
+		Rendering/mlx_render.c			\
+		Rendering/raycasting.c			\
+		Rendering/raycasting2.c			\
+		Rendering/render_entity.c		\
+		Utils/free_memory.c				\
+		Utils/free_list.c				\
+		Utils/vector_manipulation.c		\
+		Utils/delta_time.c 				\
+		Movement/handle_input.c			\
+		Movement/movement.c				\
+		Movement/interact.c				\
+		Movement/colision.c 			\
+		Game/game_loop.c				\
+		Game/door.c						\
+		Game/attack.c					\
+		Game/enemy_patrol.c				\
+		Game/enemy_colision.c			\
+		Game/enemy_choose_direction.c	\
+		Game/enemy_detect_player.c		\
+		Game/enemy_chase_player.c		\
+		Game/enemy_attack_player.c 		
 
 LIBFT := $(LIBFT_DIR)/libft.a
 

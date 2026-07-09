@@ -73,7 +73,7 @@ int create_enemy(char **map, t_list **enemy)
 }
 #include <stdio.h>
 
-void    print_entities(t_list *list)
+/*void    print_entities(t_list *list)
 {
     t_entity    *entity;
     int         i;
@@ -99,7 +99,7 @@ void    print_entities(t_list *list)
         list = list->next;
         i++;
     }
-}
+}*/
 
 void    init_enemy(t_game *game)
 {
@@ -115,5 +115,5 @@ void    init_enemy(t_game *game)
         exit (1);
     }
     game->entity_lst = enemy;
-    print_entities(game->entity_lst);
+    //print_entities(game->entity_lst);
 }

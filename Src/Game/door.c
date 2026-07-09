@@ -1,8 +1,6 @@
 #include "door.h"
 #include "cub3d.h"
 
-#include "stdio.h"
-
 void    open_door(t_game *game)
 {
     t_door *tmp;
