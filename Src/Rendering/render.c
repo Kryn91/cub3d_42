@@ -73,7 +73,7 @@ void	render_hand(t_game *game, t_img *img)
 	pos_y = SCREEN_HEIGHT
 		- game->hand.tex[game->hand.frame].height * PIXEL_SIZE;
 	sprite_to_img(&game->hand.tex[game->hand.frame], img, pos_x, pos_y);
-	if (game->hand.frame == 1 && get_time() - game->hand.last_frame_time > 0.5)
+	if (game->hand.frame == 1 && get_time() - game->hand.last_frame_time > 500)
 		game->hand.frame = 0;
 }
 
