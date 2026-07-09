@@ -1,5 +1,6 @@
 #include "attack.h"
 #include "door.h"
+#include "delta_time.h"
 
 void	handle_mouse(int button, int x, int y, void *param)
 {
@@ -10,7 +11,8 @@ void	handle_mouse(int button, int x, int y, void *param)
 }
 void	shoot(t_game *game)
 {
-	game->hand_frame = 1;
+	game->hand.frame = 1;
+	game->hand.last_frame_time = get_time();
 	if (game->projectile->state == 1)
 		return ;
 	game->projectile->pos_x = game->player.pos_x + game->player.dir_x;

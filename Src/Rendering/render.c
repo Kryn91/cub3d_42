@@ -4,6 +4,7 @@
 #include "render.h"
 #include "raycasting.h"
 #include "cub3d.h"
+#include "delta_time.h"
 
 void	render_door(t_game *game, t_ray *ray, t_img *image, int x)
 {
@@ -67,10 +68,13 @@ void	render_hand(t_game *game, t_img *img)
 	int		pos_x;
 	int		pos_y;
 
-	pos_x = SCREEN_WIDTH / 2.0 - game->hand[game->hand_frame].width * PIXEL_SIZE / 2.0;
-	pos_y = SCREEN_HEIGHT - game->hand[game->hand_frame].height * PIXEL_SIZE;
-	sprite_to_img(&game->hand[game->hand_frame], img, pos_x, pos_y);
-	game->hand_frame = 0;
+	pos_x = SCREEN_WIDTH / 2.0
+		- game->hand.tex[game->hand.frame].width * PIXEL_SIZE / 2.0;
+	pos_y = SCREEN_HEIGHT
+		- game->hand.tex[game->hand.frame].height * PIXEL_SIZE;
+	sprite_to_img(&game->hand.tex[game->hand.frame], img, pos_x, pos_y);
+	if (game->hand.frame == 1 && get_time() - game->hand.last_frame_time > 0.5)
+		game->hand.frame = 0;
 }
 
 
@@ -99,8 +103,8 @@ int	render(t_game *game)
 	init_img(game, &img, SCREEN_WIDTH, SCREEN_HEIGHT);
 	render_scene(game, &ray, &img, x);
 	render_minimap(game, &img);
-	render_hand(game, &img);
 	render_entity(game, &img);
+	render_hand(game, &img);
 	mlx_put_image_to_window(game->mlx, game->win, img.img_ptr, 0, 0);
 	mlx_destroy_image(game->mlx, img.img_ptr);
 	return (0);
