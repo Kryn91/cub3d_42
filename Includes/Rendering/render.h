@@ -1,9 +1,9 @@
 #ifndef RENDER_H
 # define RENDER_H
 
-# define PIXEL_SIZE 2
+# define PIXEL_SIZE 1
 # define SCREEN_WIDTH 1400
-# define SCREEN_HEIGHT 800
+# define SCREEN_HEIGHT 900
 
 typedef struct s_game t_game;
 
