@@ -39,6 +39,7 @@ void	init_texture(t_game *game)
 	init_tex(game, game->hand.tex, "Assets/Hand/backhand.xpm");
 	init_tex(game, game->hand.tex + 1, "Assets/Hand/fronthand.xpm");
 	init_enemy_tex(game, game->entity_lst);
+	init_tex(game, &game->door_texture, "Assets/Wall/door.xpm");
 	game->projectile = malloc(sizeof(t_entity));
 	game->projectile->type = PROJECTILE;
 	game->projectile->state = 0;

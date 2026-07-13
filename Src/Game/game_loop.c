@@ -1,6 +1,7 @@
 #include "game_loop.h"
 #include "bool.h"
 #include "entity.h"
+#include "handle_input.h"
 #include "movement.h"
 #include "door.h"
 #include "render.h"
@@ -10,6 +11,8 @@
 #include "enemy_detect_player.h"
 #include "enemy_chase_player.h"
 #include "enemy_attack_player.h"
+#include "init_texture.h"
+#include "mlx.h"
 
 void	handle_state(t_game *game, t_entity *enemy)
 {
@@ -55,6 +58,19 @@ void	handle_enemy(t_game *game)
 
 int	game_loop(t_game *game)
 {
+	t_vec	pos;
+
+	pos.x =0;
+	pos.y = 0;
+	if (game->player.is_dead == true)
+	{
+		init_tex(game, &game->game_over_tex, "Assets/game_over.xpm");
+		sprite_to_img(&game->game_over_tex, &game->game_over_tex.img, pos, 1);
+		mlx_put_image_to_window(game->mlx, game->win, game->game_over_tex.img.img_ptr, 0, 0);
+		return (0);
+	}
+	if (game->player.hp <= 0)
+		game->player.is_dead = true;
 	move_player(game);
 	handle_enemy(game);
 	projectile_update(game);

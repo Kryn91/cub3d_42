@@ -1,7 +1,7 @@
-NO ./Assets/Wall/wall.xpm
-SO ./Assets/Wall/wall_with_leave.xpm
-WE ./Assets/Wall/wall.xpm
-EA ./Assets/Wall/wall.xpm
+NO ./Assets/Wall/Wall_01.xpm
+SO ./Assets/Wall/Wall_02.xpm
+WE ./Assets/Wall/Wall_01.xpm
+EA ./Assets/Wall/Wall_03.xpm
 F 44,44,44
 C 28,28,28
 

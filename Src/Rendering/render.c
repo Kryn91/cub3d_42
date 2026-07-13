@@ -15,9 +15,9 @@ void	render_door(t_game *game, t_ray *ray, t_img *image, int x)
 	while (i < ray->wall_end)
 	{
 		// printf("%d, %f\n", ray->tex_x, ray->tex_y);
-		color = *(unsigned int *)(game->map.walls[0].img.addr + ray->tex_x
+		color = *(unsigned int *)(game->door_texture.img.addr + ray->tex_x
 				* game->map.walls[0].img.bpp / 8
-				+ (int) ray->tex_y * game->map.walls[0].img.size_line);
+				+ (int) ray->tex_y * game->door_texture.img.size_line);
 		mlx_pixel_put_img(image, x, i, color);
 		ray->tex_y += ray->tex_step;
 		i++;

@@ -9,6 +9,7 @@
 # include "render.h"
 # include "map.h"
 # include "hand.h"
+
 typedef struct s_fps
 {
 	double	last_frame;
@@ -36,6 +37,8 @@ typedef struct s_game
 	double		old_time;
 	t_entity	*projectile;
 	double		wall_dist_buf[SCREEN_WIDTH];
+	t_texture	door_texture;
+	t_texture	game_over_tex;
 	t_hand		hand;
 }	t_game;
 

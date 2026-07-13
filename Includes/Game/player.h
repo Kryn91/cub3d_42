@@ -14,6 +14,8 @@ typedef struct s_player
 	double	mouse_x;
 	double	mouse_y;
 	double	rotation_angle;
+	double	hp;
+	bool	is_dead;
 }	t_player;
 
 typedef struct s_input

@@ -1,10 +1,13 @@
 #include "handle_input.h"
+#include "init_texture.h"
 #include "movement.h"
+#include "render.h"
 #include "stdlib.h"
 #include <math.h>
 #include "free_memory.h"
 #include "free_list.h"
 #include "mlx.h"
+#include "vector_manipulation.h"
 
 void	close_win(t_game *game)
 {

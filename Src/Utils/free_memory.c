@@ -43,6 +43,10 @@ void    free_texture(t_game *game)
     mlx_destroy_image(game->mlx, game->map.walls[1].img.img_ptr);
     mlx_destroy_image(game->mlx, game->map.walls[2].img.img_ptr);
     mlx_destroy_image(game->mlx, game->map.walls[3].img.img_ptr);
+    if (game->door_texture.img.img_ptr)
+        mlx_destroy_image(game->mlx, game->door_texture.img.img_ptr);
+    if (game->game_over_tex.img.img_ptr)
+        mlx_destroy_image(game->mlx, game->game_over_tex.img.img_ptr);
 }
 
 void    free_map(t_game *game)

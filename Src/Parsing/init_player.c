@@ -66,5 +66,7 @@ void    set_camera_plane(t_game *game)
 void    init_player(t_game *game)
 {
     set_player_pos(game);
+    game->player.hp = 100;
+    game->player.is_dead = false;
     set_camera_plane(game);
 }
