@@ -15,7 +15,7 @@ bool    is_in_range(t_game *game, t_entity *enemy)
     dx = game->player.pos_x - enemy->pos_x;
     dy = game->player.pos_y - enemy->pos_y;
     distance  = sqrt((dx * dx) + (dy * dy));
-    if (distance <= 1)
+    if (distance <= 0.5)
         return (true);
     return (false);
 }
