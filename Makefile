@@ -1,6 +1,6 @@
 NAME    := cub3d
 CC      := cc
-CFLAGS  := -Wall -Wextra -Werror -g3 -g -O0
+CFLAGS  := -Wall -Wextra -Werror -g3 -g -O0 -fsanitize=address
 MLX_FLAG := -lmlx -lXext -lX11 -lm
 
 # Folder
@@ -62,7 +62,7 @@ SRCS :=	main.c							\
 		Game/enemy_choose_direction.c	\
 		Game/enemy_detect_player.c		\
 		Game/enemy_chase_player.c		\
-		Game/enemy_attack_player.c 		
+		Game/enemy_attack_player.c
 
 LIBFT := $(LIBFT_DIR)/libft.a
 

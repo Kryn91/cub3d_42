@@ -2,8 +2,6 @@
 #include "render.h"
 #include "raycasting.h"
 
-#include "stdio.h"
-
 void	sort_entities(t_list **entity_lst)
 {
 	int			swap;
@@ -85,7 +83,7 @@ void	draw_entity_stripe(t_game *game, t_img *img, t_entity *entity,
 	}
 }
 
-void	draw_entity_sprite(t_game *game, t_img *img, t_entity *entity)
+void	draw_entity_sprite(t_game *game, t_img *img, t_entity *entity, double size_mod)
 {
 	t_sprite_draw	d;
 	int				mid_x;
@@ -93,7 +91,7 @@ void	draw_entity_sprite(t_game *game, t_img *img, t_entity *entity)
 
 
 	mid_x = SCREEN_WIDTH / 2 * (1 + entity->transform_x / entity->transform_y);
-	d.height = SCREEN_HEIGHT / entity->transform_y;
+	d.height = SCREEN_HEIGHT / entity->transform_y * size_mod;
 	d.width = entity->tex.width * d.height / entity->tex.height;
 	d.start_x = mid_x - d.width / 2;
 	d.start_y = SCREEN_HEIGHT / 2 - d.height / 2;
@@ -114,6 +112,7 @@ void	render_entity(t_game *game, t_img *img)
 {
 	t_list		*entity_lst;
 	t_entity	*entity;
+	double		size_mod;
 
 	entity_transform_calc(game);
 	entity_lst = game->entity_lst;
@@ -121,8 +120,12 @@ void	render_entity(t_game *game, t_img *img)
 	while (entity_lst)
 	{
 		entity = (t_entity *) entity_lst->content;
+		if (entity->type == PROJECTILE)
+			size_mod = 0.5;
+		else
+			size_mod = 1;
 		if (entity->state != 0 && entity->transform_y > 0.3)
-			draw_entity_sprite(game, img, entity);
+			draw_entity_sprite(game, img, entity, size_mod);
 		entity_lst = entity_lst->next;
 	}
 }

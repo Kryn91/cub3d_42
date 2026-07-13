@@ -63,28 +63,65 @@ void	render_walls(t_game *game, t_ray *ray, int x, t_img *image)
 	}
 }
 
-void render_hand(t_game *game, t_img *img)
+void	render_hand(t_game *game, t_img *img)
 {
 	t_vec	pos;
 
 	if (game->hand.frame == 0)
 	{
-    	pos.x = SCREEN_WIDTH * 0.05;
-    	pos.y = SCREEN_HEIGHT - game->hand.tex[game->hand.frame].height * PIXEL_SIZE * 1;
-	    sprite_to_img(&game->hand.tex[game->hand.frame], img, pos, 1);
+		pos.x = SCREEN_WIDTH * 0.05;
+		pos.y = SCREEN_HEIGHT
+			- game->hand.tex[game->hand.frame].height * PIXEL_SIZE * 1;
+		sprite_to_img(&game->hand.tex[game->hand.frame], img, pos, 1);
 	}
 	else
 	{
-    	pos.x = SCREEN_WIDTH * 0.15;
-   		pos.y = SCREEN_HEIGHT - game->hand.tex[game->hand.frame].height * PIXEL_SIZE * 0.9;
-	    sprite_to_img(&game->hand.tex[game->hand.frame], img, pos, 0.9);
+		pos.x = SCREEN_WIDTH * 0.15;
+		pos.y = SCREEN_HEIGHT
+			- game->hand.tex[game->hand.frame].height * PIXEL_SIZE * 0.9;
+		sprite_to_img(&game->hand.tex[game->hand.frame], img, pos, 0.9);
 	}
-    if (game->hand.frame == 1 &&
-        get_time() - game->hand.last_frame_time > 500)
-    {
-        game->hand.frame = 0;
-        game->hand.last_frame_time = get_time();
-    }
+	if (game->hand.frame == 1
+		&& get_time() - game->hand.last_frame_time > 500)
+	{
+		game->hand.frame = 0;
+		game->hand.last_frame_time = get_time();
+	}
+}
+
+
+void render_spell(t_game *game, t_img *img)
+{
+	t_vec	pos;
+
+	if (get_time() - game->last_shoot_time < 500)
+		return ;
+	if (game->spell.frame == 0)
+	{
+		pos.x = SCREEN_WIDTH * 0.25;
+		pos.y = SCREEN_HEIGHT - 88
+			- game->spell.tex[game->spell.frame].height * PIXEL_SIZE * 3;
+		sprite_to_img(&game->spell.tex[game->spell.frame], img, pos, 3);
+	}
+	else if (game->spell.frame == 1)
+	{
+		pos.x = SCREEN_WIDTH * 0.25;
+		pos.y = SCREEN_HEIGHT - 88
+			- game->spell.tex[game->spell.frame].height * PIXEL_SIZE * 3;
+		sprite_to_img(&game->spell.tex[game->spell.frame], img, pos, 3);
+	}
+	else
+	{
+		pos.x = SCREEN_WIDTH * 0.25;
+		pos.y = SCREEN_HEIGHT - 88
+			- game->spell.tex[game->spell.frame].height * PIXEL_SIZE * 3;
+		sprite_to_img(&game->spell.tex[game->spell.frame], img, pos, 3);
+	}
+	if (get_time() - game->spell.last_frame_time > 200)
+	{
+		game->spell.frame = (game->spell.frame + 1) % 3;
+		game->spell.last_frame_time = get_time();
+	}
 }
 
 
@@ -115,6 +152,7 @@ int	render(t_game *game)
 	render_minimap(game, &img);
 	render_entity(game, &img);
 	render_hand(game, &img);
+	render_spell(game, &img);
 	mlx_put_image_to_window(game->mlx, game->win, img.img_ptr, 0, 0);
 	mlx_destroy_image(game->mlx, img.img_ptr);
 	return (0);

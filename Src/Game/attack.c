@@ -1,6 +1,14 @@
 #include "attack.h"
 #include "door.h"
 #include "delta_time.h"
+#include "init_texture.h"
+
+typedef enum e_collision
+{
+	COL_NONE,
+	COL_WALL,
+	COL_ENEMY
+}   t_col;
 
 void	handle_mouse(int button, int x, int y, void *param)
 {
@@ -9,30 +17,107 @@ void	handle_mouse(int button, int x, int y, void *param)
 	if (button == 1)
 		shoot((t_game *)param);
 }
+
 void	shoot(t_game *game)
 {
+	t_entity	*projectile;
+
+	if (game->hand.frame == 1)
+		return ;
 	game->hand.frame = 1;
 	game->hand.last_frame_time = get_time();
-	if (game->projectile->state == 1)
+	if (get_time() - game->last_shoot_time < 500)
 		return ;
-	game->projectile->pos_x = game->player.pos_x + game->player.dir_x;
-	game->projectile->pos_y = game->player.pos_y + game->player.dir_y;
-	game->projectile->spec.p_data.dir_x = game->player.dir_x;
-	game->projectile->spec.p_data.dir_y = game->player.dir_y;
-	game->projectile->state = 1;
+	projectile = malloc(sizeof(t_entity));
+	projectile->type = PROJECTILE;
+	projectile->state = 0;
+	init_tex(game, &projectile->tex, "Assets/Spell/Flame2.xpm");
+	projectile->pos_x = game->player.pos_x + game->player.dir_x;
+	projectile->pos_y = game->player.pos_y + game->player.dir_y;
+	projectile->spec.p_data.dir_x = game->player.dir_x;
+	projectile->spec.p_data.dir_y = game->player.dir_y;
+	projectile->state = 1;
+	ft_lstadd_front(&game->entity_lst, ft_lstnew(projectile));
+	game->last_shoot_time = get_time();
 }
 
-void	enemy_death(t_game *game, t_entity *enemy, t_list *prev, t_list *cur)
+void	entity_death(t_game *game, t_entity *entity, t_list *prev, t_list **cur)
 {
+	t_list	*tmp;
+
 	if (prev == NULL)
-		game->entity_lst = cur->next;
+		game->entity_lst = (*cur)->next;
 	else
-		prev->next = cur->next;
-	free(enemy);
-	free(cur);
+		prev->next = (*cur)->next;
+	free(entity);
+	tmp = (*cur)->next;
+	free(*cur);
+	*cur = tmp;
 }
 
-int	projectile_colision(t_game *game)
+t_col	projectile_colision(t_game *game, t_entity *projectile)
+{
+	t_list		*entity_lst;
+	t_entity	*entity;
+	double		x;
+	double		y;
+	t_door		*door;
+
+	x = projectile->pos_x;
+	y = projectile->pos_y;
+	if ((int)x < 0 || (int)y < 0
+		|| (int)x >= game->map.width || (int)y >= game->map.height)
+		return (COL_WALL);
+	if (game->map.arr[(int)y][(int)x] == '1')
+		return (COL_WALL);
+	if (game->map.arr[(int)y][(int)x] == 'D')
+	{
+		door = find_door((int)x, (int)y, game);
+		if (door == NULL || door->state != OPEN)
+			return (COL_WALL);
+	}
+	entity_lst = game->entity_lst;
+	while (entity_lst)
+	{
+		entity = (t_entity *)entity_lst->content;
+		if (entity->type == ENEMY
+			&& x >= entity->pos_x - entity->spec.e_data.hit_radius
+			&& x <= entity->pos_x + entity->spec.e_data.hit_radius
+			&& y >= entity->pos_y - entity->spec.e_data.hit_radius
+			&& y <= entity->pos_y + entity->spec.e_data.hit_radius)
+		{
+			entity->spec.e_data.hp -= 35;
+			if (entity->spec.e_data.hp <= 0)
+				entity->state = 0;
+			return (COL_ENEMY);
+		}
+		entity_lst = entity_lst->next;
+	}
+	return (COL_NONE);
+}
+
+void	free_dead_enemies(t_game *game)
+{
+	t_list		*entity_lst;
+	t_list		*tmp;
+	t_entity	*entity;
+
+	entity_lst = game->entity_lst;
+	tmp = NULL;
+	while (entity_lst)
+	{
+		entity = (t_entity *)entity_lst->content;
+		if (entity->type == ENEMY && entity->state == 0)
+		{
+			entity_death(game, entity, tmp, &entity_lst);
+			continue ;
+		}
+		tmp = entity_lst;
+		entity_lst = entity_lst->next;
+	}
+}
+
+void	projectile_update(t_game *game)
 {
 	t_list		*entity_lst;
 	t_entity	*entity;
@@ -43,39 +128,18 @@ int	projectile_colision(t_game *game)
 	while (entity_lst)
 	{
 		entity = (t_entity *)entity_lst->content;
-		if (game->map.arr[(int)game->projectile->pos_y][(int)game->projectile->pos_x] == '1')
-			return (1);
-		else if (game->map.arr[(int)game->projectile->pos_y][(int)game->projectile->pos_x] == 'D')
+		if (entity->type == PROJECTILE)
 		{
-			if (find_door((int)game->projectile->pos_x, (int)game->projectile->pos_y, game)->state != OPEN)
-				return (1);
-		}
-		if (entity->type == ENEMY
-			&& game->projectile->pos_x >= entity->pos_x - entity->spec.e_data.hit_radius
-			&& game->projectile->pos_x <= entity->pos_x + entity->spec.e_data.hit_radius
-			&& game->projectile->pos_y >= entity->pos_y - entity->spec.e_data.hit_radius
-			&& game->projectile->pos_y <= entity->pos_y + entity->spec.e_data.hit_radius)
-		{
-			entity->spec.e_data.hp -= 35;
-			if (entity->spec.e_data.hp <= 0)
-				enemy_death(game, entity, tmp, entity_lst);
-			return (1);
+			entity->pos_x += entity->spec.p_data.dir_x * 0.6;
+			entity->pos_y += entity->spec.p_data.dir_y * 0.6;
+			if (projectile_colision(game, entity) != COL_NONE)
+			{
+				entity_death(game, entity, tmp, &entity_lst);
+				continue ;
+			}
 		}
 		tmp = entity_lst;
 		entity_lst = entity_lst->next;
 	}
-	return (0);
-}
-
-void	projectile_update(t_game *game)
-{
-	if (game->projectile->state == 0)
-		return ;
-	if (projectile_colision(game))
-	{
-		game->projectile->state = 0;
-		return ;
-	}
-	game->projectile->pos_x += game->projectile->spec.p_data.dir_x * 0.6;
-	game->projectile->pos_y += game->projectile->spec.p_data.dir_y * 0.6;
+	free_dead_enemies(game);
 }
