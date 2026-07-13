@@ -11,6 +11,8 @@ void	sort_entities(t_list **entity_lst)
 	t_entity	*tmp;
 
 	swap = 1;
+	if (!*entity_lst)
+		return ;
 	while (swap)
 	{
 		cur = *entity_lst;

@@ -2,16 +2,16 @@
 
 t_door    *e_find_door(int x, int y, t_game *game)
 {
-    t_door *tmp;
+	t_door *tmp;
 
-    tmp = game->door;
-    while (tmp)
-    {
-        if (tmp->x == x && tmp->y == y)
-				return (tmp);
-        tmp = tmp->next;
-    }
-    return (NULL);
+	tmp = game->door;
+	while (tmp)
+	{
+		if (tmp->x == x && tmp->y == y)
+			return (tmp);
+		tmp = tmp->next;
+	}
+	return (NULL);
 }
 
 bool	e_check_door(double x, double y, t_game *game)
@@ -23,22 +23,22 @@ bool	e_check_door(double x, double y, t_game *game)
 	new_x = (int)x;
 	new_y = (int)y;
 	if (game->map.arr[new_y][new_x] != 'D')
-		return false;
+		return (false);
 	door = e_find_door(x, y, game);
 	if (!door)
-		return false;
+		return (false);
 	if (door->state == OPEN)
 		return (false);
-	return(true);
+	return (true);
 }
 
-bool    enemy_colision(double x, double y, t_game *game)
+bool	enemy_colision(double x, double y, t_game *game)
 {
 	if ((int)y < 0 || (int)x < 0)
 		return (true);
-  	if (y >= game->map.height || x >= game->map.width)
-        return (true);
-    if (game->map.arr[(int)y][(int)(x + ENEMY_RADIUS)] == '1')
+	if (y >= game->map.height || x >= ft_strlen(game->map.arr[(int)y]))
+		return (true);
+	if (game->map.arr[(int)y][(int)(x + ENEMY_RADIUS)] == '1')
 		return (true);
 	if (game->map.arr[(int)y][(int)(x - ENEMY_RADIUS)] == '1')
 		return (true);

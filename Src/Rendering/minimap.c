@@ -22,8 +22,8 @@ void	minimap_pixel_pos(t_game *game, t_minimap_pixel *px)
 
 void	minimap_pixel_render(t_game *game, t_img *image, t_minimap_pixel *px)
 {
-	if (px->map_x >= 0 && px->map_x < game->map.width
-		&& px->map_y >= 0 && px->map_y < game->map.height)
+	if (px->map_y >= 0 && px->map_y < game->map.height && px->map_x >= 0
+		&& px->map_x < ft_strlen(game->map.arr[(int)px->map_y]))
 	{
 		if (px->map_x >= game->player.pos_x - 0.1
 			&& px->map_x <= game->player.pos_x + 0.1
@@ -34,9 +34,15 @@ void	minimap_pixel_render(t_game *game, t_img *image, t_minimap_pixel *px)
 		else if (game->map.arr[(int)px->map_y][(int)px->map_x] == '1')
 			mlx_pixel_put_img
 				(image, MINIMAP_POS_X + px->x, MINIMAP_POS_Y + px->y, 0x000000);
-		else
+		else if (game->map.arr[(int)px->map_y][(int)px->map_x] == 'D')
+			mlx_pixel_put_img
+				(image, MINIMAP_POS_X + px->x, MINIMAP_POS_Y + px->y, 0x033300);
+		else if (game->map.arr[(int)px->map_y][(int)px->map_x] == '0')
 			mlx_pixel_put_img
 				(image, MINIMAP_POS_X + px->x, MINIMAP_POS_Y + px->y, 0xFFFFFF);
+		// else
+		// 	mlx_pixel_put_img
+		// 		(image, MINIMAP_POS_X + px->x, MINIMAP_POS_Y + px->y, 0x1A1A1A);
 	}
 	else
 		mlx_pixel_put_img
