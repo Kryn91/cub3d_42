@@ -30,7 +30,6 @@ void	shoot(t_game *game)
 		return ;
 	projectile = malloc(sizeof(t_entity));
 	projectile->type = PROJECTILE;
-	projectile->state = 0;
 	init_tex(game, &projectile->tex, "Assets/Spell/Flame2.xpm");
 	projectile->pos_x = game->player.pos_x + game->player.dir_x;
 	projectile->pos_y = game->player.pos_y + game->player.dir_y;
@@ -107,7 +106,7 @@ void	free_dead_enemies(t_game *game)
 	while (entity_lst)
 	{
 		entity = (t_entity *)entity_lst->content;
-		if (entity->type == ENEMY && entity->state == 0)
+		if (entity->state == 0)
 		{
 			entity_death(game, entity, tmp, &entity_lst);
 			continue ;
@@ -121,10 +120,8 @@ void	projectile_update(t_game *game)
 {
 	t_list		*entity_lst;
 	t_entity	*entity;
-	t_list		*tmp;
 
 	entity_lst = game->entity_lst;
-	tmp = NULL;
 	while (entity_lst)
 	{
 		entity = (t_entity *)entity_lst->content;
@@ -133,12 +130,8 @@ void	projectile_update(t_game *game)
 			entity->pos_x += entity->spec.p_data.dir_x * 0.6;
 			entity->pos_y += entity->spec.p_data.dir_y * 0.6;
 			if (projectile_colision(game, entity) != COL_NONE)
-			{
-				entity_death(game, entity, tmp, &entity_lst);
-				continue ;
-			}
+				entity->state = 0;
 		}
-		tmp = entity_lst;
 		entity_lst = entity_lst->next;
 	}
 	free_dead_enemies(game);

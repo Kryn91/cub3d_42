@@ -82,7 +82,7 @@ void	render_hand(t_game *game, t_img *img)
 		sprite_to_img(&game->hand.tex[game->hand.frame], img, pos, 0.9);
 	}
 	if (game->hand.frame == 1
-		&& get_time() - game->hand.last_frame_time > 500)
+		&& get_time() - game->hand.last_frame_time > 490)
 	{
 		game->hand.frame = 0;
 		game->hand.last_frame_time = get_time();
@@ -94,7 +94,7 @@ void render_spell(t_game *game, t_img *img)
 {
 	t_vec	pos;
 
-	if (get_time() - game->last_shoot_time < 500)
+	if (get_time() - game->last_shoot_time < 510)
 		return ;
 	if (game->spell.frame == 0)
 	{
