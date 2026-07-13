@@ -1,6 +1,6 @@
 NAME    := cub3d
 CC      := cc
-CFLAGS  := -Wall -Wextra -Werror -g3 -g -O0 -fsanitize=address
+CFLAGS  := -Wall -Wextra -Werror -g3 -g -O0
 MLX_FLAG := -lmlx -lXext -lX11 -lm
 
 # Folder
