@@ -43,6 +43,10 @@ int		main(int ac, char **av)
 	init_player(game);
 	game->fps.cap = 60;
 	game->hand.frame = 0;
+	game->spell.frame = 0;
+	game->spell.last_frame_time = 0;
+	game->last_shoot_time = -100;
+	game->hand.prepared = 0;
 	checker(game);
 	init_door(game);
 	init_enemy(game);

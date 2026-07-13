@@ -9,6 +9,8 @@
 # include "render.h"
 # include "map.h"
 # include "hand.h"
+# include "spell.h"
+
 typedef struct s_fps
 {
 	double	last_frame;
@@ -34,9 +36,10 @@ typedef struct s_game
 	t_fps		fps;
 	double		time;
 	double		old_time;
-	t_entity	*projectile;
 	double		wall_dist_buf[SCREEN_WIDTH];
 	t_hand		hand;
+	t_spell		spell;
+	double		last_shoot_time;
 }	t_game;
 
 void	parsing(int ac, char **av, t_game *game);

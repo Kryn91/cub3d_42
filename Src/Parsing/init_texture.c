@@ -38,10 +38,8 @@ void	init_texture(t_game *game)
 	init_tex(game, game->map.walls + 3, game->map.walls[3].path);
 	init_tex(game, game->hand.tex, "Assets/Hand/backhand.xpm");
 	init_tex(game, game->hand.tex + 1, "Assets/Hand/fronthand.xpm");
+	init_tex(game, game->spell.tex, "Assets/Spell/Flame0.xpm");
+	init_tex(game, game->spell.tex + 1, "Assets/Spell/Flame1.xpm");
+	init_tex(game, game->spell.tex + 2, "Assets/Spell/Flame2.xpm");
 	init_enemy_tex(game, game->entity_lst);
-	game->projectile = malloc(sizeof(t_entity));
-	game->projectile->type = PROJECTILE;
-	game->projectile->state = 0;
-	init_tex(game, &game->projectile->tex, "Assets/Hand/weapon_idle.xpm");
-	ft_lstadd_front(&game->entity_lst, ft_lstnew(game->projectile));
 }
