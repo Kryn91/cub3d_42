@@ -46,6 +46,7 @@ SRCS :=	main.c							\
 		Rendering/raycasting.c			\
 		Rendering/raycasting2.c			\
 		Rendering/render_entity.c		\
+		Rendering/render_health_bar.c 	\
 		Utils/free_memory.c				\
 		Utils/free_list.c				\
 		Utils/vector_manipulation.c		\

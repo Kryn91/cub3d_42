@@ -85,7 +85,7 @@ t_col	projectile_colision(t_game *game, t_entity *projectile)
 			&& y >= entity->pos_y - entity->spec.e_data.hit_radius
 			&& y <= entity->pos_y + entity->spec.e_data.hit_radius)
 		{
-			entity->spec.e_data.hp -= 35;
+			entity->spec.e_data.hp -= 25;
 			if (entity->spec.e_data.hp <= 0)
 				entity->state = 0;
 			return (COL_ENEMY);

@@ -19,7 +19,7 @@ void    chase_player(t_game *game, t_entity *enemy)
     normalize_vector(&dx, &dy);
     enemy->dir_x = dx;
     enemy->dir_y = dy;
-    movespeed = 0.06;
+    movespeed = 0.08;
     new_x = enemy->pos_x + enemy->dir_x * movespeed;
     new_y = enemy->pos_y + enemy->dir_y * movespeed;
     if (e_isColiding(new_x, enemy->pos_y, game) == false)

@@ -5,6 +5,7 @@
 #include "raycasting.h"
 #include "cub3d.h"
 #include "delta_time.h"
+#include "render_health_bar.h"
 
 void	render_door(t_game *game, t_ray *ray, t_img *image, int x)
 {
@@ -153,6 +154,7 @@ int	render(t_game *game)
 	render_entity(game, &img);
 	render_hand(game, &img);
 	render_spell(game, &img);
+	render_health_bar(game, &img);
 	mlx_put_image_to_window(game->mlx, game->win, img.img_ptr, 0, 0);
 	mlx_destroy_image(game->mlx, img.img_ptr);
 	return (0);
