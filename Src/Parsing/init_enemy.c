@@ -74,35 +74,6 @@ int create_enemy(char **map, t_list **enemy)
     return (0);
     return (0);
 }
-#include <stdio.h>
-
-/*void    print_entities(t_list *list)
-{
-    t_entity    *entity;
-    int         i;
-
-    i = 0;
-    while (list)
-    {
-        entity = (t_entity *)list->content;
-
-        if (entity)
-        {
-            printf("------ Entity %d ------\n", i);
-            printf("Type        : %d\n", entity->type);
-            printf("State       : %d\n", entity->state);
-            printf("Position    : (%f, %f)\n", entity->pos_x, entity->pos_y);
-            printf("Transform   : (%f, %f)\n",
-                entity->transform_x, entity->transform_y);
-            printf("HP          : %f\n", entity->spec.e_data.hp);
-        }
-        else
-            printf("Entity %d : NULL\n", i);
-
-        list = list->next;
-        i++;
-    }
-}*/
 
 void    init_enemy(t_game *game)
 {

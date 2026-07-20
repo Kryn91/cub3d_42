@@ -51,7 +51,10 @@ void	handle_enemy(t_game *game)
 	{
 		enemy = ((t_entity *)tmp->content);
 		if (enemy)
-			handle_state(game, enemy);
+		{
+			if (enemy->type == ENEMY)
+				handle_state(game, enemy);
+		}	
 		tmp = tmp->next;
 	}
 }

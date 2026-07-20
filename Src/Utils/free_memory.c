@@ -47,6 +47,8 @@ void    free_texture(t_game *game)
         mlx_destroy_image(game->mlx, game->door_texture.img.img_ptr);
     if (game->game_over_tex.img.img_ptr)
         mlx_destroy_image(game->mlx, game->game_over_tex.img.img_ptr);
+    // free les entities
+    //free main
 }
 
 void    free_map(t_game *game)

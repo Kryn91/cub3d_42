@@ -46,6 +46,20 @@ char	**add_map_line(char **map, char *line)
 	return (new_map);
 }
 
+bool	is_valid_line(char *line)
+{
+	int i;
+
+	i = 0;
+	while (line[i])
+	{
+		if (line[i] == '1' || line[i] == '0')
+			return (true);
+		i++;
+	}
+	return (false);
+}
+
 void	parse_map(char *map, t_game *game)
 {
 	int		fd;
@@ -59,7 +73,7 @@ void	parse_map(char *map, t_game *game)
 	{
 		if (is_texture(line_read))
     		handle_texture(line_read, game);
-		else
+		else if (is_valid_line(line_read))
     		game->map.arr = add_map_line(game->map.arr, line_read);
 		free(line_read);
 		line_read = get_next_line(fd);
