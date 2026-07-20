@@ -45,9 +45,11 @@ typedef struct s_entity
 	double			dir_y;
 	double			transform_x;
 	double			transform_y;
+	double			last_frame_time;
+	int				frame;
 	int				state;
 	t_enemy_state	estate;
-	t_texture		tex;
+	t_texture		tex[3];
 	t_entity_spec	spec;
 }	t_entity;
 

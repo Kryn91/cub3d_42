@@ -22,7 +22,7 @@ bool	init_enemy_tex(t_game *game, t_list *enemy)
 		entity = ((t_entity *)temp->content);
 		if (entity)
 		{
-			init_tex(game, &entity->tex, "Assets/Entity/Enemy.xpm");
+			init_tex(game, &entity->tex[0], "Assets/Entity/Enemy.xpm");
 			temp->content = entity;
 		}
 		temp = temp->next;

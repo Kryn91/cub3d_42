@@ -31,7 +31,7 @@ void	handle_state(t_game *game, t_entity *enemy)
 		else
 			attack_player(game, enemy);
 	}
-	else 
+	else
 		enemy->estate = PATROL;
 	if (old_state != PATROL && enemy->estate == PATROL)
     {
@@ -56,6 +56,8 @@ void	handle_enemy(t_game *game)
 	}
 }
 
+#include <stdio.h>
+
 int	game_loop(t_game *game)
 {
 	t_vec	pos;
@@ -73,6 +75,7 @@ int	game_loop(t_game *game)
 		game->player.is_dead = true;
 	move_player(game);
 	handle_enemy(game);
+	// printf("%c\n", game->map.arr[0][1]);
 	projectile_update(game);
 	interact(game);
 	handle_door(game);

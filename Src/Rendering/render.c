@@ -91,11 +91,13 @@ void	render_hand(t_game *game, t_img *img)
 }
 
 
-void render_spell(t_game *game, t_img *img)
+void	render_spell(t_game *game, t_img *img)
 {
 	t_vec	pos;
+	double	time;
 
-	if (get_time() - game->last_shoot_time < 510)
+	time = get_time();
+	if (time - game->last_shoot_time < 510)
 		return ;
 	if (game->spell.frame == 0)
 	{
@@ -118,10 +120,10 @@ void render_spell(t_game *game, t_img *img)
 			- game->spell.tex[game->spell.frame].height * PIXEL_SIZE * 3;
 		sprite_to_img(&game->spell.tex[game->spell.frame], img, pos, 3);
 	}
-	if (get_time() - game->spell.last_frame_time > 200)
+	if (time - game->spell.last_frame_time > 200)
 	{
 		game->spell.frame = (game->spell.frame + 1) % 3;
-		game->spell.last_frame_time = get_time();
+		game->spell.last_frame_time = time;
 	}
 }
 

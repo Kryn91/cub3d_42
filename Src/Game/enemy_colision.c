@@ -31,6 +31,7 @@ bool	e_check_door(double x, double y, t_game *game)
 		return (false);
 	return (true);
 }
+#include <stdio.h>
 
 bool	enemy_colision(double x, double y, t_game *game)
 {

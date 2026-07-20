@@ -36,13 +36,17 @@ void	minimap_pixel_render(t_game *game, t_img *image, t_minimap_pixel *px)
 				(image, MINIMAP_POS_X + px->x, MINIMAP_POS_Y + px->y, 0x000000);
 		else if (game->map.arr[(int)px->map_y][(int)px->map_x] == 'D')
 			mlx_pixel_put_img
-				(image, MINIMAP_POS_X + px->x, MINIMAP_POS_Y + px->y, 0x033300);
-		else if (game->map.arr[(int)px->map_y][(int)px->map_x] == '0')
+				(image, MINIMAP_POS_X + px->x, MINIMAP_POS_Y + px->y, 0x023100);
+		else if (game->map.arr[(int)px->map_y][(int)px->map_x] == '0'
+			|| game->map.arr[(int)px->map_y][(int)px->map_x] == 'O')
 			mlx_pixel_put_img
 				(image, MINIMAP_POS_X + px->x, MINIMAP_POS_Y + px->y, 0xFFFFFF);
-		// else
-		// 	mlx_pixel_put_img
-		// 		(image, MINIMAP_POS_X + px->x, MINIMAP_POS_Y + px->y, 0x1A1A1A);
+		else if (game->map.arr[(int)px->map_y][(int)px->map_x] == ' ')
+			mlx_pixel_put_img
+				(image, MINIMAP_POS_X + px->x, MINIMAP_POS_Y + px->y, 0x1A1A1A);
+		else
+			mlx_pixel_put_img
+				(image, MINIMAP_POS_X + px->x, MINIMAP_POS_Y + px->y, 0x101233);
 	}
 	else
 		mlx_pixel_put_img

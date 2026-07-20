@@ -2,13 +2,14 @@
 #include "door.h"
 #include "delta_time.h"
 #include "init_texture.h"
+#include "colision.h"
 
 typedef enum e_collision
 {
 	COL_NONE,
 	COL_WALL,
 	COL_ENEMY
-}   t_col;
+}	t_col;
 
 void	handle_mouse(int button, int x, int y, void *param)
 {
@@ -30,12 +31,16 @@ void	shoot(t_game *game)
 		return ;
 	projectile = malloc(sizeof(t_entity));
 	projectile->type = PROJECTILE;
-	init_tex(game, &projectile->tex, "Assets/Spell/Flame2.xpm");
+	init_tex(game, &projectile->tex[0], "Assets/Spell/FlameProj0.xpm");
+	init_tex(game, &projectile->tex[1], "Assets/Spell/FlameProj1.xpm");
+	init_tex(game, &projectile->tex[2], "Assets/Spell/FlameProj2.xpm");
 	projectile->pos_x = game->player.pos_x + game->player.dir_x;
 	projectile->pos_y = game->player.pos_y + game->player.dir_y;
 	projectile->spec.p_data.dir_x = game->player.dir_x;
 	projectile->spec.p_data.dir_y = game->player.dir_y;
 	projectile->state = 1;
+	projectile->frame = 0;
+	projectile->last_frame_time = get_time();
 	ft_lstadd_front(&game->entity_lst, ft_lstnew(projectile));
 	game->last_shoot_time = get_time();
 }
@@ -53,6 +58,7 @@ void	entity_death(t_game *game, t_entity *entity, t_list *prev, t_list **cur)
 	free(*cur);
 	*cur = tmp;
 }
+#include <stdio.h>
 
 t_col	projectile_colision(t_game *game, t_entity *projectile)
 {
@@ -67,7 +73,12 @@ t_col	projectile_colision(t_game *game, t_entity *projectile)
 	if ((int)x < 0 || (int)y < 0
 		|| (int)x >= game->map.width || (int)y >= game->map.height)
 		return (COL_WALL);
-	if (game->map.arr[(int)y][(int)x] == '1')
+	if ((int)(x - ENEMY_RADIUS) < 0 || (int)(y - ENEMY_RADIUS) < 0
+		|| (int)(x + ENEMY_RADIUS) >= game->map.width
+		|| (int)(y + ENEMY_RADIUS) >= game->map.height)
+		return (COL_WALL);
+	// printf("x:%d, y:%d, x+rad:%d, y+rad:%d, x-rad:%d, y-rad:%d\n", (int)x, (int)y, (int)(x + PLAYER_RADIUS), (int)(y + PLAYER_RADIUS), (int)(x - PLAYER_RADIUS), (int)(y - PLAYER_RADIUS));
+	if (check_wall_radius(x, y, game))
 		return (COL_WALL);
 	if (game->map.arr[(int)y][(int)x] == 'D')
 	{

@@ -3,6 +3,7 @@
 #include "free_memory.h"
 #include "entity.h"
 #include "libft.h"
+#include "delta_time.h"
 
 t_entity    *create_entity(int x, int y)
 {
@@ -23,6 +24,8 @@ t_entity    *create_entity(int x, int y)
     content->estate = PATROL;
     content->spec.e_data.hp = 100;
     content->spec.e_data.hit_radius = 0.5;
+    content->frame = 0;
+    content->last_frame_time = get_time();
     return (content);
 }
 
@@ -103,7 +106,7 @@ int create_enemy(char **map, t_list **enemy)
 
 void    init_enemy(t_game *game)
 {
-   t_list *enemy; 
+   t_list *enemy;
    enemy = NULL;
    int  state;
 
