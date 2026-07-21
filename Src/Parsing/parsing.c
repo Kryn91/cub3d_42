@@ -77,7 +77,7 @@ void    init_map_size(t_map *map)
     int len;
     int max_len;
     
-
+    max_len = 0;
     i = 0;
     while (map->arr[i])
     {
