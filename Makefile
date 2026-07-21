@@ -47,6 +47,7 @@ SRCS :=	main.c							\
 		Rendering/raycasting2.c			\
 		Rendering/render_entity.c		\
 		Rendering/render_health_bar.c 	\
+		Rendering/draw.c				\
 		Utils/free_memory.c				\
 		Utils/free_list.c				\
 		Utils/vector_manipulation.c		\
@@ -63,7 +64,7 @@ SRCS :=	main.c							\
 		Game/enemy_choose_direction.c	\
 		Game/enemy_detect_player.c		\
 		Game/enemy_chase_player.c		\
-		Game/enemy_attack_player.c
+		Game/enemy_attack_player.c		\
 
 LIBFT := $(LIBFT_DIR)/libft.a
 

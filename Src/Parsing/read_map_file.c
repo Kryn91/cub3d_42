@@ -18,7 +18,7 @@ int	open_file(char *map)
 	}
 	return (fd);
 }
-
+#include <stdio.h>
 
 char	**add_map_line(char **map, char *line)
 {
@@ -35,6 +35,7 @@ char	**add_map_line(char **map, char *line)
 	i = 0;
 	while (map && map[i])
 	{
+		printf("%s\n", map[i]);
 		new_map[i] = map[i];
 		i++;
 	}

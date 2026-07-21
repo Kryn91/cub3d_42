@@ -2,18 +2,21 @@
 #include "cub3d.h"
 #include "mlx.h"
 
+void	door_tex_calc(t_game *game, t_ray *ray)
+{
+	ray->tex_x = (int)((ray->door->progress - ray->door_x)
+			*game->map.walls[0].width);
+	ray->tex_step = (double) game->map.walls[0].height
+		/ ray->line_length;
+}
+
 void	tex_calc(t_game *game, t_ray *ray)
 {
 	double	wall_x;
 	int		wall_side;
 
 	if (ray->door)
-	{
-		ray->tex_x = (int)((ray->door->progress - ray->door_x)
-				*game->map.walls[0].width);
-		ray->tex_step = (double) game->map.walls[0].height
-			/ ray->line_length;
-	}
+		door_tex_calc(game, ray);
 	else
 	{
 		if (ray->side == 0)
