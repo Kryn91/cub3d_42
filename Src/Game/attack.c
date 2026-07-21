@@ -1,5 +1,6 @@
 #include "attack.h"
 #include "door.h"
+#include "mlx.h"
 #include "delta_time.h"
 #include "init_texture.h"
 #include "colision.h"
@@ -48,7 +49,15 @@ void	shoot(t_game *game)
 void	entity_death(t_game *game, t_entity *entity, t_list *prev, t_list **cur)
 {
 	t_list	*tmp;
+	int	i;
 
+	i = 0;
+	while (i < 3)
+	{
+		if (entity->tex[i].img.img_ptr)
+			mlx_destroy_image(game->mlx, entity->tex[i].img.img_ptr);
+		i++;
+	}
 	if (prev == NULL)
 		game->entity_lst = (*cur)->next;
 	else
@@ -58,7 +67,6 @@ void	entity_death(t_game *game, t_entity *entity, t_list *prev, t_list **cur)
 	free(*cur);
 	*cur = tmp;
 }
-#include <stdio.h>
 
 t_col	projectile_colision(t_game *game, t_entity *projectile)
 {

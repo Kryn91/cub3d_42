@@ -1,4 +1,5 @@
 #include "free_memory.h"
+#include "free_list.h"
 #include "mlx.h"
 
 void    free_tab(size_t size, char **tab)
@@ -47,8 +48,9 @@ void    free_texture(t_game *game)
         mlx_destroy_image(game->mlx, game->door_texture.img.img_ptr);
     if (game->game_over_tex.img.img_ptr)
         mlx_destroy_image(game->mlx, game->game_over_tex.img.img_ptr);
-    // free les entities
-    //free main
+    destroy_entity_images(game);
+    mlx_destroy_image(game->mlx, game->hand.tex[0].img.img_ptr);
+    mlx_destroy_image(game->mlx, game->hand.tex[1].img.img_ptr);
 }
 
 void    free_map(t_game *game)

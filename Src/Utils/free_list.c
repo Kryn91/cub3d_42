@@ -1,5 +1,6 @@
 #include "free_list.h"
 #include <stdlib.h>
+#include "mlx.h"
 
 void    free_door(t_door *door)
 {
@@ -12,5 +13,34 @@ void    free_door(t_door *door)
         next = tmp->next;
         free(tmp);
         tmp = next;
+    }
+}
+
+void    free_entity(void *content)
+{
+    free(content);
+}
+
+void    destroy_entity_images(t_game *game)
+{
+    t_list      *tmp;
+    t_entity    *entity;
+    int         i;
+
+    tmp = game->entity_lst;
+    while (tmp)
+    {
+        entity = (t_entity *)tmp->content;
+        if (entity)
+        {
+            i = 0;
+            while (i < 3)
+            {
+                if (entity->tex[i].img.img_ptr)
+                    mlx_destroy_image(game->mlx, entity->tex[i].img.img_ptr);
+                i++;
+            }
+        }
+        tmp = tmp->next;
     }
 }

@@ -1,5 +1,6 @@
 #include "handle_input.h"
 #include "init_texture.h"
+#include "libft.h"
 #include "movement.h"
 #include "render.h"
 #include "stdlib.h"
@@ -14,6 +15,7 @@ void	close_win(t_game *game)
 	free_texture(game);	
 	mlx_destroy_window(game->mlx, game->win);
 	mlx_destroy_display(game->mlx);
+	ft_lstclear(&game->entity_lst, free_entity);
 	free_map(game);
 	free_door(game->door);
 	free(game->mlx);
