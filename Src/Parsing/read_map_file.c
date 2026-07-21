@@ -18,7 +18,7 @@ int	open_file(char *map)
 	}
 	return (fd);
 }
-
+#include <stdio.h>
 
 char	**add_map_line(char **map, char *line)
 {
@@ -35,6 +35,7 @@ char	**add_map_line(char **map, char *line)
 	i = 0;
 	while (map && map[i])
 	{
+		printf("%s\n", map[i]);
 		new_map[i] = map[i];
 		i++;
 	}
@@ -58,9 +59,11 @@ void	parse_map(char *map, t_game *game)
 	while (line_read != NULL)
 	{
 		if (is_texture(line_read))
-    		handle_texture(line_read, game);
+			handle_texture(line_read, game);
+		else if (line_read[0] == '\0')
+			continue ;
 		else
-    		game->map.arr = add_map_line(game->map.arr, line_read);
+			game->map.arr = add_map_line(game->map.arr, line_read);
 		free(line_read);
 		line_read = get_next_line(fd);
 	}

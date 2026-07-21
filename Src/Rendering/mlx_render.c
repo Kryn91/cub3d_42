@@ -29,7 +29,8 @@ void	draw_pixels(t_img *img, unsigned int color, t_vec pos, double size_mod)
 		i = -1;
 		while (++i < PIXEL_SIZE * size_mod)
 		{
-			if ((int)pos.x + i < 0 || (int)pos.y + j < 0 || (int)pos.x + i > SCREEN_WIDTH
+			if ((int)pos.x + i < 0 || (int)pos.y + j < 0
+				|| (int)pos.x + i > SCREEN_WIDTH
 				|| (int)pos.y + i > SCREEN_HEIGHT)
 				continue ;
 			mlx_pixel_put_img(img, (int)pos.x + i, (int)pos.y + j, color);

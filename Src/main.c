@@ -31,6 +31,8 @@ int	run_game(t_game *game)
 	return (0);
 }
 
+#include <stdio.h>
+
 int		main(int ac, char **av)
 {
 	t_game	*game;
@@ -50,6 +52,7 @@ int		main(int ac, char **av)
 	checker(game);
 	init_door(game);
 	init_enemy(game);
+	printf("TEST %c\n", game->map.arr[0][0]);
 	if (run_game(game) != 0)
 		return (1);
 	mlx_destroy_window(game->mlx, game->win);
