@@ -4,13 +4,7 @@
 #include "delta_time.h"
 #include "init_texture.h"
 #include "colision.h"
-
-typedef enum e_collision
-{
-	COL_NONE,
-	COL_WALL,
-	COL_ENEMY
-}	t_col;
+#include "enemy_death.h"
 
 void	handle_mouse(int button, int x, int y, void *param)
 {
@@ -46,54 +40,11 @@ void	shoot(t_game *game)
 	game->last_shoot_time = get_time();
 }
 
-void	entity_death(t_game *game, t_entity *entity, t_list *prev, t_list **cur)
-{
-	t_list	*tmp;
-	int	i;
-
-	i = 0;
-	while (i < 3)
-	{
-		if (entity->tex[i].img.img_ptr)
-			mlx_destroy_image(game->mlx, entity->tex[i].img.img_ptr);
-		i++;
-	}
-	if (prev == NULL)
-		game->entity_lst = (*cur)->next;
-	else
-		prev->next = (*cur)->next;
-	free(entity);
-	tmp = (*cur)->next;
-	free(*cur);
-	*cur = tmp;
-}
-
-t_col	projectile_colision(t_game *game, t_entity *projectile)
+t_col	projectile_enemy_col(t_game *game, double x, double y)
 {
 	t_list		*entity_lst;
 	t_entity	*entity;
-	double		x;
-	double		y;
-	t_door		*door;
 
-	x = projectile->pos_x;
-	y = projectile->pos_y;
-	if ((int)x < 0 || (int)y < 0
-		|| (int)x >= game->map.width || (int)y >= game->map.height)
-		return (COL_WALL);
-	if ((int)(x - ENEMY_RADIUS) < 0 || (int)(y - ENEMY_RADIUS) < 0
-		|| (int)(x + ENEMY_RADIUS) >= game->map.width
-		|| (int)(y + ENEMY_RADIUS) >= game->map.height)
-		return (COL_WALL);
-	// printf("x:%d, y:%d, x+rad:%d, y+rad:%d, x-rad:%d, y-rad:%d\n", (int)x, (int)y, (int)(x + PLAYER_RADIUS), (int)(y + PLAYER_RADIUS), (int)(x - PLAYER_RADIUS), (int)(y - PLAYER_RADIUS));
-	if (check_wall_radius(x, y, game))
-		return (COL_WALL);
-	if (game->map.arr[(int)y][(int)x] == 'D')
-	{
-		door = find_door((int)x, (int)y, game);
-		if (door == NULL || door->state != OPEN)
-			return (COL_WALL);
-	}
 	entity_lst = game->entity_lst;
 	while (entity_lst)
 	{
@@ -114,25 +65,30 @@ t_col	projectile_colision(t_game *game, t_entity *projectile)
 	return (COL_NONE);
 }
 
-void	free_dead_enemies(t_game *game)
+t_col	projectile_colision(t_game *game, t_entity *projectile)
 {
-	t_list		*entity_lst;
-	t_list		*tmp;
-	t_entity	*entity;
+	double		x;
+	double		y;
+	t_door		*door;
 
-	entity_lst = game->entity_lst;
-	tmp = NULL;
-	while (entity_lst)
+	x = projectile->pos_x;
+	y = projectile->pos_y;
+	if ((int)x < 0 || (int)y < 0
+		|| (int)x >= game->map.width || (int)y >= game->map.height)
+		return (COL_WALL);
+	if ((int)(x - ENEMY_RADIUS) < 0 || (int)(y - ENEMY_RADIUS) < 0
+		|| (int)(x + ENEMY_RADIUS) >= game->map.width
+		|| (int)(y + ENEMY_RADIUS) >= game->map.height)
+		return (COL_WALL);
+	if (check_wall_radius(x, y, game))
+		return (COL_WALL);
+	if (game->map.arr[(int)y][(int)x] == 'D')
 	{
-		entity = (t_entity *)entity_lst->content;
-		if (entity->state == 0)
-		{
-			entity_death(game, entity, tmp, &entity_lst);
-			continue ;
-		}
-		tmp = entity_lst;
-		entity_lst = entity_lst->next;
+		door = find_door((int)x, (int)y, game);
+		if (door == NULL || door->state != OPEN)
+			return (COL_WALL);
 	}
+	return (projectile_enemy_col(game, x, y));
 }
 
 void	projectile_update(t_game *game)

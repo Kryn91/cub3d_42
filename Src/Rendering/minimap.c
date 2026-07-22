@@ -20,18 +20,28 @@ void	minimap_pixel_pos(t_game *game, t_minimap_pixel *px)
 	px->map_y = game->player.pos_y - rot_offset_y / MINIMAP_TILE_SIZE;
 }
 
+int	minimap_render_player(t_game *game, t_img *image, t_minimap_pixel *px)
+{
+	if (px->map_x >= game->player.pos_x - 0.1
+		&& px->map_x <= game->player.pos_x + 0.1
+		&& px->map_y >= game->player.pos_y - 0.1
+		&& px->map_y <= game->player.pos_y + 0.1)
+	{
+		mlx_pixel_put_img
+			(image, MINIMAP_POS_X + px->x, MINIMAP_POS_Y + px->y, 0x0000FF);
+		return (1);
+	}
+	return (0);
+}
+
 void	minimap_pixel_render(t_game *game, t_img *image, t_minimap_pixel *px)
 {
 	if (px->map_y >= 0 && px->map_y < game->map.height && px->map_x >= 0
 		&& px->map_x < ft_strlen(game->map.arr[(int)px->map_y]))
 	{
-		if (px->map_x >= game->player.pos_x - 0.1
-			&& px->map_x <= game->player.pos_x + 0.1
-			&& px->map_y >= game->player.pos_y - 0.1
-			&& px->map_y <= game->player.pos_y + 0.1)
-			mlx_pixel_put_img
-				(image, MINIMAP_POS_X + px->x, MINIMAP_POS_Y + px->y, 0x0000FF);
-		else if (game->map.arr[(int)px->map_y][(int)px->map_x] == '1')
+		if (minimap_render_player(game, image, px))
+			return ;
+		if (game->map.arr[(int)px->map_y][(int)px->map_x] == '1')
 			mlx_pixel_put_img
 				(image, MINIMAP_POS_X + px->x, MINIMAP_POS_Y + px->y, 0x000000);
 		else if (game->map.arr[(int)px->map_y][(int)px->map_x] == 'D')

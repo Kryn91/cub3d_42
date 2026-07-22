@@ -3,36 +3,7 @@
 #include "raycasting.h"
 #include "delta_time.h"
 #include "draw.h"
-void	sort_entities(t_list **entity_lst)
-{
-	int			swap;
-	t_list		*cur;
-	t_entity	*entity1;
-	t_entity	*entity2;
-	t_entity	*tmp;
-
-	swap = 1;
-	if (!*entity_lst)
-		return ;
-	while (swap)
-	{
-		cur = *entity_lst;
-		swap = 0;
-		while (cur->next)
-		{
-			entity1 = (t_entity *)cur->content;
-			entity2 = (t_entity *)cur->next->content;
-			if (entity1->transform_y < entity2->transform_y)
-			{
-				tmp = entity1;
-				cur->content = entity2;
-				cur->next->content = tmp;
-				swap = 1;
-			}
-			cur = cur->next;
-		}
-	}
-}
+#include "entity_sort.h"
 
 void	entity_transform_calc(t_game *game)
 {
