@@ -1,11 +1,25 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   free_memory.h                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: apeterso <apeterso@student.42paris.fr>     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/07/22 15:54:30 by apeterso          #+#    #+#             */
+/*   Updated: 2026/07/22 15:54:35 by apeterso         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef FREE_MEMORY_H
 # define FREE_MEMORY_H
-# include "stdlib.h"
-# include "cub3d.h"
 
-void    free_tab(size_t size, char **tab);
-void    free_array(char **arr);
-void    free_map(t_game *game);
-void    free_split(char **str);
-void    free_texture(t_game *game);
+# include "cub3d.h"
+# include "stdlib.h"
+
+void	free_tab(size_t size, char **tab);
+void	free_array(char **arr);
+void	free_map(t_game *game);
+void	free_split(char **str);
+void	free_texture(t_game *game);
+
 #endif

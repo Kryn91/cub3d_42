@@ -1,7 +1,19 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   player.h                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: apeterso <apeterso@student.42paris.fr>     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/07/22 15:29:36 by apeterso          #+#    #+#             */
+/*   Updated: 2026/07/22 15:51:13 by apeterso         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef PLAYER_H
 # define PLAYER_H
 
-# include "bool.h"
+# include "boolean.h"
 
 typedef struct s_player
 {
@@ -15,16 +27,16 @@ typedef struct s_player
 	double	mouse_y;
 	double	rotation_angle;
 	double	hp;
-	bool	is_dead;
-}	t_player;
+	t_bool	is_dead;
+}			t_player;
 
 typedef struct s_input
 {
-	bool	A;
-	bool	D;
-	bool	W;
-	bool	S;
-	bool	E;
-}   t_input;
+	t_bool	a;
+	t_bool	d;
+	t_bool	w;
+	t_bool	s;
+	t_bool	e;
+}			t_input;
 
 #endif

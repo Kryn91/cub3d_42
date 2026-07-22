@@ -1,27 +1,39 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cub3d.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: apeterso <apeterso@student.42paris.fr>     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/07/22 15:45:01 by apeterso          #+#    #+#             */
+/*   Updated: 2026/07/22 15:45:18 by apeterso         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef CUB3D_H
 # define CUB3D_H
 
-# include "bool.h"
-# include "libft.h"
-# include "player.h"
-# include "entity.h"
+# include "boolean.h"
 # include "door.h"
-# include "render.h"
-# include "map.h"
+# include "entity.h"
 # include "hand.h"
+# include "libft.h"
+# include "map.h"
+# include "player.h"
+# include "render.h"
 # include "spell.h"
 
 typedef struct s_fps
 {
-	double	last_frame;
-	double	cap;
-}	t_fps;
+	double		last_frame;
+	double		cap;
+}				t_fps;
 
 typedef struct s_time
 {
-	double	last_time;
-	double	delta_time;
-}	t_time;
+	double		last_time;
+	double		delta_time;
+}				t_time;
 
 typedef struct s_game
 {
@@ -42,8 +54,8 @@ typedef struct s_game
 	t_hand		hand;
 	t_spell		spell;
 	double		last_shoot_time;
-}	t_game;
+}				t_game;
 
-void	parsing(int ac, char **av, t_game *game);
+void			parsing(int ac, char **av, t_game *game);
 
 #endif

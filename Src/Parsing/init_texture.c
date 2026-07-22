@@ -1,21 +1,34 @@
-#include "init_texture.h"
-#include "bool.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   init_texture.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: apeterso <apeterso@student.42paris.fr>     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/07/22 15:46:30 by apeterso          #+#    #+#             */
+/*   Updated: 2026/07/22 15:46:31 by apeterso         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "boolean.h"
 #include "entity.h"
+#include "init_texture.h"
 #include "mlx.h"
 
 void	init_tex(t_game *game, t_texture *tex, char *path)
 {
 	tex->path = path;
-	tex->img.img_ptr = mlx_xpm_file_to_image
-		(game->mlx, path, &tex->width, &tex->height);
+	tex->img.img_ptr = mlx_xpm_file_to_image(game->mlx, path, &tex->width,
+			&tex->height);
 	tex->img.addr = mlx_get_data_addr(tex->img.img_ptr, &tex->img.bpp,
 			&tex->img.size_line, &tex->img.endian);
 }
 
-bool	init_enemy_tex(t_game *game, t_list *enemy)
+t_bool	init_enemy_tex(t_game *game, t_list *enemy)
 {
-	t_list *temp;
-	t_entity *entity;
+	t_list		*temp;
+	t_entity	*entity;
+
 	temp = enemy;
 	while (temp)
 	{
@@ -27,7 +40,7 @@ bool	init_enemy_tex(t_game *game, t_list *enemy)
 		}
 		temp = temp->next;
 	}
-	return (true);
+	return (TRUE);
 }
 
 void	init_texture(t_game *game)

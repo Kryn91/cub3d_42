@@ -1,19 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_player.h                                      :+:      :+:    :+:   */
+/*   boolean.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: apeterso <apeterso@student.42paris.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/07/22 15:37:51 by apeterso          #+#    #+#             */
-/*   Updated: 2026/07/22 15:37:54 by apeterso         ###   ########.fr       */
+/*   Created: 2026/07/22 15:31:52 by apeterso          #+#    #+#             */
+/*   Updated: 2026/07/22 15:32:47 by apeterso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef INIT_PLAYER_H
-# define INIT_PLAYER_H
-# include "cub3d.h"
+#ifndef BOOLEAN_H
+# define BOOLEAN_H
 
-void	init_player(t_game *game);
+typedef enum e_bool
+{
+	FALSE,
+	TRUE
+}	t_bool;
 
 #endif

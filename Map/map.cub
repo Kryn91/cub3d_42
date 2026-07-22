@@ -1,9 +1,10 @@
 NO ./Assets/Wall/tex_brick.xpm
-SO ./Assets/Wall/tex_checker.xpm
-WE ./Assets/Wall/tex_noise.xpm
+       SO ./Assets/Wall/tex_checker.xpm
+ WE ./Assets/Wall/tex_noise.xpm
 EA ./Assets/Wall/tex_stripes.xpm
 F 220,100,0
 C 225,30,0
+
 1111111111111111111111111
 1000000000110000000000001
 1011000001110000000000001

@@ -1,39 +1,62 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   texture_parser.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: apeterso <apeterso@student.42paris.fr>     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/07/22 15:46:35 by apeterso          #+#    #+#             */
+/*   Updated: 2026/07/22 16:59:40 by apeterso         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "get_next_line.h"
 #include "libft.h"
 #include "texture_parser.h"
-#include "get_next_line.h"
 
-e_type get_type(char *line)
+t_type	get_type(char *line)
 {
-    if (ft_strncmp(line, "NO ", 3) == 0)
-        return NO;
-    if (ft_strncmp(line, "SO ", 3) == 0)
-        return SO;
-    if (ft_strncmp(line, "WE ", 3) == 0)
-        return WE;
-    if (ft_strncmp(line, "EA ", 3) == 0)
-        return EA;
-    if (ft_strncmp(line, "F ", 2) == 0)
-        return F;
-    if (ft_strncmp(line, "C ", 2) == 0)
-        return C;
-    return -1;
+	int	i;
+
+	i = 0;
+	while (line[i] == ' ' || line[i] == '\t')
+		i++;
+	if (ft_strncmp(line + i, "NO ", 3) == 0)
+		return (NO);
+	if (ft_strncmp(line + i, "SO ", 3) == 0)
+		return (SO);
+	if (ft_strncmp(line + i, "WE ", 3) == 0)
+		return (WE);
+	if (ft_strncmp(line + i, "EA ", 3) == 0)
+		return (EA);
+	if (ft_strncmp(line + i, "F ", 2) == 0)
+		return (F);
+	if (ft_strncmp(line + i, "C ", 2) == 0)
+		return (C);
+	return (-1);
 }
+#include <stdio.h>
 
-bool	is_texture(char *line)
+t_bool	is_texture(char *line)
 {
-	if (ft_strncmp(line, "NO ", 3) == 0)
-        return (true);
-	else if (ft_strncmp(line, "SO ", 3) == 0)
-        return (true);
-	else if (ft_strncmp(line, "WE ", 3) == 0)
-        return (true);
-	else if (ft_strncmp(line, "EA ", 3) == 0)
-        return (true);
-	else if (ft_strncmp(line, "F ", 2) == 0)
-		return (true);
-	else if (ft_strncmp(line, "C ", 2) == 0)
-		return (true);
-	return (false);
+	int	i;
+
+	i = 0;
+	while (line[i] == ' ' || line[i] == '\t')
+		i++;
+	if (ft_strncmp(line + i, "NO ", 3) == 0)
+		return (TRUE);
+	else if (ft_strncmp(line + i, "SO ", 3) == 0)
+		return (TRUE);
+	else if (ft_strncmp(line + i, "WE ", 3) == 0)
+		return (TRUE);
+	else if (ft_strncmp(line + i, "EA ", 3) == 0)
+		return (TRUE);
+	else if (ft_strncmp(line + i, "F ", 2) == 0)
+		return (TRUE);
+	else if (ft_strncmp(line + i, "C ", 2) == 0)
+		return (TRUE);
+	return (FALSE);
 }
 
 char	*get_value(char *str)
@@ -42,10 +65,12 @@ char	*get_value(char *str)
 
 	i = 0;
 	if (!str)
-		return NULL;
+		return (NULL);
+	while (str[i] == ' ' || str[i] == '\t')
+		i++;
 	while (str[i] && str[i] != ' ')
 		i++;
-	while (str[i] == ' '|| str[i] == '\t')
+	while (str[i] == ' ' || str[i] == '\t')
 		i++;
 	return (str + i);
 }
@@ -53,7 +78,7 @@ char	*get_value(char *str)
 void	handle_texture(char *line_read, t_game *game)
 {
 	char	*value;
-	e_type	type;
+	t_type	type;
 
 	type = get_type(line_read);
 	if (type == NO || type == SO || type == WE || type == EA)

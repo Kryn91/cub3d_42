@@ -1,15 +1,27 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   attack.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: apeterso <apeterso@student.42paris.fr>     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/07/22 15:24:33 by apeterso          #+#    #+#             */
+/*   Updated: 2026/07/22 15:24:34 by apeterso         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "attack.h"
-#include "door.h"
-#include "mlx.h"
-#include "delta_time.h"
-#include "init_texture.h"
 #include "colision.h"
+#include "delta_time.h"
+#include "door.h"
 #include "enemy_death.h"
+#include "init_texture.h"
+#include "mlx.h"
 
 void	handle_mouse(int button, int x, int y, void *param)
 {
-	(void) x;
-	(void) y;
+	(void)x;
+	(void)y;
 	if (button == 1)
 		shoot((t_game *)param);
 }
@@ -49,11 +61,11 @@ t_col	projectile_enemy_col(t_game *game, double x, double y)
 	while (entity_lst)
 	{
 		entity = (t_entity *)entity_lst->content;
-		if (entity->type == ENEMY
-			&& x >= entity->pos_x - entity->spec.e_data.hit_radius
-			&& x <= entity->pos_x + entity->spec.e_data.hit_radius
-			&& y >= entity->pos_y - entity->spec.e_data.hit_radius
-			&& y <= entity->pos_y + entity->spec.e_data.hit_radius)
+		if (entity->type == ENEMY && x >= entity->pos_x
+			- entity->spec.e_data.hit_radius && x <= entity->pos_x
+			+ entity->spec.e_data.hit_radius && y >= entity->pos_y
+			- entity->spec.e_data.hit_radius && y <= entity->pos_y
+			+ entity->spec.e_data.hit_radius)
 		{
 			entity->spec.e_data.hp -= 25;
 			if (entity->spec.e_data.hp <= 0)
@@ -67,18 +79,18 @@ t_col	projectile_enemy_col(t_game *game, double x, double y)
 
 t_col	projectile_colision(t_game *game, t_entity *projectile)
 {
-	double		x;
-	double		y;
-	t_door		*door;
+	double	x;
+	double	y;
+	t_door	*door;
 
 	x = projectile->pos_x;
 	y = projectile->pos_y;
-	if ((int)x < 0 || (int)y < 0
-		|| (int)x >= game->map.width || (int)y >= game->map.height)
+	if ((int)x < 0 || (int)y < 0 || (int)x >= game->map.width
+		|| (int)y >= game->map.height)
 		return (COL_WALL);
-	if ((int)(x - ENEMY_RADIUS) < 0 || (int)(y - ENEMY_RADIUS) < 0
-		|| (int)(x + ENEMY_RADIUS) >= game->map.width
-		|| (int)(y + ENEMY_RADIUS) >= game->map.height)
+	if ((int)(x - ENEMY_RADIUS) < 0 || (int)(y - ENEMY_RADIUS) < 0 || (int)(x
+			+ ENEMY_RADIUS) >= game->map.width || (int)(y
+			+ ENEMY_RADIUS) >= game->map.height)
 		return (COL_WALL);
 	if (check_wall_radius(x, y, game))
 		return (COL_WALL);

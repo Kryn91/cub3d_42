@@ -1,19 +1,30 @@
-#include "libft.h"
-#include "cub3d.h"
-#include "handle_input.h"
-#include "free_memory.h"
-#include "free_list.h"
-#include "mlx.h"
-#include "init_player.h"
-#include "checker.h"
-#include "game_loop.h"
-#include "init_door.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: apeterso <apeterso@student.42paris.fr>     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/07/22 15:47:10 by apeterso          #+#    #+#             */
+/*   Updated: 2026/07/22 15:47:45 by apeterso         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "attack.h"
+#include "checker.h"
+#include "cub3d.h"
+#include "free_list.h"
+#include "free_memory.h"
+#include "game_loop.h"
+#include "handle_input.h"
+#include "init_door.h"
 #include "init_enemy.h"
+#include "init_player.h"
 #include "init_texture.h"
+#include "libft.h"
+#include "mlx.h"
 
 int		render(t_game *game);
-void	init(t_game *game);
 
 int	run_game(t_game *game)
 {
@@ -31,9 +42,17 @@ int	run_game(t_game *game)
 	return (0);
 }
 
-#include <stdio.h>
+void	init_game_data(t_game *game)
+{
+	game->fps.cap = 60;
+	game->hand.frame = 0;
+	game->spell.frame = 0;
+	game->spell.last_frame_time = 0;
+	game->last_shoot_time = -100;
+	game->hand.prepared = 0;
+}
 
-int		main(int ac, char **av)
+int	main(int ac, char **av)
 {
 	t_game	*game;
 
@@ -43,16 +62,10 @@ int		main(int ac, char **av)
 	ft_memset(game, 0, sizeof(t_game));
 	parsing(ac, av, game);
 	init_player(game);
-	game->fps.cap = 60;
-	game->hand.frame = 0;
-	game->spell.frame = 0;
-	game->spell.last_frame_time = 0;
-	game->last_shoot_time = -100;
-	game->hand.prepared = 0;
+	init_game_data(game);
 	checker(game);
 	init_door(game);
 	init_enemy(game);
-	printf("TEST %c\n", game->map.arr[0][0]);
 	if (run_game(game) != 0)
 		return (1);
 	mlx_destroy_window(game->mlx, game->win);

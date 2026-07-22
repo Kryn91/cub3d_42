@@ -1,18 +1,31 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   handle_input.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: apeterso <apeterso@student.42paris.fr>     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/07/22 15:46:10 by apeterso          #+#    #+#             */
+/*   Updated: 2026/07/22 15:46:11 by apeterso         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "free_list.h"
+#include "free_memory.h"
 #include "handle_input.h"
 #include "init_texture.h"
+#include "key.h"
 #include "libft.h"
+#include "mlx.h"
 #include "movement.h"
 #include "render.h"
 #include "stdlib.h"
-#include <math.h>
-#include "free_memory.h"
-#include "free_list.h"
-#include "mlx.h"
 #include "vector_manipulation.h"
+#include <math.h>
 
 void	close_win(t_game *game)
 {
-	free_texture(game);	
+	free_texture(game);
 	mlx_destroy_window(game->mlx, game->win);
 	mlx_destroy_display(game->mlx);
 	ft_lstclear(&game->entity_lst, free_entity);
@@ -42,57 +55,18 @@ void	rotate_player(t_game *game, double angle)
 	game->player.rotation_angle += angle;
 }
 
-void	handle_arrow(int keycode, t_game *game)
+void	handle_mouse_input(int x, int y, t_game *game)
 {
-	if (keycode == KEY_RIGHT)
-		rotate_player(game, 0.10);
-	if (keycode == KEY_LEFT)
-		rotate_player(game, -0.10);
-}
+	int	center_x;
+	int	center_y;
+	int	delta;
 
-void	key_press(int keycode, t_game *game)
-{
-	handle_arrow(keycode, game);
-	if (keycode == KEY_A)
-		game->input.A = true;
-	if (keycode == KEY_D)
-		game->input.D = true;
-	if (keycode == KEY_S)
-		game->input.S = true;
-	if (keycode == KEY_W)
-		game->input.W = true;
-	if (keycode == KEY_E)
-		game->input.E = true;
-	else if (keycode == KEY_ESC)
-		close_win(game);
-}
-
-void	key_release(int keycode, t_game *game)
-{
-	if (keycode == KEY_A)
-		game->input.A = false;
-	if (keycode == KEY_D)
-		game->input.D = false;
-	if (keycode == KEY_S)
-		game->input.S = false;
-	if (keycode == KEY_W)
-		game->input.W = false;
-	if (keycode == KEY_E)
-		game->input.E = false;
-}
-
-void handle_mouse_input(int x, int y, t_game *game)
-{
-    int center_x = SCREEN_WIDTH / 2;
-    int center_y = SCREEN_HEIGHT / 2;
-
-    int delta = x - game->player.mouse_x;
-    game->player.mouse_x = x;
-
-    if (x == center_x && y == center_y)
-        return;
-
-    rotate_player(game, delta * MOUSE_SENSIBILITY);
-
-    mlx_mouse_move(game->mlx, game->win, center_x, center_y);
+	center_x = SCREEN_WIDTH / 2;
+	center_y = SCREEN_HEIGHT / 2;
+	delta = x - game->player.mouse_x;
+	game->player.mouse_x = x;
+	if (x == center_x && y == center_y)
+		return ;
+	rotate_player(game, delta * MOUSE_SENSIBILITY);
+	mlx_mouse_move(game->mlx, game->win, center_x, center_y);
 }

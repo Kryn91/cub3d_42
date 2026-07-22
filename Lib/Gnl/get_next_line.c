@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kealves- <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: apeterso <apeterso@student.42paris.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/27 11:13:27 by kealves-          #+#    #+#             */
-/*   Updated: 2026/02/02 15:34:41 by kealves-         ###   ########.fr       */
+/*   Updated: 2026/07/22 16:03:50 by apeterso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ void	extract_line(t_slist *stash, char **line)
 		{
 			if (stash->content[i] == '\n')
 			{
-			(*line)[j++] = stash->content[i];
+				(*line)[j++] = stash->content[i];
 				break ;
 			}
 			(*line)[j++] = stash->content[i++];

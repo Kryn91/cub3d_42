@@ -58,6 +58,7 @@ SRCS :=	main.c							\
 		Movement/movement.c				\
 		Movement/interact.c				\
 		Movement/colision.c 			\
+		Movement/key.c					\
 		Game/game_loop.c				\
 		Game/door.c						\
 		Game/attack.c					\

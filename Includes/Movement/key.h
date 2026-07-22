@@ -1,19 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_player.h                                      :+:      :+:    :+:   */
+/*   key.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: apeterso <apeterso@student.42paris.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/07/22 15:37:51 by apeterso          #+#    #+#             */
-/*   Updated: 2026/07/22 15:37:54 by apeterso         ###   ########.fr       */
+/*   Created: 2026/07/22 15:36:05 by apeterso          #+#    #+#             */
+/*   Updated: 2026/07/22 15:36:07 by apeterso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef INIT_PLAYER_H
-# define INIT_PLAYER_H
+#ifndef KEY_H
+# define KEY_H
+
 # include "cub3d.h"
 
-void	init_player(t_game *game);
+void	handle_arrow(int keycode, t_game *game);
+void	key_press(int keycode, t_game *game);
+void	key_release(int keycode, t_game *game);
+void	rotate_player(t_game *game, double angle);
 
 #endif

@@ -1,10 +1,10 @@
-#include "libft.h"
-#include "get_next_line.h"
 #include "cub3d.h"
-#include <stdio.h>
+#include "free_memory.h"
+#include "get_next_line.h"
+#include "libft.h"
 #include "read_map_file.h"
 #include "texture_parser.h"
-#include "free_memory.h"
+#include <stdio.h>
 
 int	open_file(char *map)
 {
@@ -18,7 +18,6 @@ int	open_file(char *map)
 	}
 	return (fd);
 }
-#include <stdio.h>
 
 char	**add_map_line(char **map, char *line)
 {
@@ -35,7 +34,6 @@ char	**add_map_line(char **map, char *line)
 	i = 0;
 	while (map && map[i])
 	{
-		printf("%s\n", map[i]);
 		new_map[i] = map[i];
 		i++;
 	}
@@ -47,18 +45,18 @@ char	**add_map_line(char **map, char *line)
 	return (new_map);
 }
 
-bool	is_valid_line(char *line)
+t_bool	is_valid_line(char *line)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (line[i])
 	{
 		if (line[i] == '1' || line[i] == '0')
-			return (true);
+			return (TRUE);
 		i++;
 	}
-	return (false);
+	return (FALSE);
 }
 
 void	parse_map(char *map, t_game *game)
@@ -73,9 +71,9 @@ void	parse_map(char *map, t_game *game)
 	while (line_read != NULL)
 	{
 		if (is_texture(line_read))
-    		handle_texture(line_read, game);
+			handle_texture(line_read, game);
 		else if (is_valid_line(line_read))
-    		game->map.arr = add_map_line(game->map.arr, line_read);
+			game->map.arr = add_map_line(game->map.arr, line_read);
 		free(line_read);
 		line_read = get_next_line(fd);
 	}

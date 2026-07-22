@@ -1,17 +1,30 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   texture_parser.h                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: apeterso <apeterso@student.42paris.fr>     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/07/22 15:38:07 by apeterso          #+#    #+#             */
+/*   Updated: 2026/07/22 16:55:19 by apeterso         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef TEXTURE_PARSER_H
 # define TEXTURE_PARSER_H
 # include "cub3d.h"
 
-typedef enum    e_type
+typedef enum e_type
 {
-    NO,
-    SO,
-    WE,
-    EA,
-    C,
-    F
-}   e_type;
+	NO,
+	SO,
+	WE,
+	EA,
+	C,
+	F
+}		t_type;
 
 void	handle_texture(char *line_read, t_game *game);
-bool	is_texture(char *line);
+t_bool	is_texture(char *line);
+
 #endif
