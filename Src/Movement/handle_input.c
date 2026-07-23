@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_input.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apeterso <apeterso@student.42paris.fr>     +#+  +:+       +#+        */
+/*   By: kealves- <kealves-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/22 15:46:10 by apeterso          #+#    #+#             */
-/*   Updated: 2026/07/22 15:46:11 by apeterso         ###   ########.fr       */
+/*   Updated: 2026/07/23 21:05:31 by kealves-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ void	close_win(t_game *game)
 	free_map(game);
 	free_door(game->door);
 	free(game->mlx);
+	free(game);
 	exit(0);
 }
 

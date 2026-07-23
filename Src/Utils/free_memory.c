@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_memory.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apeterso <apeterso@student.42paris.fr>     +#+  +:+       +#+        */
+/*   By: kealves- <kealves-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/22 15:47:28 by apeterso          #+#    #+#             */
-/*   Updated: 2026/07/22 15:47:34 by apeterso         ###   ########.fr       */
+/*   Updated: 2026/07/23 21:00:21 by kealves-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,8 @@ void	free_split(char **str)
 	free(str);
 }
 
-void	free_texture(t_game *game)
+
+void    free_texture(t_game *game)
 {
 	mlx_destroy_image(game->mlx, game->map.walls[0].img.img_ptr);
 	mlx_destroy_image(game->mlx, game->map.walls[1].img.img_ptr);
@@ -67,6 +68,12 @@ void	free_texture(t_game *game)
 	destroy_entity_images(game);
 	mlx_destroy_image(game->mlx, game->hand.tex[0].img.img_ptr);
 	mlx_destroy_image(game->mlx, game->hand.tex[1].img.img_ptr);
+	if (game->spell.tex[0].img.img_ptr)
+		mlx_destroy_image(game->mlx, game->spell.tex[0].img.img_ptr);
+	if (game->spell.tex[1].img.img_ptr)
+		mlx_destroy_image(game->mlx, game->spell.tex[1].img.img_ptr);
+	if (game->spell.tex[2].img.img_ptr)
+		mlx_destroy_image(game->mlx, game->spell.tex[2].img.img_ptr);
 }
 
 void	free_map(t_game *game)
