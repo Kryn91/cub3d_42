@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apeterso <apeterso@student.42paris.fr>     +#+  +:+       +#+        */
+/*   By: kealves- <kealves-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/22 15:46:31 by apeterso          #+#    #+#             */
-/*   Updated: 2026/07/22 15:46:33 by apeterso         ###   ########.fr       */
+/*   Updated: 2026/07/23 21:09:32 by kealves-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,12 +36,15 @@ t_bool	check_cub(char *av)
 	return (TRUE);
 }
 
-t_bool	check_valid_arg(int ac, char **av)
+t_bool	check_valid_arg(int ac, char **av, t_game *game)
 {
 	if (ac != 2 || av[1][0] == '\0')
 		return (FALSE);
 	if (check_cub(av[1]) == FALSE)
+	{
+		free(game);
 		exit(1);
+	}
 	return (TRUE);
 }
 
@@ -66,7 +69,7 @@ void	init_map_size(t_map *map)
 
 void	parsing(int ac, char **av, t_game *game)
 {
-	if (check_valid_arg(ac, av) == FALSE)
+	if (check_valid_arg(ac, av, game) == FALSE)
 		exit(1);
 	parse_map(av[1], game);
 	init_map_size(&game->map);
