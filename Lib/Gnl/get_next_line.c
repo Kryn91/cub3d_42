@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apeterso <apeterso@student.42paris.fr>     +#+  +:+       +#+        */
+/*   By: kealves- <kealves-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/27 11:13:27 by kealves-          #+#    #+#             */
-/*   Updated: 2026/07/22 16:03:50 by apeterso         ###   ########.fr       */
+/*   Updated: 2026/07/23 19:59:21 by kealves-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,9 +97,9 @@ void	clean_stash(t_slist **stash)
 
 	i = 0;
 	j = 0;
-	clean_node = malloc(sizeof(t_slist));
 	if (stash == NULL || *stash == NULL)
 		return ;
+	clean_node = malloc(sizeof(t_slist));
 	clean_node->next = NULL;
 	current = lst_get_last(*stash);
 	while (current->content[i] && current->content[i] != '\n')

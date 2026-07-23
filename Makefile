@@ -36,6 +36,7 @@ SRCS :=	main.c							\
 		Parsing/init_door.c 			\
 		Parsing/init_enemy.c			\
 		Parsing/init_texture.c			\
+		Parsing/check_map.c 			\
 		Checker/checker.c 				\
 		Checker/map_checker.c			\
 		Checker/map_solver.c			\
