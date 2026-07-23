@@ -11,6 +11,8 @@ LIB_DIR := Lib
 LIBFT_DIR := $(LIB_DIR)/libft
 MLX_DIR := $(LIB_DIR)/Mlx
 GNL_DIR := $(LIB_DIR)/Gnl
+
+# Includes
 INC_PARSING := $(INC_DIR)/Parsing
 INC_MOVEMENT := $(INC_DIR)/Movement
 INC_CHECKER := $(INC_DIR)/Checker
@@ -18,12 +20,9 @@ INC_GAME := $(INC_DIR)/Game
 INC_RENDER := $(INC_DIR)/Rendering
 INC_UTILS := $(INC_DIR)/Utils
 
-# MLX
-MLX_URL := https://github.com/42paris/minilibx-linux.git
-MLX_BRANCH := fedora
 
 # ============================================================
-#  Src Files
+# Src Files
 # ============================================================
 
 SRCS :=	main.c							\
@@ -33,10 +32,10 @@ SRCS :=	main.c							\
 		Parsing/texture_parsing.c		\
 		Parsing/color_parser.c			\
 		Parsing/init_player.c			\
-		Parsing/init_door.c 			\
+		Parsing/init_door.c 				\
 		Parsing/init_enemy.c			\
 		Parsing/init_texture.c			\
-		Parsing/check_map.c 			\
+		Parsing/check_map.c 				\
 		Checker/checker.c 				\
 		Checker/map_checker.c			\
 		Checker/map_solver.c			\
@@ -58,7 +57,7 @@ SRCS :=	main.c							\
 		Movement/handle_input.c			\
 		Movement/movement.c				\
 		Movement/interact.c				\
-		Movement/colision.c 			\
+		Movement/colision.c 				\
 		Movement/key.c					\
 		Game/game_loop.c				\
 		Game/door.c						\
@@ -71,53 +70,96 @@ SRCS :=	main.c							\
 		Game/enemy_attack_player.c		\
 		Game/enemy_death.c
 
+
+# ============================================================
+# GNL
+# ============================================================
+
+GNL_SRCS := $(GNL_DIR)/get_next_line.c \
+			$(GNL_DIR)/get_next_line_utils.c
+
+
+# ============================================================
+# Objects
+# ============================================================
+
+OBJS := $(addprefix $(OBJ_DIR)/, $(SRCS:.c=.o))
+
+GNL_OBJS := $(GNL_SRCS:.c=.o)
+
+
+# ============================================================
+# Libraries
+# ============================================================
+
 LIBFT := $(LIBFT_DIR)/libft.a
 
-GNL :=	$(GNL_DIR)/get_next_line.c		\
-		$(GNL_DIR)/get_next_line_utils.c
+
+# ============================================================
+# Includes flags
+# ============================================================
+
+IFLAGS := -I$(INC_DIR) \
+		  -I$(LIB_DIR) \
+		  -I$(LIBFT_DIR) \
+		  -I$(INC_PARSING) \
+		  -I$(INC_CHECKER) \
+		  -I$(INC_MOVEMENT) \
+		  -I$(INC_UTILS) \
+		  -I$(INC_GAME) \
+		  -I$(INC_RENDER) \
+		  -I$(GNL_DIR) \
+		  -I$(MLX_DIR)
 
 
 # ============================================================
-#  Generate complete Path
-# ============================================================
-
-OBJS    := $(addprefix $(OBJ_DIR)/, $(SRCS:.c=.o))
-IFLAGS  := -I$(INC_DIR) -I$(LIB_DIR) -I$(LIBFT_DIR) -I$(INC_PARSING) -I$(INC_CHECKER) -I$(INC_MOVEMENT) \
--I$(INC_UTILS) -I$(INC_GAME) -I$(INC_RENDER) -I$(GNL_DIR) -I$(MLX_DIR)
-
-# ============================================================
-#  Rules
+# Rules
 # ============================================================
 
 all: libs mlx $(NAME)
 
-mlx :
+
+mlx:
 	@if [ ! -d "$(MLX_DIR)/.git" ]; then \
-		git clone --branch $(MLX_BRANCH) $(MLX_URL) $(MLX_DIR); \
+		git clone --branch fedora https://github.com/42paris/minilibx-linux.git $(MLX_DIR); \
 		$(MAKE) -C $(MLX_DIR); \
 	fi
+
 
 libs:
 	$(MAKE) bonus -C $(LIBFT_DIR) -j
 
-$(NAME): $(OBJS)
-	$(CC) $(CFLAGS) $(OBJS) $(LIBFT) $(GNL) -L$(MLX_DIR) $(MLX_FLAG) -o $(NAME)
+
+$(NAME): $(OBJS) $(GNL_OBJS)
+	$(CC) $(CFLAGS) $(OBJS) $(GNL_OBJS) $(LIBFT) \
+	-L$(MLX_DIR) $(MLX_FLAG) -o $(NAME)
+
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 	@mkdir -p $(dir $@)
 	$(CC) $(CFLAGS) -MMD $(IFLAGS) -c $< -o $@
 
+
+$(GNL_DIR)/%.o: $(GNL_DIR)/%.c
+	$(CC) $(CFLAGS) -MMD $(IFLAGS) -c $< -o $@
+
+
 clean:
 	rm -rf $(OBJ_DIR)
-	$(MAKE) clean -C $(LIBFT_DIR) -j
-	rm -rf $(MLX_DIR)
+	rm -f $(GNL_OBJS)
+	$(MAKE) clean -C $(LIBFT_DIR)
+
 
 fclean: clean
 	rm -f $(NAME)
 	$(MAKE) fclean -C $(LIBFT_DIR)
 
--include $(OBJS:.o=.d)
 
 re: fclean all
 
-.PHONY: all clean fclean re libs
+
+-include $(OBJS:.o=.d)
+-include $(GNL_OBJS:.o=.d)
+
+
+.PHONY: all clean fclean re libs mlx

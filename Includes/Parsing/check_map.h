@@ -4,5 +4,6 @@
 
 t_bool is_map_line(char *line);
 t_bool is_empty_line(char *line);
+void    finish_gnl(int fd);
 
 #endif

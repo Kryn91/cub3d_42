@@ -1,4 +1,6 @@
 # include "boolean.h"
+#include "get_next_line.h"
+#include "check_map.h"
 
 t_bool is_map_line(char *line)
 {
@@ -25,4 +27,16 @@ t_bool is_empty_line(char *line)
         i++;
     }
     return (TRUE);
+}
+
+void    finish_gnl(int fd)
+{
+    char *line_read;
+
+    line_read = get_next_line(fd);
+    while (line_read != NULL)
+    {
+        free(line_read);
+        line_read = get_next_line(fd);
+    }
 }

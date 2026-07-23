@@ -47,13 +47,13 @@ char	**add_map_line(char **map, char *line)
 	return (new_map);
 }
 
-void	parse_map_line(char *line, t_game *game,
+int	parse_map_line(char *line, t_game *game,
 		t_bool *in_map, t_bool *map_finished)
 {
 	if (*in_map == FALSE)
 	{
 		if (is_empty_line(line))
-        return ;
+        return (0);
 		if (is_texture(line))
 			handle_texture(line, game);
 		if (is_map_line(line))
@@ -68,13 +68,12 @@ void	parse_map_line(char *line, t_game *game,
 			if (*map_finished)
 			{
 				printf("Error: empty line inside or after the map\n");
-				free_map(game);
-				free(game);
-				exit(EXIT_FAILURE);
+				return (1);
 			}
 			game->map.arr = add_map_line(game->map.arr, line);
 		}
 	}
+	return (0);
 }
 
 void	parse_map(char *map, t_game *game)
@@ -92,7 +91,14 @@ void	parse_map(char *map, t_game *game)
 	line = get_next_line(fd);
 	while (line)
 	{
-		parse_map_line(line, game, &in_map, &map_finished);
+		if (parse_map_line(line, game, &in_map, &map_finished) == 1)
+		{
+			free(line);
+			finish_gnl(fd);
+			free_map(game);
+			free(game);
+			exit(1);
+		}
 		free(line);
 		line = get_next_line(fd);
 	}
