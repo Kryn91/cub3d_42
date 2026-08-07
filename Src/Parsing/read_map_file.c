@@ -1,4 +1,17 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   read_map_file.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: kealves- <kealves-@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/07/24 13:24:19 by kealves-          #+#    #+#             */
+/*   Updated: 2026/07/24 15:05:36 by kealves-         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "boolean.h"
+#include "check_map.h"
 #include "cub3d.h"
 #include "free_memory.h"
 #include "get_next_line.h"
@@ -6,7 +19,6 @@
 #include "read_map_file.h"
 #include "texture_parser.h"
 #include <stdio.h>
-#include "check_map.h"
 
 int	open_file(char *map)
 {
@@ -47,15 +59,15 @@ char	**add_map_line(char **map, char *line)
 	return (new_map);
 }
 
-int	parse_map_line(char *line, t_game *game,
-		t_bool *in_map, t_bool *map_finished)
+int	parse_map_line(char *line, t_game *game, t_bool *in_map,
+		t_bool *map_finished)
 {
 	if (*in_map == FALSE)
 	{
 		if (is_empty_line(line))
-        return (0);
-		if (is_texture(line))
-			handle_texture(line, game);
+			return (0);
+		if (is_texture(line) && handle_texture(line, game) == FALSE)
+			return (1);
 		if (is_map_line(line))
 			*in_map = TRUE;
 	}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   texture_parser.h                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apeterso <apeterso@student.42paris.fr>     +#+  +:+       +#+        */
+/*   By: kealves- <kealves-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/22 15:38:07 by apeterso          #+#    #+#             */
-/*   Updated: 2026/07/22 16:55:19 by apeterso         ###   ########.fr       */
+/*   Updated: 2026/07/24 14:30:11 by kealves-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ typedef enum e_type
 	F
 }		t_type;
 
-void	handle_texture(char *line_read, t_game *game);
+t_bool	handle_texture(char *line_read, t_game *game);
 t_bool	is_texture(char *line);
 
 #endif

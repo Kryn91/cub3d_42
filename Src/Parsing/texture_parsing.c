@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   texture_parsing.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apeterso <apeterso@student.42paris.fr>     +#+  +:+       +#+        */
+/*   By: kealves- <kealves-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/22 15:46:37 by apeterso          #+#    #+#             */
-/*   Updated: 2026/07/22 15:46:38 by apeterso         ###   ########.fr       */
+/*   Updated: 2026/07/24 14:54:05 by kealves-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,11 +42,11 @@ void	init_and_check_texture(t_game *game)
 		game->map.walls[2].path, game->map.walls[3].path, game->map.floor_parse,
 		game->map.ceiling_parse);
 	if (check_xpm(game->map.walls[0].path) == FALSE)
-		return (free_map(game), exit(2));
+		return (free_map(game), free(game), exit(2));
 	if (check_xpm(game->map.walls[1].path) == FALSE)
-		return (free_map(game), exit(2));
+		return (free_map(game), free(game), exit(2));
 	if (check_xpm(game->map.walls[2].path) == FALSE)
-		return (free_map(game), exit(2));
+		return (free_map(game), free(game), exit(2));
 	if (check_xpm(game->map.walls[3].path) == FALSE)
-		return (free_map(game), exit(2));
+		return (free_map(game), free(game), exit(2));
 }

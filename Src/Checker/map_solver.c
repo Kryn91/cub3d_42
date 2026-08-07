@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_solver.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apeterso <apeterso@student.42paris.fr>     +#+  +:+       +#+        */
+/*   By: kealves- <kealves-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/22 15:23:55 by apeterso          #+#    #+#             */
-/*   Updated: 2026/07/22 16:02:55 by apeterso         ###   ########.fr       */
+/*   Updated: 2026/07/24 14:26:21 by kealves-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,8 @@ t_bool	flood_fill(char **map, t_start start, int width, int heigth)
 	{
 		p = stack_pop(&stack);
 		if (p.x < 0 || p.y < 0 || p.y >= heigth || p.x >= width)
-			return (printf("Error\nNot a valid Map\n"), FALSE);
+			return (printf("Error\nNot a valid Map\n"), free(stack.data),
+				FALSE);
 		c = map[p.y][p.x];
 		if (c == '1' || c == 'X')
 			continue ;

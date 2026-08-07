@@ -6,7 +6,7 @@
 /*   By: kealves- <kealves-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/22 15:47:28 by apeterso          #+#    #+#             */
-/*   Updated: 2026/07/23 21:00:21 by kealves-         ###   ########.fr       */
+/*   Updated: 2026/07/24 13:21:01 by kealves-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,7 @@ void	free_split(char **str)
 	free(str);
 }
 
-
-void    free_texture(t_game *game)
+void	free_texture(t_game *game)
 {
 	mlx_destroy_image(game->mlx, game->map.walls[0].img.img_ptr);
 	mlx_destroy_image(game->mlx, game->map.walls[1].img.img_ptr);

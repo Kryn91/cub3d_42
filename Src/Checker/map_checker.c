@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_checker.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apeterso <apeterso@student.42paris.fr>     +#+  +:+       +#+        */
+/*   By: kealves- <kealves-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/22 15:23:34 by apeterso          #+#    #+#             */
-/*   Updated: 2026/07/22 15:33:25 by apeterso         ###   ########.fr       */
+/*   Updated: 2026/07/24 14:00:01 by kealves-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ t_bool	check_player_count(t_map *map)
 	else if (count > 1)
 		ft_putstr_fd("Error\nToo Much player\n", 2);
 	else
-		ft_putstr_fd("Error\nPlayer is needed", 2);
+		ft_putstr_fd("Error\nPlayer is needed\n", 2);
 	return (FALSE);
 }
 

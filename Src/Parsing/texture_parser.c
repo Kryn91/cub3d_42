@@ -3,16 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   texture_parser.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apeterso <apeterso@student.42paris.fr>     +#+  +:+       +#+        */
+/*   By: kealves- <kealves-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/22 15:46:35 by apeterso          #+#    #+#             */
-/*   Updated: 2026/07/22 16:59:40 by apeterso         ###   ########.fr       */
+/*   Updated: 2026/07/24 14:36:53 by kealves-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 #include "libft.h"
 #include "texture_parser.h"
+#include <stdio.h>
+#include "free_memory.h"
 
 t_type	get_type(char *line)
 {
@@ -35,7 +37,6 @@ t_type	get_type(char *line)
 		return (C);
 	return (-1);
 }
-#include <stdio.h>
 
 t_bool	is_texture(char *line)
 {
@@ -75,7 +76,7 @@ char	*get_value(char *str)
 	return (str + i);
 }
 
-void	handle_texture(char *line_read, t_game *game)
+t_bool	handle_texture(char *line_read, t_game *game)
 {
 	char	*value;
 	t_type	type;
@@ -85,7 +86,12 @@ void	handle_texture(char *line_read, t_game *game)
 	{
 		value = get_value(line_read);
 		if (!value)
-			return ;
+			return (FALSE);
+		if (game->map.walls[type].path)
+		{
+			printf("Error\nMultiple textures set\n");
+			return (FALSE);
+		}
 		game->map.walls[type].path = ft_strtrim(value, "\n");
 	}
 	else if (type == C || type == F)
@@ -96,4 +102,5 @@ void	handle_texture(char *line_read, t_game *game)
 		if (type == F)
 			game->map.floor_parse = ft_strtrim(value, "\n");
 	}
+	return (TRUE);
 }

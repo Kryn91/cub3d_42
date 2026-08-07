@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   color_parser.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apeterso <apeterso@student.42paris.fr>     +#+  +:+       +#+        */
+/*   By: kealves- <kealves-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/22 15:46:23 by apeterso          #+#    #+#             */
-/*   Updated: 2026/07/22 16:22:13 by apeterso         ###   ########.fr       */
+/*   Updated: 2026/07/24 15:04:59 by kealves-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include "color_parser.h"
 #include "free_memory.h"
 #include "libft.h"
+#include <stdio.h>
 
 t_bool	check_valid_digit(char *str)
 {
@@ -57,15 +58,14 @@ int	transform_color(char *str)
 		return (0);
 	if (!split[0] || !split[1] || !split[2])
 		return (free_split(split), -1);
+	if (split[3])
+		return (free_split(split), -1);
 	r = ft_atoi(split[0]);
 	g = ft_atoi(split[1]);
 	b = ft_atoi(split[2]);
 	color = rgb_to_hex(r, g, b);
 	if (color == -1)
 	{
-		ft_putstr_fd("Error\nColor is not rgb :", 2);
-		ft_putstr_fd(str, 2);
-		ft_putstr_fd("\n", 2);
 		free_split(split);
 		return (-1);
 	}
@@ -76,27 +76,23 @@ int	transform_color(char *str)
 void	color_parser(t_game *game)
 {
 	if (game->map.ceiling_parse == NULL || game->map.floor_parse == NULL)
-	{
-		free_map(game);
-		free(game);
-		exit(1);
-	}
+		return (free_map(game), free(game), exit(1));
 	if (check_valid_digit(game->map.ceiling_parse) == FALSE)
-	{
-		free_map(game);
-		free(game);
-		exit(1);
-	}
+		return (free_map(game), free(game), exit(1));
 	if (check_valid_digit(game->map.floor_parse) == FALSE)
-	{
-		free_map(game);
-		free(game);
-		exit(1);
-	}
+		return (free_map(game), free(game), exit(1));
+	if (game->map.ceiling_parse[ft_strlen(game->map.ceiling_parse) - 1] == ',')
+		return (printf("Error\nInvalid color\n"), free_map(game), free(game),
+			exit(1));
+	if (game->map.floor_parse[ft_strlen(game->map.floor_parse) - 1] == ',')
+		return (printf("Error\nInvalid color\n"), free_map(game), free(game),
+			exit(1));
 	game->map.ceiling_color = transform_color(game->map.ceiling_parse);
 	if (game->map.ceiling_color == -1)
-		return (free_map(game), free(game), exit(1));
+		return (printf("Error\nInvalid color\n"), free_map(game), free(game),
+			exit(1));
 	game->map.floor_color = transform_color(game->map.floor_parse);
 	if (game->map.floor_color == -1)
-		return (free_map(game), free(game), exit(1));
+		return (printf("Error\nInvalid color\n"), free_map(game), free(game),
+			exit(1));
 }
