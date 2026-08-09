@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_solver.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kealves- <kealves-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: apeterso <apeterso@student.42paris.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/22 15:23:55 by apeterso          #+#    #+#             */
-/*   Updated: 2026/07/24 14:26:21 by kealves-         ###   ########.fr       */
+/*   Updated: 2026/08/09 16:10:03 by apeterso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ t_bool	check_error(char c)
 {
 	if (c == '_' || c == '\0')
 	{
-		printf("Error: map not closed\n");
+		printf("Error\nmap not closed\n");
 		return (FALSE);
 	}
 	return (TRUE);

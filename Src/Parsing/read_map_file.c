@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   read_map_file.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kealves- <kealves-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: apeterso <apeterso@student.42paris.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/24 13:24:19 by kealves-          #+#    #+#             */
-/*   Updated: 2026/07/24 15:05:36 by kealves-         ###   ########.fr       */
+/*   Updated: 2026/08/09 16:28:00 by apeterso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	open_file(char *map)
 	fd = open(map, O_RDONLY);
 	if (fd < 0)
 	{
-		ft_putstr_fd("Error\nInvalid file", 2);
+		ft_putstr_fd("Error\nInvalid file\n", 2);
 		exit(1);
 	}
 	return (fd);
@@ -79,7 +79,7 @@ int	parse_map_line(char *line, t_game *game, t_bool *in_map,
 		{
 			if (*map_finished)
 			{
-				printf("Error: empty line inside or after the map\n");
+				printf("Error\nempty line inside or after the map\n");
 				return (1);
 			}
 			game->map.arr = add_map_line(game->map.arr, line);
