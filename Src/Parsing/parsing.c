@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kealves- <kealves-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: apeterso <apeterso@student.42paris.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/22 15:46:31 by apeterso          #+#    #+#             */
-/*   Updated: 2026/08/09 12:41:23 by kealves-         ###   ########.fr       */
+/*   Updated: 2026/08/09 17:34:23 by apeterso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,5 +78,5 @@ void	parsing(int ac, char **av, t_game *game)
 	init_map_size(&game->map);
 	color_parser(game);
 	if (!game->map.arr)
-		exit(1);
+		exit(1);		//Message derreur manquant ?
 }

@@ -6,7 +6,7 @@
 /*   By: apeterso <apeterso@student.42paris.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/22 15:46:20 by apeterso          #+#    #+#             */
-/*   Updated: 2026/07/22 16:23:32 by apeterso         ###   ########.fr       */
+/*   Updated: 2026/08/09 17:36:06 by apeterso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ void	init_door(t_game *game)
 	{
 		free_map(game);
 		free(game);
-		exit(1);
+		exit(1);	//Message d'erreur manquant ?
 	}
 	game->door = door;
 }

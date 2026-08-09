@@ -1,4 +1,4 @@
-NAME    := cub3d
+NAME    := cub3D
 CC      := cc
 CFLAGS  := -Wall -Wextra -Werror -g3 -g -O0
 MLX_FLAG := -lmlx -lXext -lX11 -lm

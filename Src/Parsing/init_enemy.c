@@ -6,7 +6,7 @@
 /*   By: apeterso <apeterso@student.42paris.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/22 15:46:25 by apeterso          #+#    #+#             */
-/*   Updated: 2026/07/22 15:46:26 by apeterso         ###   ########.fr       */
+/*   Updated: 2026/08/09 17:41:29 by apeterso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,12 +78,11 @@ int	create_enemy(char **map, t_list **enemy)
 		while (map[y][x])
 		{
 			if (map[y][x] == 'O')
-				enemy_add_back(y, x, enemy);
+				enemy_add_back(y, x, enemy);	// jamais de return 1 ?
 			x++;
 		}
 		y++;
 	}
-	return (0);
 	return (0);
 }
 
@@ -98,7 +97,7 @@ void	init_enemy(t_game *game)
 	{
 		free_map(game);
 		free_door(game->door);
-		exit(1);
+		exit(1);	//Message d'erreur manquant ?
 	}
 	game->entity_lst = enemy;
 }
