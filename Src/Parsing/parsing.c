@@ -6,7 +6,7 @@
 /*   By: kealves- <kealves-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/22 15:46:31 by apeterso          #+#    #+#             */
-/*   Updated: 2026/07/23 21:09:32 by kealves-         ###   ########.fr       */
+/*   Updated: 2026/08/09 12:41:23 by kealves-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,10 @@ t_bool	check_cub(char *av)
 t_bool	check_valid_arg(int ac, char **av, t_game *game)
 {
 	if (ac != 2 || av[1][0] == '\0')
+	{
+		ft_putstr_fd("Error\nThe Number of argument of the program must be 2\n", 2);
 		return (FALSE);
+	}
 	if (check_cub(av[1]) == FALSE)
 	{
 		free(game);

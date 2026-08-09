@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apeterso <apeterso@student.42paris.fr>     +#+  +:+       +#+        */
+/*   By: kealves- <kealves-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/22 15:47:10 by apeterso          #+#    #+#             */
-/*   Updated: 2026/07/22 15:47:45 by apeterso         ###   ########.fr       */
+/*   Updated: 2026/08/09 12:39:09 by kealves-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,20 @@ int		render(t_game *game);
 int	run_game(t_game *game)
 {
 	game->mlx = mlx_init();
+	if (!game->mlx)
+	{
+    	ft_putstr_fd("Error\nMLX initialization failed\n", 2);
+		free_map(game);
+    	return (1);
+	}
 	init_texture(game);
 	game->win = mlx_new_window(game->mlx, SCREEN_WIDTH, SCREEN_HEIGHT, "cub3d");
+	if (!game->win)
+	{
+    	ft_putstr_fd("Error\nWindow initialization failed\n", 2);
+		free_map(game);
+		return (1);
+	}
 	mlx_hook(game->win, 17, 0, (void *)close_win, game);
 	mlx_hook(game->win, 2, 1L << 0, (void *)key_press, game);
 	mlx_hook(game->win, 3, 1L << 1, (void *)key_release, game);

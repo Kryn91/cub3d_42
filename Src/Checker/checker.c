@@ -3,15 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   checker.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apeterso <apeterso@student.42paris.fr>     +#+  +:+       +#+        */
+/*   By: kealves- <kealves-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/22 15:23:51 by apeterso          #+#    #+#             */
-/*   Updated: 2026/07/22 16:23:13 by apeterso         ###   ########.fr       */
+/*   Updated: 2026/08/09 12:41:14 by kealves-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "checker.h"
 #include "free_memory.h"
+#include "libft.h"
 #include "map_checker.h"
 #include <unistd.h>
 
@@ -39,6 +40,7 @@ void	checker(t_game *game)
 	if (game->map.walls[0].path == NULL || game->map.walls[1].path == NULL
 		|| game->map.walls[2].path == NULL || game->map.walls[3].path == NULL)
 	{
+		ft_putstr_fd("Error\nAll wall need path\n", 2);
 		free_map(game);
 		free(game);
 		exit(1);

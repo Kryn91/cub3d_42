@@ -32,11 +32,12 @@ SRCS :=	main.c							\
 		Parsing/texture_parsing.c		\
 		Parsing/color_parser.c			\
 		Parsing/init_player.c			\
-		Parsing/init_door.c 				\
+		Parsing/init_door.c 			\
 		Parsing/init_enemy.c			\
 		Parsing/init_texture.c			\
-		Parsing/check_map.c 				\
+		Parsing/check_map.c 			\
 		Checker/checker.c 				\
+		Checker/map_wall_checker.c 		\
 		Checker/map_checker.c			\
 		Checker/map_solver.c			\
 		Checker/solver.c				\
@@ -57,7 +58,7 @@ SRCS :=	main.c							\
 		Movement/handle_input.c			\
 		Movement/movement.c				\
 		Movement/interact.c				\
-		Movement/colision.c 				\
+		Movement/colision.c 			\
 		Movement/key.c					\
 		Game/game_loop.c				\
 		Game/door.c						\

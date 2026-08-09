@@ -6,13 +6,14 @@
 /*   By: kealves- <kealves-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/22 15:23:34 by apeterso          #+#    #+#             */
-/*   Updated: 2026/07/24 14:00:01 by kealves-         ###   ########.fr       */
+/*   Updated: 2026/08/09 13:52:52 by kealves-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include "map_checker.h"
 #include "map_solver.h"
+#include "map_wall_checker.h"
 
 t_bool	check_valid_char(t_map *map)
 {
@@ -79,6 +80,8 @@ t_bool	check_map(t_game *game)
 	if (check_valid_char(&game->map) == FALSE)
 		return (FALSE);
 	if (check_player_count(&game->map) == FALSE)
+		return (FALSE);
+	if (check_wall(game) == FALSE)
 		return (FALSE);
 	if (map_solver(game) == FALSE)
 		return (FALSE);
