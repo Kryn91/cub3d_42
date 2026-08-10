@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   texture_parser.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apeterso <apeterso@student.42paris.fr>     +#+  +:+       +#+        */
+/*   By: kealves- <kealves-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/22 15:46:35 by apeterso          #+#    #+#             */
-/*   Updated: 2026/08/09 17:37:44 by apeterso         ###   ########.fr       */
+/*   Updated: 2026/08/10 18:55:00 by kealves-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ t_bool	handle_texture(char *line_read, t_game *game)
 	{
 		value = get_value(line_read);
 		if (!value)
-			return (FALSE);	//Message d'erreur manquant ?
+			return (FALSE);
 		if (game->map.walls[type].path)
 		{
 			printf("Error\nMultiple textures set\n");

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_door.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apeterso <apeterso@student.42paris.fr>     +#+  +:+       +#+        */
+/*   By: kealves- <kealves-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/22 15:46:20 by apeterso          #+#    #+#             */
-/*   Updated: 2026/08/09 17:36:06 by apeterso         ###   ########.fr       */
+/*   Updated: 2026/08/10 18:36:25 by kealves-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,16 @@
 #include "init_door.h"
 #include <stdio.h>
 
-void	lst_add_back(int y, int x, t_door **door)
+int	lst_add_back(int y, int x, t_door **door)
 {
 	t_door	*tmp;
 	t_door	*new;
 
 	if (!door)
-		return ;
+		return (0);
 	new = malloc(sizeof(t_door));
 	if (!new)
-		return ;
+		return (1);
 	new->x = x;
 	new->y = y;
 	new->state = CLOSE;
@@ -32,12 +32,13 @@ void	lst_add_back(int y, int x, t_door **door)
 	if (!*door)
 	{
 		*door = new;
-		return ;
+		return (0);
 	}
 	tmp = *door;
 	while (tmp->next)
 		tmp = tmp->next;
 	tmp->next = new;
+	return (0);
 }
 
 int	create_door(char **map, t_door **door)
@@ -52,7 +53,13 @@ int	create_door(char **map, t_door **door)
 		while (map[y][x])
 		{
 			if (map[y][x] == 'D')
-				lst_add_back(y, x, door);
+			{
+				if (lst_add_back(y, x, door) == 1)
+				{
+					perror("malloc");
+					return (-1);
+				}
+			}
 			x++;
 		}
 		y++;
@@ -71,7 +78,7 @@ void	init_door(t_game *game)
 	{
 		free_map(game);
 		free(game);
-		exit(1);	//Message d'erreur manquant ?
+		exit(1);
 	}
 	game->door = door;
 }

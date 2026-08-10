@@ -3,16 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apeterso <apeterso@student.42paris.fr>     +#+  +:+       +#+        */
+/*   By: kealves- <kealves-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/22 15:46:31 by apeterso          #+#    #+#             */
-/*   Updated: 2026/08/09 17:34:23 by apeterso         ###   ########.fr       */
+/*   Updated: 2026/08/10 18:29:28 by kealves-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "boolean.h"
 #include "color_parser.h"
 #include "cub3d.h"
+#include "free_memory.h"
 #include "libft.h"
 #include "read_map_file.h"
 #include <stdio.h>
@@ -51,7 +52,7 @@ t_bool	check_valid_arg(int ac, char **av, t_game *game)
 	return (TRUE);
 }
 
-void	init_map_size(t_map *map)
+int	init_map_size(t_map *map)
 {
 	int	i;
 	int	len;
@@ -59,6 +60,11 @@ void	init_map_size(t_map *map)
 
 	max_len = 0;
 	i = 0;
+	if (!map->arr)
+	{
+		ft_putstr_fd("Error\nMap is missing\n", 2);
+		return (-1);
+	}
 	while (map->arr[i])
 	{
 		len = ft_strlen(map->arr[i]);
@@ -68,6 +74,7 @@ void	init_map_size(t_map *map)
 	}
 	map->width = max_len;
 	map->height = i;
+	return (0);
 }
 
 void	parsing(int ac, char **av, t_game *game)
@@ -75,8 +82,12 @@ void	parsing(int ac, char **av, t_game *game)
 	if (check_valid_arg(ac, av, game) == FALSE)
 		exit(1);
 	parse_map(av[1], game);
-	init_map_size(&game->map);
+	if (init_map_size(&game->map) == -1)
+	{
+		free_map(game);
+		exit(1);
+	}
 	color_parser(game);
 	if (!game->map.arr)
-		exit(1);		//Message derreur manquant ?
+		exit(1);
 }

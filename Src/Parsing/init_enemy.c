@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_enemy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apeterso <apeterso@student.42paris.fr>     +#+  +:+       +#+        */
+/*   By: kealves- <kealves-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/22 15:46:25 by apeterso          #+#    #+#             */
-/*   Updated: 2026/08/09 17:41:29 by apeterso         ###   ########.fr       */
+/*   Updated: 2026/08/10 18:53:57 by kealves-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,29 +41,30 @@ t_entity	*create_entity(int x, int y)
 	return (content);
 }
 
-void	enemy_add_back(int y, int x, t_list **enemy)
+int	enemy_add_back(int y, int x, t_list **enemy)
 {
 	t_list	*tmp;
 	t_list	*new;
 
 	if (!enemy)
-		return ;
+		return (0);
 	new = malloc(sizeof(t_list));
 	if (!new)
-		return ;
+		return (1);
 	new->content = create_entity(x, y);
 	if (!new->content)
-		return ;
+		return (1);
 	new->next = NULL;
 	if (!*enemy)
 	{
 		*enemy = new;
-		return ;
+		return (1);
 	}
 	tmp = *enemy;
 	while (tmp->next)
 		tmp = tmp->next;
 	tmp->next = new;
+	return (0);
 }
 
 int	create_enemy(char **map, t_list **enemy)
@@ -78,7 +79,10 @@ int	create_enemy(char **map, t_list **enemy)
 		while (map[y][x])
 		{
 			if (map[y][x] == 'O')
-				enemy_add_back(y, x, enemy);	// jamais de return 1 ?
+			{
+				if (enemy_add_back(y, x, enemy) == -1)	
+					return (-1);
+			}
 			x++;
 		}
 		y++;
@@ -95,9 +99,10 @@ void	init_enemy(t_game *game)
 	state = create_enemy(game->map.arr, &enemy);
 	if (state == 1)
 	{
+		ft_putstr_fd("Error\nAllocating memory malloc fail\n", 2);
 		free_map(game);
 		free_door(game->door);
-		exit(1);	//Message d'erreur manquant ?
+		exit(1);
 	}
 	game->entity_lst = enemy;
 }
