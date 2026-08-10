@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kealves- <kealves-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: apeterso <apeterso@student.42paris.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/22 15:47:10 by apeterso          #+#    #+#             */
-/*   Updated: 2026/08/09 12:39:09 by kealves-         ###   ########.fr       */
+/*   Updated: 2026/08/10 19:04:36 by apeterso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,15 +31,15 @@ int	run_game(t_game *game)
 	game->mlx = mlx_init();
 	if (!game->mlx)
 	{
-    	ft_putstr_fd("Error\nMLX initialization failed\n", 2);
+		ft_putstr_fd("Error\nMLX initialization failed\n", 2);
 		free_map(game);
-    	return (1);
+		return (1);
 	}
 	init_texture(game);
 	game->win = mlx_new_window(game->mlx, SCREEN_WIDTH, SCREEN_HEIGHT, "cub3d");
 	if (!game->win)
 	{
-    	ft_putstr_fd("Error\nWindow initialization failed\n", 2);
+		ft_putstr_fd("Error\nWindow initialization failed\n", 2);
 		free_map(game);
 		return (1);
 	}

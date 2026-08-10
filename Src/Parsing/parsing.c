@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kealves- <kealves-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: apeterso <apeterso@student.42paris.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/22 15:46:31 by apeterso          #+#    #+#             */
-/*   Updated: 2026/08/10 18:29:28 by kealves-         ###   ########.fr       */
+/*   Updated: 2026/08/10 19:03:58 by apeterso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,8 @@ t_bool	check_valid_arg(int ac, char **av, t_game *game)
 {
 	if (ac != 2 || av[1][0] == '\0')
 	{
-		ft_putstr_fd("Error\nThe Number of argument of the program must be 2\n", 2);
+		ft_putstr_fd("Error\nThe Number of argument of the program must be 2\n",
+			2);
 		return (FALSE);
 	}
 	if (check_cub(av[1]) == FALSE)

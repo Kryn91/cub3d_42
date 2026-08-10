@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   color_parser.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kealves- <kealves-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: apeterso <apeterso@student.42paris.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/22 15:46:23 by apeterso          #+#    #+#             */
-/*   Updated: 2026/08/10 18:17:21 by kealves-         ###   ########.fr       */
+/*   Updated: 2026/08/10 19:03:26 by apeterso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,8 +76,8 @@ int	transform_color(char *str)
 void	color_parser(t_game *game)
 {
 	if (game->map.ceiling_parse == NULL || game->map.floor_parse == NULL)
-		return (free_map(game), ft_putstr_fd("Error\nColor is missing\n", 2), 
-		free(game), exit(1));
+		return (free_map(game), ft_putstr_fd("Error\nColor is missing\n", 2),
+			free(game), exit(1));
 	if (check_valid_digit(game->map.ceiling_parse) == FALSE)
 		return (free_map(game), free(game), exit(1));
 	if (check_valid_digit(game->map.floor_parse) == FALSE)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_enemy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kealves- <kealves-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: apeterso <apeterso@student.42paris.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/22 15:46:25 by apeterso          #+#    #+#             */
-/*   Updated: 2026/08/10 18:53:57 by kealves-         ###   ########.fr       */
+/*   Updated: 2026/08/10 19:03:15 by apeterso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ int	create_enemy(char **map, t_list **enemy)
 		{
 			if (map[y][x] == 'O')
 			{
-				if (enemy_add_back(y, x, enemy) == -1)	
+				if (enemy_add_back(y, x, enemy) == -1)
 					return (-1);
 			}
 			x++;
