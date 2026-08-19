@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   read_map_file.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apeterso <apeterso@student.42paris.fr>     +#+  +:+       +#+        */
+/*   By: kealves- <kealves-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/24 13:24:19 by kealves-          #+#    #+#             */
-/*   Updated: 2026/08/09 16:28:00 by apeterso         ###   ########.fr       */
+/*   Updated: 2026/08/19 13:00:05 by kealves-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,17 +59,32 @@ char	**add_map_line(char **map, char *line)
 	return (new_map);
 }
 
+int	check_before_map(char *line, t_game *game, t_bool *in_map)
+{
+	if (is_empty_line(line))
+		return (0);
+	if (is_texture(line))
+	{
+		if (handle_texture(line, game) == FALSE)
+			return (1);
+		return (0);
+	}
+	if (is_map_line(line))
+	{
+		*in_map = TRUE;
+		return (0);
+	}
+	ft_putstr_fd("Error\nInvalid identifier before map\n", 2);
+	return (1);
+}
+
 int	parse_map_line(char *line, t_game *game, t_bool *in_map,
 		t_bool *map_finished)
 {
 	if (*in_map == FALSE)
 	{
-		if (is_empty_line(line))
-			return (0);
-		if (is_texture(line) && handle_texture(line, game) == FALSE)
+		if (check_before_map(line, game, in_map))
 			return (1);
-		if (is_map_line(line))
-			*in_map = TRUE;
 	}
 	if (*in_map == TRUE)
 	{
@@ -79,8 +94,8 @@ int	parse_map_line(char *line, t_game *game, t_bool *in_map,
 		{
 			if (*map_finished)
 			{
-				printf("Error\nempty line inside or after the map\n");
-				return (1);
+				return (printf("Error\nempty line inside or after the map\n")
+				, 1);
 			}
 			game->map.arr = add_map_line(game->map.arr, line);
 		}

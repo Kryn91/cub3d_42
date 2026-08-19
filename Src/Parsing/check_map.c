@@ -6,13 +6,14 @@
 /*   By: kealves- <kealves-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/24 13:22:40 by kealves-          #+#    #+#             */
-/*   Updated: 2026/07/24 13:23:46 by kealves-         ###   ########.fr       */
+/*   Updated: 2026/08/19 12:12:42 by kealves-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "boolean.h"
 #include "check_map.h"
 #include "get_next_line.h"
+#include "libft.h"
 
 t_bool	is_map_line(char *line)
 {
@@ -21,7 +22,7 @@ t_bool	is_map_line(char *line)
 	i = 0;
 	while (line[i] == ' ' || line[i] == '\t')
 		i++;
-	if (line[i] == '1')
+	if (line[i] == '1' || line[i] == '0')
 		return (TRUE);
 	else
 		return (FALSE);
