@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_memory.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kealves- <kealves-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: apeterso <apeterso@student.42paris.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/22 15:47:28 by apeterso          #+#    #+#             */
-/*   Updated: 2026/07/24 13:21:01 by kealves-         ###   ########.fr       */
+/*   Updated: 2026/08/19 17:40:29 by apeterso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,8 +65,10 @@ void	free_texture(t_game *game)
 	if (game->game_over_tex.img.img_ptr)
 		mlx_destroy_image(game->mlx, game->game_over_tex.img.img_ptr);
 	destroy_entity_images(game);
-	mlx_destroy_image(game->mlx, game->hand.tex[0].img.img_ptr);
-	mlx_destroy_image(game->mlx, game->hand.tex[1].img.img_ptr);
+	if (game->hand.tex[0].img.img_ptr)
+		mlx_destroy_image(game->mlx, game->hand.tex[0].img.img_ptr);
+	if (game->hand.tex[1].img.img_ptr)
+		mlx_destroy_image(game->mlx, game->hand.tex[1].img.img_ptr);
 	if (game->spell.tex[0].img.img_ptr)
 		mlx_destroy_image(game->mlx, game->spell.tex[0].img.img_ptr);
 	if (game->spell.tex[1].img.img_ptr)

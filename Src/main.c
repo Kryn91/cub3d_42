@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kealves- <kealves-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: apeterso <apeterso@student.42paris.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/22 15:47:10 by apeterso          #+#    #+#             */
-/*   Updated: 2026/08/19 12:32:51 by kealves-         ###   ########.fr       */
+/*   Updated: 2026/08/19 17:53:32 by apeterso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ int	run_game(t_game *game)
 
 void	init_game_data(t_game *game)
 {
+	game->first_loop = 1;
 	game->fps.cap = 60;
 	game->hand.frame = 0;
 	game->spell.frame = 0;
@@ -82,6 +83,7 @@ int	main(int ac, char **av)
 		return (1);
 	mlx_destroy_window(game->mlx, game->win);
 	mlx_destroy_display(game->mlx);
+	ft_lstclear(&game->entity_lst, free_entity);
 	free_map(game);
 	free_door(game->door);
 	free_texture(game);

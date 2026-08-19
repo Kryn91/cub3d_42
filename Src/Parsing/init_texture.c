@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_texture.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kealves- <kealves-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: apeterso <apeterso@student.42paris.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/22 15:46:30 by apeterso          #+#    #+#             */
-/*   Updated: 2026/08/19 12:17:35 by kealves-         ###   ########.fr       */
+/*   Updated: 2026/08/19 17:52:00 by apeterso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,27 @@
 #include "entity.h"
 #include "init_texture.h"
 #include "mlx.h"
+#include "free_memory.h"
+#include "free_list.h"
+#include <stdio.h>
 
 void	init_tex(t_game *game, t_texture *tex, char *path)
 {
 	tex->path = path;
 	tex->img.img_ptr = mlx_xpm_file_to_image(game->mlx, path, &tex->width,
 			&tex->height);
+	if (!tex->img.img_ptr)
+	{
+		free_map(game);
+		free_door(game->door);
+		free_texture(game);
+		mlx_destroy_display(game->mlx);
+		ft_lstclear(&game->entity_lst, free_entity);
+		free(game->mlx);
+		free(game);
+		printf("Error\nFailed to initialize texture\n");
+		exit(1);
+	}
 	tex->img.addr = mlx_get_data_addr(tex->img.img_ptr, &tex->img.bpp,
 			&tex->img.size_line, &tex->img.endian);
 }

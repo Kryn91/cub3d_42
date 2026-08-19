@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_input.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kealves- <kealves-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: apeterso <apeterso@student.42paris.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/22 15:46:10 by apeterso          #+#    #+#             */
-/*   Updated: 2026/07/23 21:05:31 by kealves-         ###   ########.fr       */
+/*   Updated: 2026/08/19 17:58:20 by apeterso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,11 @@ void	handle_mouse_input(int x, int y, t_game *game)
 	center_y = SCREEN_HEIGHT / 2;
 	delta = x - game->player.mouse_x;
 	game->player.mouse_x = x;
+	if (game->first_loop)
+	{
+		game->first_loop = 0;
+		return ;
+	}
 	if (x == center_x && y == center_y)
 		return ;
 	rotate_player(game, delta * MOUSE_SENSIBILITY);

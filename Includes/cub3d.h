@@ -6,7 +6,7 @@
 /*   By: apeterso <apeterso@student.42paris.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/22 15:45:01 by apeterso          #+#    #+#             */
-/*   Updated: 2026/07/22 15:45:18 by apeterso         ###   ########.fr       */
+/*   Updated: 2026/08/19 17:52:51 by apeterso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ typedef struct s_game
 	t_texture	game_over_tex;
 	t_hand		hand;
 	t_spell		spell;
+	int			first_loop;
 	double		last_shoot_time;
 }				t_game;
 
