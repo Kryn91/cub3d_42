@@ -1,0 +1,79 @@
+{
+   ignore_libx11_reachable
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   ...
+   obj:*/libX11.so.*
+}
+
+{
+   ignore_libx11_definite
+   Memcheck:Leak
+   match-leak-kinds: definite
+   ...
+   obj:*/libX11.so.*
+}
+
+{
+   ignore_libxext_reachable
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   ...
+   obj:*/libXext.so.*
+}
+
+{
+   ignore_libxcb_reachable
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   ...
+   obj:*/libxcb.so.*
+}
+
+{
+   ignore_libxcb_definite
+   Memcheck:Leak
+   match-leak-kinds: definite
+   ...
+   obj:*/libxcb.so.*
+}
+
+{
+   ignore_mlx_init
+   Memcheck:Leak
+   match-leak-kinds: all
+   ...
+   fun:mlx_init
+}
+
+{
+   ignore_mlx_new_image
+   Memcheck:Leak
+   match-leak-kinds: all
+   ...
+   fun:mlx_new_image
+}
+
+{
+   ignore_xcb_writev_param
+   Memcheck:Param
+   writev(vector[0])
+   ...
+   obj:*/libxcb.so.*
+}
+
+{
+   ignore_dlopen_reachable
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   ...
+   fun:_dl_catch_exception
+}
+
+{
+   ignore_dlopen_reachable_2
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   ...
+   fun:_dl_open
+}

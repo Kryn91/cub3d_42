@@ -6,7 +6,7 @@
 /*   By: apeterso <apeterso@student.42paris.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/22 15:46:31 by apeterso          #+#    #+#             */
-/*   Updated: 2026/08/10 19:03:58 by apeterso         ###   ########.fr       */
+/*   Updated: 2026/08/26 13:02:50 by apeterso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,11 +81,15 @@ int	init_map_size(t_map *map)
 void	parsing(int ac, char **av, t_game *game)
 {
 	if (check_valid_arg(ac, av, game) == FALSE)
+	{
+		free(game);
 		exit(1);
+	}
 	parse_map(av[1], game);
 	if (init_map_size(&game->map) == -1)
 	{
 		free_map(game);
+		free(game);
 		exit(1);
 	}
 	color_parser(game);
