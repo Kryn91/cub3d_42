@@ -6,12 +6,13 @@
 /*   By: apeterso <apeterso@student.42paris.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/22 15:46:23 by apeterso          #+#    #+#             */
-/*   Updated: 2026/08/10 19:03:26 by apeterso         ###   ########.fr       */
+/*   Updated: 2026/08/26 17:57:46 by apeterso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "boolean.h"
 #include "color_parser.h"
+#include "free_game.h"
 #include "free_memory.h"
 #include "libft.h"
 #include <stdio.h>
@@ -76,24 +77,20 @@ int	transform_color(char *str)
 void	color_parser(t_game *game)
 {
 	if (game->map.ceiling_parse == NULL || game->map.floor_parse == NULL)
-		return (free_map(game), ft_putstr_fd("Error\nColor is missing\n", 2),
-			free(game), exit(1));
+		return (free_game(game), ft_putstr_fd("Error\nColor is missing\n", 2),
+			exit(1));
 	if (check_valid_digit(game->map.ceiling_parse) == FALSE)
-		return (free_map(game), free(game), exit(1));
+		return (free_game(game), exit(1));
 	if (check_valid_digit(game->map.floor_parse) == FALSE)
-		return (free_map(game), free(game), exit(1));
+		return (free_game(game), exit(1));
 	if (game->map.ceiling_parse[ft_strlen(game->map.ceiling_parse) - 1] == ',')
-		return (printf("Error\nInvalid color\n"), free_map(game), free(game),
-			exit(1));
+		return (printf("Error\nInvalid color\n"), free_game(game), exit(1));
 	if (game->map.floor_parse[ft_strlen(game->map.floor_parse) - 1] == ',')
-		return (printf("Error\nInvalid color\n"), free_map(game), free(game),
-			exit(1));
+		return (printf("Error\nInvalid color\n"), free_game(game), exit(1));
 	game->map.ceiling_color = transform_color(game->map.ceiling_parse);
 	if (game->map.ceiling_color == -1)
-		return (printf("Error\nInvalid color\n"), free_map(game), free(game),
-			exit(1));
+		return (printf("Error\nInvalid color\n"), free_game(game), exit(1));
 	game->map.floor_color = transform_color(game->map.floor_parse);
 	if (game->map.floor_color == -1)
-		return (printf("Error\nInvalid color\n"), free_map(game), free(game),
-			exit(1));
+		return (printf("Error\nInvalid color\n"), free_game(game), exit(1));
 }

@@ -6,13 +6,14 @@
 /*   By: apeterso <apeterso@student.42paris.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/22 15:47:10 by apeterso          #+#    #+#             */
-/*   Updated: 2026/08/19 17:53:32 by apeterso         ###   ########.fr       */
+/*   Updated: 2026/08/26 17:46:48 by apeterso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "attack.h"
 #include "checker.h"
 #include "cub3d.h"
+#include "free_game.h"
 #include "free_list.h"
 #include "free_memory.h"
 #include "game_loop.h"
@@ -32,7 +33,7 @@ int	run_game(t_game *game)
 	if (!game->mlx)
 	{
 		ft_putstr_fd("Error\nMLX initialization failed\n", 2);
-		free_map(game);
+		free_game(game);
 		return (1);
 	}
 	init_texture(game);
@@ -40,7 +41,7 @@ int	run_game(t_game *game)
 	if (!game->win)
 	{
 		ft_putstr_fd("Error\nWindow initialization failed\n", 2);
-		free_map(game);
+		free_game(game);
 		return (1);
 	}
 	mlx_hook(game->win, 17, 0, (void *)close_win, game);
@@ -81,12 +82,6 @@ int	main(int ac, char **av)
 	init_enemy(game);
 	if (run_game(game) != 0)
 		return (1);
-	mlx_destroy_window(game->mlx, game->win);
-	mlx_destroy_display(game->mlx);
-	ft_lstclear(&game->entity_lst, free_entity);
-	free_map(game);
-	free_door(game->door);
-	free_texture(game);
-	free(game);
+	free_game(game);
 	return (0);
 }

@@ -3,24 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   init_door.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kealves- <kealves-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: apeterso <apeterso@student.42paris.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/22 15:46:20 by apeterso          #+#    #+#             */
-/*   Updated: 2026/08/10 18:36:25 by kealves-         ###   ########.fr       */
+/*   Updated: 2026/08/26 17:35:57 by apeterso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "free_game.h"
 #include "free_memory.h"
 #include "init_door.h"
 #include <stdio.h>
 
 int	lst_add_back(int y, int x, t_door **door)
 {
-	t_door	*tmp;
-	t_door	*new;
-
-	if (!door)
-		return (0);
+	t_door		*tmp;
+	t_door		*new;
+	
 	new = malloc(sizeof(t_door));
 	if (!new)
 		return (1);
@@ -55,10 +54,7 @@ int	create_door(char **map, t_door **door)
 			if (map[y][x] == 'D')
 			{
 				if (lst_add_back(y, x, door) == 1)
-				{
-					perror("malloc");
-					return (-1);
-				}
+					return (1);
 			}
 			x++;
 		}
@@ -74,11 +70,11 @@ void	init_door(t_game *game)
 
 	door = NULL;
 	state = create_door(game->map.arr, &door);
-	if (state == -1)
+	game->door = door;
+	if (state == 1)
 	{
-		free_map(game);
-		free(game);
+		ft_putstr_fd("Error\nAllocating memory malloc fail\n", 2);
+		free_game(game);
 		exit(1);
 	}
-	game->door = door;
 }

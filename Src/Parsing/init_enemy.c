@@ -6,12 +6,13 @@
 /*   By: apeterso <apeterso@student.42paris.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/22 15:46:25 by apeterso          #+#    #+#             */
-/*   Updated: 2026/08/10 19:03:15 by apeterso         ###   ########.fr       */
+/*   Updated: 2026/08/26 17:36:56 by apeterso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "delta_time.h"
 #include "entity.h"
+#include "free_game.h"
 #include "free_list.h"
 #include "free_memory.h"
 #include "init_enemy.h"
@@ -43,22 +44,22 @@ t_entity	*create_entity(int x, int y)
 
 int	enemy_add_back(int y, int x, t_list **enemy)
 {
-	t_list	*tmp;
-	t_list	*new;
+	t_list		*tmp;
+	t_list		*new;
+	static int	i = 0;
 
-	if (!enemy)
-		return (0);
+	i++;
 	new = malloc(sizeof(t_list));
 	if (!new)
 		return (1);
 	new->content = create_entity(x, y);
 	if (!new->content)
-		return (1);
+		return (free(new), 1);
 	new->next = NULL;
 	if (!*enemy)
 	{
 		*enemy = new;
-		return (1);
+		return (0);
 	}
 	tmp = *enemy;
 	while (tmp->next)
@@ -80,8 +81,8 @@ int	create_enemy(char **map, t_list **enemy)
 		{
 			if (map[y][x] == 'O')
 			{
-				if (enemy_add_back(y, x, enemy) == -1)
-					return (-1);
+				if (enemy_add_back(y, x, enemy) == 1)
+					return (1);
 			}
 			x++;
 		}
@@ -97,12 +98,11 @@ void	init_enemy(t_game *game)
 
 	enemy = NULL;
 	state = create_enemy(game->map.arr, &enemy);
+	game->entity_lst = enemy;
 	if (state == 1)
 	{
 		ft_putstr_fd("Error\nAllocating memory malloc fail\n", 2);
-		free_map(game);
-		free_door(game->door);
+		free_game(game);
 		exit(1);
 	}
-	game->entity_lst = enemy;
 }

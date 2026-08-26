@@ -6,13 +6,14 @@
 /*   By: apeterso <apeterso@student.42paris.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/24 13:24:19 by kealves-          #+#    #+#             */
-/*   Updated: 2026/08/26 12:35:13 by apeterso         ###   ########.fr       */
+/*   Updated: 2026/08/26 17:50:22 by apeterso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "boolean.h"
 #include "check_map.h"
 #include "cub3d.h"
+#include "free_game.h"
 #include "free_memory.h"
 #include "get_next_line.h"
 #include "libft.h"
@@ -94,8 +95,8 @@ int	parse_map_line(char *line, t_game *game, t_bool *in_map,
 		{
 			if (*map_finished)
 			{
-				return (printf("Error\nempty line inside or after the map\n")
-					, 1);
+				return (printf("Error\nempty line inside or after the map\n"),
+					1);
 			}
 			game->map.arr = add_map_line(game->map.arr, line);
 		}
@@ -122,8 +123,7 @@ void	parse_map(char *map, t_game *game)
 		{
 			free(line);
 			finish_gnl(fd);
-			free_map(game);
-			free(game);
+			free_game(game);
 			exit(1);
 		}
 		free(line);

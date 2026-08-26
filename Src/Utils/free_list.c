@@ -6,7 +6,7 @@
 /*   By: apeterso <apeterso@student.42paris.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/22 15:47:24 by apeterso          #+#    #+#             */
-/*   Updated: 2026/07/22 15:47:25 by apeterso         ###   ########.fr       */
+/*   Updated: 2026/08/26 16:59:01 by apeterso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,10 @@ void	destroy_entity_images(t_game *game)
 			while (i < 3)
 			{
 				if (entity->tex[i].img.img_ptr)
+				{
 					mlx_destroy_image(game->mlx, entity->tex[i].img.img_ptr);
+					entity->tex[i].img.img_ptr = NULL;
+				}
 				i++;
 			}
 		}

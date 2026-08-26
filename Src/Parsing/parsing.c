@@ -6,13 +6,14 @@
 /*   By: apeterso <apeterso@student.42paris.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/22 15:46:31 by apeterso          #+#    #+#             */
-/*   Updated: 2026/08/26 13:02:50 by apeterso         ###   ########.fr       */
+/*   Updated: 2026/08/26 17:49:27 by apeterso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "boolean.h"
 #include "color_parser.h"
 #include "cub3d.h"
+#include "free_game.h"
 #include "free_memory.h"
 #include "libft.h"
 #include "read_map_file.h"
@@ -82,14 +83,13 @@ void	parsing(int ac, char **av, t_game *game)
 {
 	if (check_valid_arg(ac, av, game) == FALSE)
 	{
-		free(game);
+		free_game(game);
 		exit(1);
 	}
 	parse_map(av[1], game);
 	if (init_map_size(&game->map) == -1)
 	{
-		free_map(game);
-		free(game);
+		free_game(game);
 		exit(1);
 	}
 	color_parser(game);

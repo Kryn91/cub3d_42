@@ -6,7 +6,7 @@
 /*   By: apeterso <apeterso@student.42paris.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/22 15:46:10 by apeterso          #+#    #+#             */
-/*   Updated: 2026/08/19 17:58:20 by apeterso         ###   ########.fr       */
+/*   Updated: 2026/08/26 17:41:37 by apeterso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include "free_memory.h"
 #include "handle_input.h"
 #include "init_texture.h"
+#include "free_game.h"
 #include "key.h"
 #include "libft.h"
 #include "mlx.h"
@@ -25,14 +26,7 @@
 
 void	close_win(t_game *game)
 {
-	free_texture(game);
-	mlx_destroy_window(game->mlx, game->win);
-	mlx_destroy_display(game->mlx);
-	ft_lstclear(&game->entity_lst, free_entity);
-	free_map(game);
-	free_door(game->door);
-	free(game->mlx);
-	free(game);
+	free_game(game);
 	exit(0);
 }
 

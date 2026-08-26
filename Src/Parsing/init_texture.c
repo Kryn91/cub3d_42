@@ -6,16 +6,17 @@
 /*   By: apeterso <apeterso@student.42paris.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/22 15:46:30 by apeterso          #+#    #+#             */
-/*   Updated: 2026/08/19 17:52:00 by apeterso         ###   ########.fr       */
+/*   Updated: 2026/08/26 18:02:21 by apeterso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "boolean.h"
 #include "entity.h"
+#include "free_game.h"
+#include "free_list.h"
+#include "free_memory.h"
 #include "init_texture.h"
 #include "mlx.h"
-#include "free_memory.h"
-#include "free_list.h"
 #include <stdio.h>
 
 void	init_tex(t_game *game, t_texture *tex, char *path)
@@ -25,13 +26,7 @@ void	init_tex(t_game *game, t_texture *tex, char *path)
 			&tex->height);
 	if (!tex->img.img_ptr)
 	{
-		free_map(game);
-		free_door(game->door);
-		free_texture(game);
-		mlx_destroy_display(game->mlx);
-		ft_lstclear(&game->entity_lst, free_entity);
-		free(game->mlx);
-		free(game);
+		free_game(game);
 		printf("Error\nFailed to initialize texture\n");
 		exit(1);
 	}
