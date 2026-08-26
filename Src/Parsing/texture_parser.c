@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   texture_parser.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kealves- <kealves-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: apeterso <apeterso@student.42paris.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/22 15:46:35 by apeterso          #+#    #+#             */
-/*   Updated: 2026/08/19 12:55:47 by kealves-         ###   ########.fr       */
+/*   Updated: 2026/08/26 12:34:48 by apeterso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,7 @@ t_bool	handle_texture(char *line_read, t_game *game)
 		if (!value)
 			return (FALSE);
 		if (game->map.walls[type].path)
-			return(printf("Error\nMultiple textures set\n"), FALSE);
+			return (printf("Error\nMultiple textures set\n"), FALSE);
 		game->map.walls[type].path = ft_strtrim(value, "\n");
 	}
 	else if (type == C || type == F)

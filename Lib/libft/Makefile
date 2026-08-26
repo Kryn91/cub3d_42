@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: kealves- <marvin@42.fr>                    +#+  +:+       +#+         #
+#    By: apeterso <apeterso@student.42paris.fr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/11/13 15:14:42 by kealves-          #+#    #+#              #
-#    Updated: 2025/11/21 12:51:32 by kealves-         ###   ########.fr        #
+#    Updated: 2026/08/26 12:51:21 by apeterso         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,7 @@ SRC = ft_atoi.c ft_isdigit.c ft_memmove.c ft_strlen.c ft_toupper.c ft_bzero.c \
 	ft_strjoin.c ft_strtrim.c ft_split.c ft_itoa.c ft_strmapi.c ft_striteri.c \
        	ft_putchar_fd.c ft_putstr_fd.c ft_putendl_fd.c ft_putnbr_fd.c ft_lstadd_front.c \
 	ft_lstsize.c ft_lstlast.c ft_lstadd_back.c ft_lstdelone.c ft_lstclear.c \
-	ft_lstiter.c ft_lstmap.c 
+	ft_lstiter.c ft_lstmap.c
 SRCBONUS = ft_lstnew.c
 HEADER = libft.h
 NAME=libft.a
@@ -34,10 +34,15 @@ $(NAME): $(OBJ)
 %.o	: %.c $(HEADER)
 	$(CC) $(CFLAGS) -c $<  -o $@
 
-bonus:	$(OBJ) $(OBJBONUS) $(HEADER)
+bonus: .bonus
+
+.bonus : $(OBJ) $(OBJBONUS) $(HEADER)
 	ar -rcs $(NAME) $(OBJ) $(OBJBONUS)
+	@touch .bonus
+
 clean:
-	rm -f $(OBJ) $(OBJBONUS)
+	rm -f $(OBJ) $(OBJBONUS) .bonus
+	
 fclean: clean
 	rm -f $(NAME)
 re: fclean all

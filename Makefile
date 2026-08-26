@@ -100,16 +100,16 @@ LIBFT := $(LIBFT_DIR)/libft.a
 # Includes flags
 # ============================================================
 
-IFLAGS := -I$(INC_DIR) \
-		  -I$(LIB_DIR) \
-		  -I$(LIBFT_DIR) \
-		  -I$(INC_PARSING) \
-		  -I$(INC_CHECKER) \
-		  -I$(INC_MOVEMENT) \
-		  -I$(INC_UTILS) \
-		  -I$(INC_GAME) \
-		  -I$(INC_RENDER) \
-		  -I$(GNL_DIR) \
+IFLAGS := -I$(INC_DIR)		\
+		  -I$(LIB_DIR)		\
+		  -I$(LIBFT_DIR)	\
+		  -I$(INC_PARSING)	\
+		  -I$(INC_CHECKER)	\
+		  -I$(INC_MOVEMENT)	\
+		  -I$(INC_UTILS)	\
+		  -I$(INC_GAME)		\
+		  -I$(INC_RENDER)	\
+		  -I$(GNL_DIR)		\
 		  -I$(MLX_DIR)
 
 
