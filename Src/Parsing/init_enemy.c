@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_enemy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apeterso <apeterso@student.42paris.fr>     +#+  +:+       +#+        */
+/*   By: kealves- <kealves-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/22 15:46:25 by apeterso          #+#    #+#             */
-/*   Updated: 2026/08/26 17:36:56 by apeterso         ###   ########.fr       */
+/*   Updated: 2026/08/28 16:16:21 by kealves-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,9 +46,7 @@ int	enemy_add_back(int y, int x, t_list **enemy)
 {
 	t_list		*tmp;
 	t_list		*new;
-	static int	i = 0;
 
-	i++;
 	new = malloc(sizeof(t_list));
 	if (!new)
 		return (1);
