@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   read_map_file.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apeterso <apeterso@student.42paris.fr>     +#+  +:+       +#+        */
+/*   By: kealves- <kealves-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/24 13:24:19 by kealves-          #+#    #+#             */
-/*   Updated: 2026/08/26 17:50:22 by apeterso         ###   ########.fr       */
+/*   Updated: 2026/08/28 17:01:39 by kealves-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,6 +124,7 @@ void	parse_map(char *map, t_game *game)
 			free(line);
 			finish_gnl(fd);
 			free_game(game);
+			close(fd);
 			exit(1);
 		}
 		free(line);

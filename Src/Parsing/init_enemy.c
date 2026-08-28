@@ -6,7 +6,7 @@
 /*   By: kealves- <kealves-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/22 15:46:25 by apeterso          #+#    #+#             */
-/*   Updated: 2026/08/28 16:16:21 by kealves-         ###   ########.fr       */
+/*   Updated: 2026/08/28 17:08:39 by kealves-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ t_entity	*create_entity(int x, int y)
 		return (NULL);
 	content = ft_memset(content, 0, sizeof(t_entity));
 	if (!content)
-		return (NULL);
+		return (free(content), NULL);
 	content->type = ENEMY;
 	content->state = 1;
 	content->pos_x = x + 0.5;
