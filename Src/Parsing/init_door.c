@@ -6,7 +6,7 @@
 /*   By: apeterso <apeterso@student.42paris.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/22 15:46:20 by apeterso          #+#    #+#             */
-/*   Updated: 2026/08/26 17:35:57 by apeterso         ###   ########.fr       */
+/*   Updated: 2026/09/02 13:15:46 by apeterso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	lst_add_back(int y, int x, t_door **door)
 {
 	t_door		*tmp;
 	t_door		*new;
-	
+
 	new = malloc(sizeof(t_door));
 	if (!new)
 		return (1);

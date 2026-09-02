@@ -56,6 +56,7 @@ SRCS :=	main.c							\
 		Utils/vector_manipulation.c		\
 		Utils/delta_time.c 				\
 		Utils/free_game.c				\
+		Utils/free_tex.c				\
 		Movement/handle_input.c			\
 		Movement/movement.c				\
 		Movement/interact.c				\

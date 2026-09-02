@@ -1,20 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free_game.h                                        :+:      :+:    :+:   */
+/*   free_tex.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: apeterso <apeterso@student.42paris.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/09/02 13:16:19 by apeterso          #+#    #+#             */
-/*   Updated: 2026/09/02 13:16:25 by apeterso         ###   ########.fr       */
+/*   Created: 2026/09/02 13:16:37 by apeterso          #+#    #+#             */
+/*   Updated: 2026/09/02 13:16:38 by apeterso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FREE_GAME_H
-# define FREE_GAME_H
+#ifndef FREE_TEX_H
+# define FREE_TEX_H
 
-# include "cub3d.h"
-
-void	free_game(t_game *game);
+void	free_texture(t_game *game);
 
 #endif
